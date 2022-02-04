@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo dnf remove thunderbird gnome-remote-desktop gnome-calendar gnome-calculator gnome-weather gnome-contacts gnome-clock gnome-maps gnome-screenshot gnome-logs gnome-character gnome-font-viewer simple-scan keepassxc geditcheese firefox baobab yelp -y
+sudo dnf remove thunderbird gnome-remote-desktop gnome-calendar gnome-calculator gnome-weather gnome-contacts gnome-clock gnome-maps gnome-screenshot gnome-logs gnome-character gnome-font-viewer gnome-color-manager simple-scan keepassxc geditcheese firefox baobab yelp -y
 sudo dnf autoremove -y
 sudo dnf install arc-theme -y
 gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
