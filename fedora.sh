@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo dnf remove thunderbird gnome-remote-desktop gnome-calculator gnome-weather gnome-contacts firefox baobab -y
+sudo dnf remove thunderbird gnome-remote-desktop gnome-calculator gnome-weather gnome-contacts gnome-clock cheese firefox baobab  -y
 sudo dnf autoremove -y
 sudo dnf install arc-theme -y
 gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
