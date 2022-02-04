@@ -10,4 +10,4 @@ curl --proxy http://127.0.0.1:8082 https://packages.element.io/debian/element-io
 echo "deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main" | sudo tee /etc/apt/sources.list.d/element-io.list
 
 sudo apt update 
-sudo apt install signal-desktop element-desktop -y
+sudo apt install signal-desktop element-desktop telegram-desktop -y
