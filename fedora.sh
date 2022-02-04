@@ -2,7 +2,7 @@
 
 sudo dnf remove thunderbird gnome-remote-desktop gnome-calculator gnome-weather gnome-contacts firefox baobab -y
 sudo dnf autoremove -y
-sudo dnf install gnome-tweak-tool arc-theme -y
+sudo dnf install arc-theme -y
 gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
 sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
 curl --proxy http://127.0.0.1:8082 https://brave-browser-rpm-release.s3.brave.com/brave-core.asc > brave-core.asc
