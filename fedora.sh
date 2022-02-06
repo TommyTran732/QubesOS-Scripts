@@ -34,3 +34,10 @@ Persistent=true
 [Install]
 WantedBy=timers.target
 ' | sudo tee /etc/systemd/user/update-user-flatpaks.timer
+
+echo '
+[org/gnome/desktop/interface]
+gtk-theme='Arc-Dark'
+' | sudo tee /etc/dconf/db/local.d/gtk-theme
+
+sudo dconf update
