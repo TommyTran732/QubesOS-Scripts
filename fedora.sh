@@ -11,7 +11,8 @@ rm -rf brave-core.asc
 echo "gpgcheck=1" | sudo tee /etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo
 sudo dnf intall brave-browser -y
 
-echo '[Unit]
+cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
+[Unit]
 Description=Update user Flatpaks
 
 [Service]
@@ -20,9 +21,10 @@ ExecStart=/usr/bin/flatpak --user update -y
 
 [Install]
 WantedBy=default.target
-' | sudo tee /etc/systemd/user/update-user-flatpaks.service
+EOF
 
-echo '[Unit]
+cat > /etc/systemd/user/update-user-flatpaks.timer <<- 'EOF'
+[Unit]
 Description=Update user Flatpaks daily
 
 [Timer]
@@ -31,10 +33,11 @@ Persistent=true
 
 [Install]
 WantedBy=timers.target
-' | sudo tee /etc/systemd/user/update-user-flatpaks.timer
+EOF
 
-echo '[org/gnome/desktop/interface]
+cat > /etc/dconf/db/local.d/gtk-theme <<- 'EOF'
+[org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'
-' | sudo tee /etc/dconf/db/local.d/gtk-theme
+EOF
 
 sudo dconf update
