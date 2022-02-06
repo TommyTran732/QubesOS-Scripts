@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo dnf remove thunderbird gnome-remote-desktop gnome-calendar gnome-calculator gnome-weather gnome-contacts gnome-clock gnome-maps gnome-screenshot gnome-logs gnome-character gnome-font-viewer gnome-color-manager simple-scan keepassxc cheese baobab yelp -y
+sudo dnf remove thunderbird gnome-remote-desktop gnome-calendar gnome-calculator gnome-weather gnome-contacts gnome-clocks gnome-maps gnome-screenshot gnome-logs gnome-character gnome-font-viewer gnome-color-manager simple-scan keepassxc cheese baobab yelp -y
 sudo dnf autoremove -y
 sudo dnf install arc-theme qubes-u2f -y
 sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
