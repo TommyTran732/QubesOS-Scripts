@@ -10,6 +10,7 @@ rm -rf brave-core.asc
 echo "gpgcheck=1" | sudo tee /etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo
 sudo dnf intall brave-browser -y
 
+git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
 mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
