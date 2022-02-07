@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo dnf install gnome-keyring nextcloud-client
+sudo dnf install nextcloud-client
