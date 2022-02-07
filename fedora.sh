@@ -10,6 +10,10 @@ rm -rf brave-core.asc
 echo "gpgcheck=1" | sudo tee /etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo
 sudo dnf intall brave-browser -y
 
+git clone https://github.com/horst3180/arc-icon-theme
+mv arc-icon-theme/Arc /usr/share/icons
+rm -rf arc-icon-theme
+
 sudo cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
 [Unit]
 Description=Update user Flatpaks
@@ -34,9 +38,10 @@ Persistent=true
 WantedBy=timers.target
 EOF
 
-sudo cat > /etc/dconf/db/local.d/gtk-theme <<- 'EOF'
+sudo cat > /etc/dconf/db/local.d/custom <<- 'EOF'
 [org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'
+icon-theme='Arc'
 EOF
 
 sudo dconf update
