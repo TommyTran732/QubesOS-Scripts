@@ -1,1 +1,1 @@
-sudo dnf install lyx bind-utils wireshark -y
+sudo dnf install lyx -y
