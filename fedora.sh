@@ -8,7 +8,7 @@ curl --proxy http://127.0.0.1:8082 https://brave-browser-rpm-release.s3.brave.co
 sudo rpm --import brave-core.asc
 rm -rf brave-core.asc
 echo "gpgcheck=1" | sudo tee /etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo
-sudo dnf install brave-browser yubikey-manager-qt yubioath-desktop -y
+sudo dnf install brave-browser yubikey-manager-qt yubioath-desktop ntfs-3g exfatprogs -y
 
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
