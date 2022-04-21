@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo dnf install thunderbird gpgme -y
+sudo dnf install thunderbird -y
