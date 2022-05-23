@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo dnf install -y qubes-usb-proxy qubes-input-proxy-sender qubes-core-agent-nautilus qubes-u2f qubes-pdf-converter qubes-img-converter ykpers yubikey-personalization-gui yubioath-desktop nitrokey-app nautlius 
