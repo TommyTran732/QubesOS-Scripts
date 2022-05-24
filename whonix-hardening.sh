@@ -12,5 +12,5 @@ sudo apt install --no-install-recommends lkrg-dkms linux-headers-amd64
 echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" >> /etc/ld.so.preload
 
 #Reduce kernel information leaks
-#Will break a lot of applications. The apps I use on Whonix works fine with it so I am enabling it.
+#Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
 systemctl enable hide-hardware-info.service
