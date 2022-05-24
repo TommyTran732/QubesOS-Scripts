@@ -13,4 +13,4 @@ echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" >> /etc/ld.so.preloa
 
 #Reduce kernel information leaks
 #Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
-systemctl enable hide-hardware-info.service
+systemctl enable --now hide-hardware-info.service
