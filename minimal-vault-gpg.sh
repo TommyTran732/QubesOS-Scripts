@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo dnf install -y qubes-split-gpg
+sudo dnf install -y qubes-gpg-split
