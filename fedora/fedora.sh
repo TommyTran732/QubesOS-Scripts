@@ -14,6 +14,8 @@ git clone https://github.com/horst3180/arc-icon-theme
 mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
 
+echo "countme=false" | sudo tee -a /etc/dnf/dnf.conf
+
 sudo cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
 [Unit]
 Description=Update user Flatpaks
