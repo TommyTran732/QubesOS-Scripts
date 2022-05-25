@@ -1,7 +1,7 @@
 # QubesOS-Scripts
-My Scripts for setting up template VMs
+My Scripts for setting up qubes VMs
 
-1. For the normal Fedora TemplateVMs, run the fedora.sh first to trim down the Fedora template, then base the other TemplateVMs on it.
-2. The Fedora minimal TemplateVMs should be based directly on the Fedora minimal template.
-3. VMs running Flatpak should be using Fedora instead of Debian for newer Flatpak and Bubblewrap packages. I only use Debian for situations where official packages from a developer is available only for Debian and not Fedora.
-4. The whonix hardening script should be run on both the workstation and gateway.
+1. Run dom0.sh script to set up dom0
+2. Download the Fedora Minimal template and use the Fedora Minimal scripts to create TemplateVMs based on it. The most important thing here is that you replace sys-net and sys-firewall with a minimal version for attack surface reduction. I have been trying to create a minimal template for ProtonVPN, but haven't been able to so far. Any help with this would be appreciated.
+3. Run the fedora.sh script to trim down the default Fedora template and do basic configuration. Other TemplateVMs should be based on the trimmed down Fedora template.
+4. Run the whonix_hardening.sh script on both the Whonix Gateway and Workstation templates to enable experimental hardening features.
