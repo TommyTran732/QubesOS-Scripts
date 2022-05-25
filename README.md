@@ -1,5 +1,5 @@
 # QubesOS-Scripts
-My Scripts for template VMs
+My Scripts for setting up template VMs
 
 1. For the normal Fedora TemplateVMs, run the fedora.sh first to trim down the Fedora template, then base the other templates on it.
 2. The Fedora minimal TemplateVMs should be based directly on the Fedora minimal template.
