@@ -30,14 +30,10 @@ echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.s
 #Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
 sudo systemctl enable --now hide-hardware-info.service
 
-#Debloat
-sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* vim* system-config-printer* xsettingsd xterm* yelp*
-sudo apt autoremove -y
-sudo apt autoclean
-
-#Theming
+#Install packages
 sudo apt install --no-install-recommend qubes-gpg-split qubes-u2f-proxy eog qt5ct qt5-style-plugins arc-theme -y
 
+#Theming
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
 mv arc-icon-theme/Arc /usr/share/icons
