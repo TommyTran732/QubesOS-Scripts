@@ -1,9 +1,13 @@
 #!/bin/bash
 #Adding KickSecure's signing key
-sudo apt install --no-install-recommends curl -y
 curl --proxy http://127.0.0.1:8082/ --tlsv1.3 --proto =https --max-time 180 --output ~/derivative.asc https://www.kicksecure.com/derivative.asc
 sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
 echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
+
+#Debloat
+sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* vim* system-config-printer* xsettingsd xterm* yelp*
+sudo apt autoremove -y
+sudo apt autoclean
 
 #Distribution morphing
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
