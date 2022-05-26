@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo dnf install -y qubes-gpg-split arc-theme
+sudo apt install --no-install-recommends qubes-gpg-split arc-theme -y
 
 sudo mkdir /etc/gtk-3.0
 echo '[Settings]
