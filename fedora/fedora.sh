@@ -10,16 +10,15 @@ git clone https://github.com/horst3180/arc-icon-theme
 sudo mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
 
-echo "export export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
+echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
-sudo cat > /etc/dconf/db/local.d/custom <<- 'EOF'
-[org/gnome/desktop/interface]
+echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'
-icon-theme='Arc'
-EOF
+icon-theme='Arc'" | sudo tee /etc/dconf/db/local.d/custom
 
-sudo cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
-[Unit]
+sudo dconf update
+
+echo "[Unit]
 Description=Update user Flatpaks
 
 [Service]
@@ -27,11 +26,9 @@ Type=oneshot
 ExecStart=/usr/bin/flatpak --user update -y
 
 [Install]
-WantedBy=default.target
-EOF
+WantedBy=default.target" | sudo tee /etc/systemd/user/update-user-flatpaks.service
 
-sudo cat > /etc/systemd/user/update-user-flatpaks.timer <<- 'EOF'
-[Unit]
+echo "[Unit]
 Description=Update user Flatpaks daily
 
 [Timer]
@@ -39,5 +36,4 @@ OnCalendar=daily
 Persistent=true
 
 [Install]
-WantedBy=timers.target
-EOF
+WantedBy=timers.target" | sudo tee /etc/systemd/user/update-user-flatpaks.timer

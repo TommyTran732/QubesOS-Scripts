@@ -43,7 +43,7 @@ git clone https://github.com/horst3180/arc-icon-theme
 mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
 
-echo "export export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
+echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
 sudo mkdir /etc/gtk-3.0
 echo '[Settings]
@@ -57,16 +57,13 @@ gtk-theme-name=Arc-Dark
 gtk-application-prefer-dark-theme=1
 ' | sudo tee /etc/gtk-4.0/settings.ini
 
-sudo cat > /etc/dconf/db/local.d/custom <<- 'EOF'
-[org/gnome/desktop/interface]
+echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'
-icon-theme='Arc'
-EOF
+icon-theme='Arc'" | sudo tee /etc/dconf/db/local.d/custom
 
 sudo dconf update
 
-sudo cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
-[Unit]
+echo "[Unit]
 Description=Update user Flatpaks
 
 [Service]
@@ -74,11 +71,9 @@ Type=oneshot
 ExecStart=/usr/bin/flatpak --user update -y
 
 [Install]
-WantedBy=default.target
-EOF
+WantedBy=default.target" | sudo tee /etc/systemd/user/update-user-flatpaks.service
 
-sudo cat > /etc/systemd/user/update-user-flatpaks.timer <<- 'EOF'
-[Unit]
+echo "[Unit]
 Description=Update user Flatpaks daily
 
 [Timer]
@@ -86,5 +81,4 @@ OnCalendar=daily
 Persistent=true
 
 [Install]
-WantedBy=timers.target
-EOF
+WantedBy=timers.target" | sudo tee /etc/systemd/user/update-user-flatpaks.timer
