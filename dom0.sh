@@ -16,6 +16,6 @@ echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 echo "emails  vault-gpg allow" | sudo tee /etc/qubes-rpc/policy/qubes.Gpg
 echo "@anyvm  @anyvm  ask,default_target=vault-gpg" | sudo tee -a /etc/qubes-rpc/policy/qubes.Gpg
 
-#Disabling Passwordless sudo
+#Support for disabling passwordless sudo
 echo "/usr/bin/echo 1" >/etc/qubes-rpc/qubes.VMAuth
 echo "@anyvm dom0 ask,default_target=dom0" > /etc/qubes-rpc/policy/qubes.VMAuth
