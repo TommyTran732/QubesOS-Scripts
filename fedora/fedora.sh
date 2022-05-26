@@ -7,14 +7,23 @@ curl --proxy http://127.0.0.1:8082 https://brave-browser-rpm-release.s3.brave.co
 sudo rpm --import brave-core.asc
 rm -rf brave-core.asc
 echo "gpgcheck=1" | sudo tee /etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo
-sudo dnf install brave-browser arc-theme qubes-u2f qubes-gpg-split ntfs-3g exfatprogs -y
+sudo dnf install brave-browser qubes-u2f qubes-gpg-split arc-theme qt5ct qt5-qtstyleplugins ntfs-3g exfatprogs -y
+echo "countme=false" | sudo tee -a /etc/dnf/dnf.conf
 
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
 mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
 
-echo "countme=false" | sudo tee -a /etc/dnf/dnf.conf
+echo "export export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
+
+sudo cat > /etc/dconf/db/local.d/custom <<- 'EOF'
+[org/gnome/desktop/interface]
+gtk-theme='Arc-Dark'
+icon-theme='Arc'
+EOF
+
+sudo dconf update
 
 sudo cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
 [Unit]
@@ -39,11 +48,3 @@ Persistent=true
 [Install]
 WantedBy=timers.target
 EOF
-
-sudo cat > /etc/dconf/db/local.d/custom <<- 'EOF'
-[org/gnome/desktop/interface]
-gtk-theme='Arc-Dark'
-icon-theme='Arc'
-EOF
-
-sudo dconf update
