@@ -18,6 +18,8 @@ icon-theme='Arc'" | sudo tee /etc/dconf/db/local.d/custom
 
 sudo dconf update
 
+#Flatpak update service
+
 echo "[Unit]
 Description=Update user Flatpaks
 

@@ -5,7 +5,7 @@ sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
 echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
 
 #Debloat
-sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* vim* system-config-printer* xsettingsd xterm* yelp*
+sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* system-config-printer* xsettingsd xterm* yelp*
 sudo apt autoremove -y
 sudo apt autoclean
 
@@ -31,12 +31,12 @@ echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.s
 sudo systemctl enable --now hide-hardware-info.service
 
 #Install packages
-sudo apt install --no-install-recommend qubes-gpg-split qubes-u2f-proxy eog qt5ct qt5-style-plugins arc-theme -y
+sudo apt install --no-install-recommends qubes-gpg-split qubes-u2f eog qt5ct qt5-style-plugins arc-theme -y
 
 #Theming
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
-mv arc-icon-theme/Arc /usr/share/icons
+sudo mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
 
 echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
@@ -44,18 +44,16 @@ echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 sudo mkdir /etc/gtk-3.0
 echo "[Settings]
 gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1" | sudo tee /etc/gtk-3.0/settings.ini
+gtk-application-prefer-dark-theme=1
+gtk-icon-theme-name=Arc-Dark" | sudo tee /etc/gtk-3.0/settings.ini
 
 sudo mkdir /etc/gtk-4.0
 echo "[Settings]
 gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1" | sudo tee /etc/gtk-4.0/settings.ini
+gtk-application-prefer-dark-theme=1
+gtk-icon-theme-name=Arc" | sudo tee /etc/gtk-4.0/settings.ini
 
-echo "[org/gnome/desktop/interface]
-gtk-theme='Arc-Dark'
-icon-theme='Arc'" | sudo tee /etc/dconf/db/local.d/custom
-
-sudo dconf update
+#Flatpak update service
 
 echo "[Unit]
 Description=Update user Flatpaks
