@@ -10,6 +10,9 @@ sudo apt autoremove -y
 sudo apt autoclean
 
 #Distribution morphing
+sudo addgroup --system console
+sudo adduser user console
+sudo adduser user sudo
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
 sudo mv /etc/apt/sources.list ~/
 sudo touch /etc/apt/sources.list
