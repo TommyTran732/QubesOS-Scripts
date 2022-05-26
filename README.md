@@ -1,5 +1,5 @@
 # QubesOS-Scripts
-My scripts for setting up QubesOS. Read the scripts and adjust them to your needs, don't just blindly run them.
+My scripts for setting up QubesOS. Read the scripts and adjust them to your needs, don't just blindly run them. Note that the scripts do not disable passwordless sudo. If you want to do it, follow https://www.qubes-os.org/doc/vm-sudo/ and set it up on the Fedora and Debian templates before using my scripts. The purpose of this is to **hopefully** get a bit better protection against VM escapes (as an attacker would need to both get root privilege in the VM and exploit a bug in the Qubes agents or Xen hypervisor).
 
 1. Run dom0.sh script to set up dom0
 2. Download the Fedora Minimal template and use the fedora-minimal.sh script to do basic configuration. Then, create TemplateVMs based on it. The most important thing here is that you replace sys-net and sys-firewall with a minimal version for attack surface reduction. I have been trying to create a minimal template for ProtonVPN, but haven't been able to so far. Any help with this would be appreciated.
