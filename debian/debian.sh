@@ -1,8 +1,9 @@
 #!/bin/bash
 
-sudo apt purge -y thunderbird emacs firefox* keepassxc cups* vim* system-config-printer* xsettingsd xterm*
-sudo apt autoremove
-sudo apt install qt5ct qt5-qtstyleplugins arc-theme
+sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* vim* system-config-printer* xsettingsd xterm*
+sudo apt autoremove -y
+sudo apt autoclean
+sudo apt install -y qt5ct qt5-qtstyleplugins arc-theme
 
 sudo mkdir /etc/gtk-3.0
 echo '[Settings]
