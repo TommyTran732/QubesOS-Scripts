@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt purge -y thunderbird emacs firefox* keepassxc cups* vim* system-config-printer* xsettingsd
+sudo apt purge -y thunderbird emacs firefox* keepassxc cups* vim* system-config-printer* xsettingsd xterm*
 sudo apt autoremove
 sudo apt install qt5ct qt5-qtstyleplugins arc-theme
 
