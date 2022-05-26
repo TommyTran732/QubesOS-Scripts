@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install --no-install-recommends qubes-gpg-split arc-theme -y
+sudo apt install --no-install-recommends qubes-core-agent-networking qubes-core-agent-network-manager wireless-tools notification-daemon gnome-keyring firmware-iwlwifi arc-theme -y
 
 sudo mkdir -p /etc/gtk-3.0
 echo '[Settings]
