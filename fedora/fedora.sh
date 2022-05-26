@@ -17,3 +17,27 @@ sudo cat > /etc/dconf/db/local.d/custom <<- 'EOF'
 gtk-theme='Arc-Dark'
 icon-theme='Arc'
 EOF
+
+sudo cat > /etc/systemd/user/update-user-flatpaks.service <<- 'EOF'
+[Unit]
+Description=Update user Flatpaks
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flatpak --user update -y
+
+[Install]
+WantedBy=default.target
+EOF
+
+sudo cat > /etc/systemd/user/update-user-flatpaks.timer <<- 'EOF'
+[Unit]
+Description=Update user Flatpaks daily
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
