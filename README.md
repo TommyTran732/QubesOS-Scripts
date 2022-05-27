@@ -10,3 +10,8 @@ I have a script to create a Brave VM based on the normal KickSecure and Fedora t
 If you want to install Flatpak packages, install them inside of an AppVM as a **user Flatpak** and enable the update-user-flatpaks.service as a **user** systemd service for automatic updates.
 
 It is recommended that you follow the docs [here](https://www.qubes-os.org/doc/vm-sudo/#replacing-passwordless-root-access-with-dom0-user-prompt) to make a prompt for root access on non-minimal VMs. dom0.sh already takes care dom dom0 so you only need to worry about the guests.
+
+# Notes
+1. Kicksecure, while having more security mitigation, takes significantly longer than Fedora to launch and generally runs slower.
+2. Currently, launching Flatpak apps from the appmenu does not work on KickSecure. I have not been able to find the culprit, so any help would be greatly appreciated.
+3. My personal recommendation is use KickSecure for system VMs like sys-net and sys-usb. For normal apps, especially Flatpaks, just use Fedora instead. Of course, the exception to this rule would be when you can only get official binaries for Debian, like with Signal and Element for example. 
