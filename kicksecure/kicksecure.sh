@@ -5,15 +5,13 @@ sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
 echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
 
 #Debloat
-sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* system-config-printer* xsettingsd xterm* yelp*
+sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* system-config-printer* xsettingsd yelp*
 sudo apt autoremove -y
 sudo apt autoclean
 
 #Distribution morphing
-sudo addgroup --system console
-sudo adduser user console
-sudo adduser user sudo
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
+sudo apt autoremove -y
 sudo mv /etc/apt/sources.list ~/
 sudo touch /etc/apt/sources.list
 

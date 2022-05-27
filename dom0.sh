@@ -19,3 +19,8 @@ echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 #Obviously replace vault-gpg with the actual GPG backend that you are using https://www.qubes-os.org/doc/split-gpg/
 echo "emails  vault-gpg allow" | sudo tee /etc/qubes-rpc/policy/qubes.Gpg
 echo "@anyvm  @anyvm  ask,default_target=vault-gpg" | sudo tee -a /etc/qubes-rpc/policy/qubes.Gpg
+
+#Enabling VMAuth - if you want to get the prompt you will still need to configure the guest VMs tho
+echo "/usr/bin/echo 1" | sudo tee /etc/qubes-rpc/qubes.VMAuth
+sudo chmod u+x /etc/qubes-rpc/qubes.VMAuth
+echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
