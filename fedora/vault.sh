@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install --no-install-recommends qubes-gpg-split arc-theme -y
+sudo apt install --no-install-recommends qubes-gpg-split yubikey-manager-qt yubioath nitrokey-app arc-theme -y
 
 sudo mkdir -p /etc/gtk-3.0
 echo '[Settings]
