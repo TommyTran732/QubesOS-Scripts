@@ -43,7 +43,7 @@ sudo mkdir /etc/gtk-3.0
 echo "[Settings]
 gtk-theme-name=Arc-Dark
 gtk-application-prefer-dark-theme=1
-gtk-icon-theme-name=Arc-Dark" | sudo tee /etc/gtk-3.0/settings.ini
+gtk-icon-theme-name=Arc" | sudo tee /etc/gtk-3.0/settings.ini
 
 sudo mkdir /etc/gtk-4.0
 echo "[Settings]
