@@ -1,4 +1,7 @@
 #!/bin/bash
+
+sudo apt install curl -y
+
 #Adding KickSecure's signing key
 curl --proxy http://127.0.0.1:8082/ --tlsv1.3 --proto =https --max-time 180 --output ~/derivative.asc https://www.kicksecure.com/derivative.asc
 sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
