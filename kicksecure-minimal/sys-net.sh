@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y qubes-core-agent-networking qubes-core-agent-network-manager network-manager-applet firmware-iwlwifi gnome-keyring arc-theme
+sudo apt install -y qubes-core-agent-networking qubes-core-agent-network-manager firmware-iwlwifi gnome-keyring arc-theme
 
 sudo mkdir -p /etc/gtk-3.0
 echo '[Settings]
