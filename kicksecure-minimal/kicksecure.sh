@@ -8,6 +8,7 @@ sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
 echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
 
 #Distribution morphing
+sudo apt update
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
 sudo apt autoremove -y
 sudo mv /etc/apt/sources.list ~/
