@@ -4,7 +4,7 @@
 sudo systemctl enable --now permission-hardening
 
 #Install LKRG
-sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms tirdad -y
+sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms -y
 
 #Enable hardened malloc
 echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.so.preload
