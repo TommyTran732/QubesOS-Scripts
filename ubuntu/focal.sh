@@ -6,6 +6,7 @@ sudo apt autoremove -y
 sudo apt autoclean
 
 #Add repo
+sudo apt install curl -y
 curl --proxy http://127.0.0.1:8082/ --tlsv1.3 --proto =https --max-time 180 --output ~/unman.pub https://raw.githubusercontent.com/unman/unman/master/unman.pub
 sudo apt-key add ~/unman.pub
 echo "deb https://qubes.3isec.org/4.0 focal main" | sudo tee -a /etc/apt/sources.list
