@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Deboat
-sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common keepassx* gnome-settings-daemon ibus* cups* system-config-printer* xsettingsd yelp*
+sudo apt purge -y firefox* thunderbird emacs emacs-gtk emacs-bin-common emacs-common keepassx* gnome-settings-daemon ibus* cups* system-config-printer* xsettingsd yelp*
 sudo apt autoremove -y
 sudo apt autoclean
 
