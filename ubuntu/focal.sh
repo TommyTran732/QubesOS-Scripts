@@ -13,7 +13,7 @@ echo "deb https://qubes.3isec.org/4.0 focal main" | sudo tee -a /etc/apt/sources
 
 #Install packages
 sudo apt update
-sudo apt install --no-install-recommends qubes-gpg-split eog qt5ct qt5-style-plugins nautilus arc-theme snapd qubes-snapd-helper -y
+sudo apt install --no-install-recommends qubes-gpg-split eog qt5ct qt5-style-plugins nautilus arc-theme -y
 
 #Theming
 git config --global http.proxy http://127.0.0.1:8082
