@@ -10,7 +10,6 @@ git clone https://github.com/horst3180/arc-icon-theme
 sudo mv arc-icon-theme/Arc /usr/share/icons
 rm -rf arc-icon-theme
 
-
 echo "[org/gnome/desktop/interface]
 color-scheme='prefer-dark'" | sudo tee /etc/dconf/db/local.d/custom
 
