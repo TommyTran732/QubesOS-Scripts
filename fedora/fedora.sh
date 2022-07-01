@@ -13,6 +13,7 @@ rm -rf arc-icon-theme
 echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
 echo "[org/gnome/desktop/interface]
+color-scheme='prefer-dark'
 gtk-theme='Arc-Dark'
 icon-theme='Arc'" | sudo tee /etc/dconf/db/local.d/custom
 
