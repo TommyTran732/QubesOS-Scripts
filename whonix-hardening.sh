@@ -9,6 +9,9 @@ sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms -y
 #Enable hardened malloc
 echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.so.preload
 
+#Restrict /proc and access
+sudo systemctl enable --now proc-hidepid.service
+
 #Reduce kernel information leaks
 #Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
 sudo systemctl enable --now hide-hardware-info.service
