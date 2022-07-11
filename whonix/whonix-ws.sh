@@ -4,7 +4,7 @@
 sudo systemctl enable --now permission-hardening
 
 #Install pages
-sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms qt5ct qt5-style-plugins arc-theme element-desktop git -y
+sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms qt5ct qt5-style-plugins arc-theme git -y
 
 #Enable hardened malloc
 echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.so.preload
