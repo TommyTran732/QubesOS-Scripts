@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Install pages
+#Install packages
 sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms qt5ct qt5-style-plugins arc-theme git -y
 
 #Enabling SUID Disabler and Permission Hardener
