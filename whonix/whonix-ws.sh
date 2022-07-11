@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#Enabling SUID Disabler and Permission Hardener
-sudo systemctl enable --now permission-hardening
-
 #Install pages
 sudo apt install --no-install-recommends linux-headers-amd64 lkrg-dkms qt5ct qt5-style-plugins arc-theme git -y
+
+#Enabling SUID Disabler and Permission Hardener
+sudo systemctl enable --now permission-hardening
 
 #Enable hardened malloc
 echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.so.preload
