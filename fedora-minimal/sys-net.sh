@@ -4,26 +4,7 @@ sudo dnf install -y qubes-core-agent-networking qubes-core-agent-network-manager
 
 sudo systemctl disable --now systemd-timesyncd
 
-#Configuration copied from https://github.com/GrapheneOS/infrastructure/blob/main/chrony.conf
-
-echo 'server time.cloudflare.com iburst nts
-server nts1.time.nl iburst nts
-server sth1.nts.netnod.se iburst nts
-server ptbtime1.ptb.de iburst nts
-
-minsources 2
-authselectmode require
-
-driftfile /var/lib/chrony/drift
-ntsdumpdir /var/lib/chrony
-
-leapsectz right/UTC
-makestep 1.0 3
-
-rtconutc
-rtcsync
-
-cmdport 0' | sudo tee /etc/chrony.conf
+sudo curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony/chrony.conf
 
 sudo systemctl enable --now chronyd
 
