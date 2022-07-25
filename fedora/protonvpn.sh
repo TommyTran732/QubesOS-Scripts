@@ -8,4 +8,4 @@ gtk-theme='Arc-Dark'" | sudo tee /etc/dconf/db/local.d/custom
 
 sudo dconf update
 
-sudo rm -rf /usr/share/icons/arc-icon-theme
+sudo rm -rf /usr/share/icons/Arc
