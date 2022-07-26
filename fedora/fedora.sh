@@ -5,6 +5,14 @@ sudo dnf autoremove -y
 sudo dnf install qubes-u2f qubes-gpg-split arc-theme qt5ct qt5-qtstyleplugins -y
 echo "countme=False" | sudo tee -a /etc/dnf/dnf.conf
 
+# Blacklisting kernel modules
+sudo curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Whonix/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
+
+# Security kernel settings.
+sudo curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Whonix/security-misc/master/etc/sysctl.d/30_security-misc.conf -o /etc/sysctl.d/30_security-misc.conf
+sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /mnt/etc/sysctl.d/30_security-misc.conf
+sudo curl --proxy http://127.00.1:8082 https://raw.githubusercontent.com/Whonix/security-misc/master/etc/sysctl.d/30_silent-kernel-printk.conf -o /etc/sysctl.d/30_silent-kernel-printk.conf
+
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
 sudo mv arc-icon-theme/Arc /usr/share/icons
