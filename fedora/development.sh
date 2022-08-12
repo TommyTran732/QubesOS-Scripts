@@ -10,3 +10,9 @@ sudo dnf install docker-ce docker-compose-plugin github-desktop code java-latest
 sudo systemctl enable --now docker
 sudo usermod -aG docker $USER
 newgrp docker
+
+sudo mkdir -p /etc/qubes-bind-dirs.d
+sudo tee /etc/qubes-bind-dirs.d50_user.conf << EOF > /dev/null
+binds+=( '/var/lib/docker' )
+binds+=( '/etc/docker' )
+EOF
