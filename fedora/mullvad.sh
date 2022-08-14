@@ -9,3 +9,5 @@ gtk-theme='Arc-Dark'" | sudo tee /etc/dconf/db/local.d/custom
 sudo dconf update
 
 sudo rm -rf /usr/share/icons/Arc
+
+echo "/usr/lib/qubes/qubes-setup-dnat-to-ns" | sudo tee -a /rw/config/rc.local
