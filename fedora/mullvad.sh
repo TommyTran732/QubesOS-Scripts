@@ -1,7 +1,7 @@
 #!/bin/bash
 #Needs to be installed in a standalone VM for now.
 
-sudo dnf install -y https://mullvad.net/media/app/MullvadVPN-2022.3_x86_64.rpm
+sudo dnf install -y https://mullvad.net/media/app/MullvadVPN-2022.4_x86_64.rpm
 
 echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'" | sudo tee /etc/dconf/db/local.d/custom
