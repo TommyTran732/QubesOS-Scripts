@@ -18,3 +18,12 @@ echo '[Settings]
 gtk-theme-name=Arc-Dark
 gtk-application-prefer-dark-theme=1
 ' | sudo tee /etc/gtk-4.0/settings.ini
+
+echo '[device]
+wifi.scan-rand-mac-address=yes
+
+[connection]
+wifi.cloned-mac-address=random
+ethernet.cloned-mac-address=random
+connection.stable-id=${CONNECTION}/${BOOT}
+' | sudo tee /etc/NetworkManager/conf.d/00-macrandomize.conf
