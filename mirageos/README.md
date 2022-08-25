@@ -1,5 +1,5 @@
 # MirageOS
 
-This is my own build of MirageOS 3.10. As of this writing, the Dockerfile on the main branch of Mirage is broken, so the SHA256SUm will not match with what they have officially.
+Mirage 4.2 built from pull request https://github.com/mirage/qubes-mirage-firewall/pull/140
 
-The SHA256Sum of this build is `0342f3a1c450cfa46de07d3f3181afd1cd4d17d731bfe3b022eec35009539416`.
+SHA256 Checksum: `588e921b9d78a99f6f49d468a7b68284c50dabeba95698648ea52e99b381723b`
