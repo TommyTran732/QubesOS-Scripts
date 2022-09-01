@@ -4,7 +4,11 @@
 sudo dnf install -y https://mullvad.net/media/app/MullvadVPN-2022.4_x86_64.rpm
 
 echo "[org/gnome/desktop/interface]
-gtk-theme='Arc-Dark'" | sudo tee /etc/dconf/db/local.d/custom
+gtk-theme='Arc-Dark'
+
+[org/gnome/desktop/media-handling]
+automount=false
+automount-open=false" | sudo tee /etc/dconf/db/local.d/custom
 
 sudo dconf update
 
