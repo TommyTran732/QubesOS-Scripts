@@ -22,7 +22,11 @@ echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
 echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'
-icon-theme='Arc'" | sudo tee /etc/dconf/db/local.d/custom
+icon-theme='Arc'
+
+[org/gnome/desktop/media-handling]
+automount=false
+automount-open=false" | sudo tee /etc/dconf/db/local.d/custom
 
 sudo dconf update
 
