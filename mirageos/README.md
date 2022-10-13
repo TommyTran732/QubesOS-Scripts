@@ -1,5 +1,5 @@
 # MirageOS
 
-Mirage 4.2 built from pull request https://github.com/mirage/qubes-mirage-firewall/commit/721f552a3ce4f09659e315b918c935c9e9af810b
+Mirage 4.2 built from pull request hhttps://github.com/mirage/qubes-mirage-firewall/commit/07da67c8cffdec2ee3b5fc9821de06e808b7bdcd
 
-SHA256 Checksum: `d0ec19d5b392509955edccf100852bcc9c0e05bf31f1ec25c9cc9c9e74c3b7bf`
+SHA256 Checksum: `73488b0c54d6c43d662ddf58916b6d472430894f6394c6bdb8a879723abcc06f`
