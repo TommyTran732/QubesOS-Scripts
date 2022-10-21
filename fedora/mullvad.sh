@@ -20,5 +20,5 @@ binds+=( '/etc/mullvad-vpn' )
 EOF
 
 #Run these in the AppVM:
-#echo "sleep 10 # Waiting a bit that Mullvad succeeds to establish connection
+#echo "sleep 10 # Waiting a bit so that Mullvad can establish connection
 #/usr/lib/qubes/qubes-setup-dnat-to-ns" | sudo tee -a /rw/config/rc.local
