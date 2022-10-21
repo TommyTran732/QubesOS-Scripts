@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo dnf install -y https://mullvad.net/media/app/MullvadVPN-2022.4_x86_64.rpm
+sudo dnf install -y https://mullvad.net/media/app/MullvadVPN-2022.5_x86_64.rpm
 sudo systemctl enable mullvad-daemon
 
 echo "[org/gnome/desktop/interface]
