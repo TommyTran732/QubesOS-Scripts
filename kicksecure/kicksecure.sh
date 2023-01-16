@@ -11,7 +11,7 @@ sudo apt autoremove -y
 sudo apt autoclean
 
 #Distribution morphing
-sudo apt install --no-install-recommends kicksecure-qubes-cli -y
+sudo apt install --no-install-recommends kicksecure-qubes-cli gnome-settings-daemon -y
 sudo apt autoremove -y
 sudo mv /etc/apt/sources.list ~/
 sudo touch /etc/apt/sources.list
