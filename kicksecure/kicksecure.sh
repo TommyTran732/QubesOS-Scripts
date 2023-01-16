@@ -43,17 +43,15 @@ rm -rf arc-icon-theme
 
 echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
-sudo mkdir -p /etc/gtk-3.0
-echo "[Settings]
-gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1
-gtk-icon-theme-name=Arc" | sudo tee /etc/gtk-3.0/settings.ini
+echo "[org/gnome/desktop/interface]
+gtk-theme='Arc-Dark'
+icon-theme='Arc'
 
-sudo mkdir -p /etc/gtk-4.0
-echo "[Settings]
-gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1
-gtk-icon-theme-name=Arc" | sudo tee /etc/gtk-4.0/settings.ini
+[org/gnome/desktop/media-handling]
+automount=false
+automount-open=false" | sudo tee /etc/dconf/db/local.d/custom
+
+sudo dconf update
 
 #Flatpak update service
 
