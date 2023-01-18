@@ -17,6 +17,14 @@ sudo curl --proxy http://127.00.1:8082 https://raw.githubusercontent.com/Kicksec
 sudo mkdir -p /etc/systemd/system/ModemManager.service.d
 sudo curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/divestedcg/Brace/master/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf -o /etc/systemd/system/ModemManager.service.d/99-brace.conf
 
+#Setup SSH client
+echo "GSSAPIAuthentication no" | sudo tee /etc/ssh/ssh_config.d/10-custom.conf
+echo "VerifyHostKeyDNS yes" | sudo tee -a /etc/ssh/ssh_config.d/10-custom.conf
+
+#Force DNSSEC
+sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
+sudo systemctl restart systemd-resolved
+
 # Theming
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
