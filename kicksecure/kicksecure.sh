@@ -35,6 +35,14 @@ sudo systemctl enable --now hide-hardware-info.service
 #Install packages
 sudo apt install --no-install-recommends qubes-gpg-split qubes-u2f eog qt5ct qt5-style-plugins arc-theme -y
 
+#Setup SSH client
+echo "GSSAPIAuthentication no" | sudo tee /etc/ssh/ssh_config.d/10-custom.conf
+echo "VerifyHostKeyDNS yes" | sudo tee -a /etc/ssh/ssh_config.d/10-custom.conf
+
+#Force DNSSEC
+sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
+sudo systemctl restart systemd-resolved
+
 #Theming
 git config --global http.proxy http://127.0.0.1:8082
 git clone https://github.com/horst3180/arc-icon-theme
