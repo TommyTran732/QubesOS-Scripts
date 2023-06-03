@@ -9,7 +9,6 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/dock
 sudo dnf install docker-ce docker-compose-plugin github-desktop code
 sudo systemctl enable --now docker
 sudo usermod -aG docker $USER
-newgrp docker
 
 sudo mkdir -p /etc/qubes-bind-dirs.d
 sudo tee /etc/qubes-bind-dirs.d50_user.conf << EOF > /dev/null
