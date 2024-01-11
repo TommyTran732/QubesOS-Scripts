@@ -56,16 +56,11 @@ sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
 sudo systemctl restart systemd-resolved
 
 #Theming
-git config --global http.proxy http://127.0.0.1:8082
-git clone https://github.com/horst3180/arc-icon-theme
-sudo mv arc-icon-theme/Arc /usr/share/icons
-rm -rf arc-icon-theme
 
 echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
 echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Dark'
-icon-theme='Arc'
 
 [org/gnome/desktop/media-handling]
 automount=false
