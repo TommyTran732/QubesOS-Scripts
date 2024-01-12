@@ -1,7 +1,46 @@
 #!/bin/bash
 
-sudo dnf remove firefox thunderbird totem gnome-remote-desktop gnome-calendar gnome-disk-utility gnome-calculator gnome-connections gnome-weather gnome-contacts gnome-clocks gnome-maps gnome-screenshot gnome-logs gnome-characters gnome-font-viewer gnome-color-manager simple-scan keepassxc cheese baobab yelp evince* httpd mozilla* cups rygel -y
+# Remove unnecessary stuff from the Qubes template
+sudo dnf -y thunderbird httpd keepassxc rygel
+
+# Remove firefox packages
+sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
+
+# Remove Network + hardware tools packages
+sudo dnf -y remove '*cups' nmap-ncat nfs-utils nmap-ncat openssh-server net-snmp-libs net-tools opensc traceroute rsync tcpdump teamd geolite2* mtr dmidecode sgpio
+
+#Remove support for some languages and spelling
+sudo dnf -y remove ibus-typing-booster '*speech*' '*zhuyin*' '*pinyin*' '*kkc*' '*m17n*' '*hangul*' '*anthy*' words
+
+#Remove codec + image + printers
+sudo dnf -y remove openh264 ImageMagick* sane* simple-scan
+
+#Remove Active Directory + Sysadmin + reporting tools
+sudo dnf -y remove 'sssd*' realmd adcli cyrus-sasl-plain cyrus-sasl-gssapi mlocate quota* dos2unix kpartx sos abrt samba-client gvfs-smb
+
+#Remove vm and virtual stuff
+sudo dnf -y remove 'podman*' '*libvirt*' 'open-vm*' qemu-guest-agent 'hyperv*' spice-vdagent virtualbox-guest-additions vino xorg-x11-drv-vmware xorg-x11-drv-amdgpu
 sudo dnf autoremove -y
+
+#Remove NetworkManager
+sudo dnf -y remove NetworkManager-pptp-gnome NetworkManager-ssh-gnome NetworkManager-openconnect-gnome NetworkManager-openvpn-gnome NetworkManager-vpnc-gnome ppp* ModemManager
+
+#Remove Gnome apps
+sudo dnf remove -y gnome-photos gnome-connections gnome-tour gnome-themes-extra gnome-screenshot gnome-remote-desktop gnome-font-viewer gnome-calculator gnome-calendar gnome-contacts \
+    gnome-maps gnome-weather gnome-logs gnome-boxes gnome-disk-utility gnome-clocks gnome-color-manager gnome-characters baobab totem \
+    gnome-shell-extension-background-logo gnome-shell-extension-apps-menu gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list \
+    gnome-classic* gnome-user* gnome-text-editor chrome-gnome-shell eog
+
+#Remove apps
+sudo dnf remove -y rhythmbox yelp evince libreoffice* cheese file-roller* mediawriter
+
+#Remove other packages
+ sudo dnf remove -y lvm2 rng-tools thermald '*perl*' yajl
+
+# Disable openh264 repo
+sudo dnf config-manager --set-disabled fedora-cisco-openh264
+
+# Install custom packages
 sudo dnf install qubes-u2f qubes-gpg-split arc-theme qt5ct qt5-qtstyleplugins -y
 echo "countme=False" | sudo tee -a /etc/dnf/dnf.conf
 
