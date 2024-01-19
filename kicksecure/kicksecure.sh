@@ -45,7 +45,7 @@ sudo systemctl enable --now proc-hidepid.service
 sudo systemctl enable --now hide-hardware-info.service
 
 #Install packages
-sudo apt install --no-install-recommends qubes-gpg-split qubes-u2f eog qt5ct qt5-style-plugins arc-theme -y
+sudo apt install --no-install-recommends tirdad qubes-gpg-split qubes-u2f eog qt5ct qt5-style-plugins arc-theme -y
 
 #Setup SSH client
 echo "GSSAPIAuthentication no" | sudo tee /etc/ssh/ssh_config.d/10-custom.conf
