@@ -14,23 +14,31 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-#Install packages
+unpriv(){
+  sudo -u nobody "$@"
+}
+
+# Avoid phased updates
+unpriv curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades
+sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
+
+# Install packages
 sudo apt install --no-install-recommends tirdad qt5ct qt5-style-plugins arc-theme git -y
 
-#Enabling SUID Disabler and Permission Hardener
+# Enabling SUID Disabler and Permission Hardener
 sudo systemctl enable --now permission-hardening
 
-#Enable hardened malloc
+# Enable hardened malloc
 echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.so.preload
 
-#Restrict /proc and access
+# Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
 
-#Reduce kernel information leaks
-#Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
+# Reduce kernel information leaks
+# Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
 sudo systemctl enable --now hide-hardware-info.service
 
-#Theming
+# Theming
 
 echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
 
