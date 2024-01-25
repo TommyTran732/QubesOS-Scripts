@@ -21,11 +21,11 @@ rm -rf /etc/chrony.conf
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf
 systemctl enable --now chronyd
 
-#Switch DNSSEC to default / allow-downgrade, as there is no guaranteee that the DNS server obtained via DHCP supports DNSSEC.
+# Switch DNSSEC to default / allow-downgrade, as there is no guaranteee that the DNS server obtained via DHCP supports DNSSEC.
 sed -i 's/DNSSEC=yes/#DNSSEC=false/g' /etc/systemd/resolved.conf
 systemctl restart systemd-resolved
 
-#Theming
+# Theming
 
 sudo mkdir -p /etc/gtk-3.0
 echo '[Settings]

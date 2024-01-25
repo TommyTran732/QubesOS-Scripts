@@ -19,6 +19,6 @@ sudo tee /etc/qubes-bind-dirs.d/50_user.conf << EOF > /dev/null
 binds+=( '/etc/mullvad-vpn' )
 EOF
 
-#Run these in the AppVM:
-#echo "sleep 10 # Waiting a bit so that Mullvad can establish connection
-#/usr/lib/qubes/qubes-setup-dnat-to-ns" | sudo tee -a /rw/config/rc.local
+# Run these in the AppVM:
+# echo "sleep 10 # Waiting a bit so that Mullvad can establish connection
+# /usr/lib/qubes/qubes-setup-dnat-to-ns" | sudo tee -a /rw/config/rc.local
