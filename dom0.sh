@@ -14,6 +14,12 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+# Enabling discard and fstrim
+sudo sed -i 's/issue_discards = 0/issue_discards = 1/g' /etc/lvm/lvm.conf
+sudo systemctl enable fstrim.timer
+
+# Theming
+
 sudo mkdir -p /etc/gtk-3.0
 echo "[Settings]
 gtk-theme-name=Arc-Dark
@@ -41,7 +47,3 @@ echo "@anyvm  @anyvm ask,default_target=vault" | sudo tee /etc/qubes-rpc/policy/
 echo "/usr/bin/echo 1" | sudo tee /etc/qubes-rpc/qubes.VMAuth
 sudo chmod u+x /etc/qubes-rpc/qubes.VMAuth
 echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
-
-# Enabling discard and fstrim
-sudo sed -i 's/issue_discards = 0/issue_discards = 1/g' /etc/lvm/lvm.conf
-sudo systemctl enable fstrim.timer
