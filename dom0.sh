@@ -34,7 +34,7 @@ sudo qubes-dom0-update qubes-u2f-dom0 qt5ct qt5-qtstyleplugins
 qvm-service --enable personal qubes-u2f-proxy
 qvm-service --enable work qubes-u2f-proxy
 
-echo "QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
+echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee /etc/environment
 
 #O bviously replace vault with the actual GPG backend that you are using https://www.qubes-os.org/doc/split-gpg/
 echo "emails  vault allow" | sudo tee /etc/qubes-rpc/policy/qubes.Gpg
