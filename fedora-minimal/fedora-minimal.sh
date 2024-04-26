@@ -23,6 +23,6 @@ sudo sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sys
 curl --proxy http://127.00.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf | sudo tee /etc/sysctl.d/30_silent-kernel-printk.conf
 curl --proxy http://127.00.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf | sudo tee /etc/sysctl.d/30_security-misc_kexec-disable.conf
 
-#Setup SSH client
+# Setup SSH client
 echo "GSSAPIAuthentication no" > /etc/ssh/ssh_config.d/10-custom.conf
 echo "VerifyHostKeyDNS yes" >> /etc/ssh/ssh_config.d/10-custom.conf
