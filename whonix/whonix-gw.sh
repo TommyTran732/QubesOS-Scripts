@@ -28,9 +28,6 @@ sudo apt install --no-install-recommends tirdad qt5ct qt5-style-plugins arc-them
 # Enabling SUID Disabler and Permission Hardener
 sudo systemctl enable --now permission-hardening
 
-# Enable hardened malloc
-echo "/usr/lib/libhardened_malloc.so/libhardened_malloc.so" | sudo tee /etc/ld.so.preload
-
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
 
