@@ -80,10 +80,7 @@ Description=Update user Flatpaks
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/flatpak --user update -y
-
-[Install]
-WantedBy=default.target" | sudo tee /etc/systemd/user/update-user-flatpaks.service
+ExecStart=/usr/bin/flatpak --user update -y" | sudo tee /etc/systemd/user/update-user-flatpaks.service
 
 echo "[Unit]
 Description=Update user Flatpaks daily
