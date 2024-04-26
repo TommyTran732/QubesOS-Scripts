@@ -46,6 +46,7 @@ echo "countme=False" | sudo tee -a /etc/dnf/dnf.conf
 
 # Blacklisting kernel modules
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf | sudo tee /etc/modprobe.d/30_security-misc.conf
+sudo sed -i 's/#install msr/install msr/g' /etc/modprobe.d/30_security-misc.conf
 
 # Security kernel settings.
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf | sudo tee /etc/sysctl.d/990-security-misc.conf
