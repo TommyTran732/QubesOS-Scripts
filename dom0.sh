@@ -20,6 +20,14 @@ sudo systemctl enable fstrim.timer
 
 # Theming
 
+# After a reboot, run qt5ct and set the theme to gtk-2
+
+sudo qubes-dom0-update qubes-ctap-dom0 qt5ct qt5-qtstyleplugins
+
+echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment
+
+# Add extra gtk theming - this is probably not necessary, but why not
+
 sudo mkdir -p /etc/gtk-3.0
 echo '[Settings]
 gtk-theme-name=Arc-Dark
@@ -29,7 +37,3 @@ sudo mkdir -p /etc/gtk-4.0
 echo '[Settings]
 gtk-theme-name=Arc-Dark
 gtk-application-prefer-dark-theme=1' | sudo tee /etc/gtk-4.0/settings.ini
-
-sudo qubes-dom0-update qubes-ctap-dom0 qt5ct qt5-qtstyleplugins
-
-echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment
