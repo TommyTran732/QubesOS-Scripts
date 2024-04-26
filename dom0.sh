@@ -30,6 +30,6 @@ echo "[Settings]
 gtk-theme-name=Arc-Dark
 gtk-application-prefer-dark-theme=1" | sudo tee /etc/gtk-4.0/settings.ini
 
-sudo qubes-dom0-update qubes-u2f-dom0 qt5ct qt5-qtstyleplugins
+sudo qubes-dom0-update qubes-ctap-dom0 qt5ct qt5-qtstyleplugins
 
 echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee /etc/environment
