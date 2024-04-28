@@ -1,7 +1,7 @@
 # QubesOS-Scripts
 My scripts for setting up QubesOS. 
 
-Running these scripts should be very straight forward. For the default Fedora template, run fedora.sh to trim it down first.
+Running these scripts should be very straight forward. For the default Fedora template, run fedora-gnome.sh to trim it down first.
 
 After you are done running those scripts, any other script can be used in a different template based on those trimmed down templates to create their respective virtual machines.
 
