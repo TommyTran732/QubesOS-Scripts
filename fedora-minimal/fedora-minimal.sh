@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2023 Thien Tran
+# Copyright (C) 2022-2024 Thien Tran
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,34 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-# Blacklisting kernel modules
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf | sudo tee /etc/modprobe.d/30_security-misc.conf
+# Compliance
+systemctl mask debug-shell.service
+systemctl mask kdump.service
 
-# Security kernel settings.
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf | sudo tee /etc/sysctl.d/990-security-misc.conf
-sudo sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/990-security-misc.conf
-curl --proxy http://127.00.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf | sudo tee /etc/sysctl.d/30_silent-kernel-printk.conf
-curl --proxy http://127.00.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf | sudo tee /etc/sysctl.d/30_security-misc_kexec-disable.conf
+# Setting umask to 077
+umask 077
+sed -i 's/umask 022/umask 077/g' /etc/bashrc
+echo 'umask 077' | tee -a /etc/bashrc
 
-# Setup SSH client
-echo "GSSAPIAuthentication no" > /etc/ssh/ssh_config.d/10-custom.conf
-echo "VerifyHostKeyDNS yes" >> /etc/ssh/ssh_config.d/10-custom.conf
+# Disable timesyncd
+systemctl disable --now systemd-timesyncd
+systemctl mask systemd-timesyncd
+
+# Security kernel settings
+curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf | tee /etc/modprobe.d/30_security-misc.conf
+chmod 644 /etc/modprobe.d/30_security-misc.conf
+sed -i 's/#install msr/install msr/g' /etc/modprobe.d/30_security-misc.conf
+curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf | tee /etc/sysctl.d/990-security-misc.conf
+chmod 644 /etc/sysctl.d/990-security-misc.conf
+sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/990-security-misc.conf
+curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf | tee /etc/sysctl.d/30_silent-kernel-printk.conf
+chmod 644 /etc/sysctl.d/30_silent-kernel-printk.conf
+curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf | tee /etc/sysctl.d/30_security-misc_kexec-disable.conf
+chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
+# Dracut doesn't seem to work - need to investigate
+# dracut -f
+sysctl -p
+
+# Harden SSH
+curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf
+chmod 644 /etc/ssh/ssh_config.d/10-custom.conf

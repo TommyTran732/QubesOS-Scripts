@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2023 Thien Tran
+# Copyright (C) 2022-2024 Thien Tran
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -19,7 +19,7 @@ unpriv(){
 }
 
 # Avoid phased updates
-unpriv curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
@@ -35,14 +35,11 @@ sudo systemctl enable --now proc-hidepid.service
 # Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
 sudo systemctl enable --now hide-hardware-info.service
 
-echo "export QT_QPA_PLATFORMTHEME=gtk2" | sudo tee /etc/environment
+# Theming
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/environment | sudo tee /etc/environment
 
 sudo mkdir -p /etc/gtk-3.0
-echo "[Settings]
-gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1" | sudo tee /etc/gtk-3.0/settings.ini
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini | sudo tee /etc/gtk-3.0/settings.ini
 
 sudo mkdir -p /etc/gtk-4.0
-echo "[Settings]
-gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1" | sudo tee /etc/gtk-4.0/settings.ini
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini | sudo tee /etc/gtk-4.0/settings.ini
