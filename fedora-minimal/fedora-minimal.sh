@@ -45,3 +45,10 @@ sysctl -p
 # Harden SSH
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf
 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
+
+# Setup hardened_malloc
+dnf install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm' -y
+sed -i 's/^metalink=.*/&?protocol=https/g' /etc/yum.repos.d/divested-release.repo
+dnf config-manager --save --setopt=divested.includepkgs=divested-release,real-ucode,microcode_ctl,amd-ucode-firmware,hardened_malloc
+dnf install hardened_malloc -y
+echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
