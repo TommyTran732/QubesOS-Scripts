@@ -74,7 +74,7 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Tomm
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
 
 # Remove unnecessary stuff from the Qubes template
-sudo dnf -y thunderbird httpd keepassxc rygel
+sudo dnf -y remove thunderbird httpd keepassxc rygel
 
 # Remove firefox packages
 sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
