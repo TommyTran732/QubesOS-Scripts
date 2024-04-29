@@ -117,7 +117,7 @@ sudo dnf config-manager --set-disabled fedora-cisco-openh264
 sudo dnf -y upgrade
 
 # Install custom packages
-sudo dnf install qubes-u2f qubes-gpg-split adw-gtk3-theme gnome-console -y
+sudo dnf install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console -y
 
 # Flatpak update service
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service
