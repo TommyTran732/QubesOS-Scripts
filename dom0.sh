@@ -16,7 +16,7 @@
 
 # Enabling discard and fstrim
 sudo sed -i 's/issue_discards = 0/issue_discards = 1/g' /etc/lvm/lvm.conf
-sudo systemctl enable fstrim.timer
+sudo systemctl enable --now fstrim.timer
 
 # Theming
 
