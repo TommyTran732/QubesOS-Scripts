@@ -23,7 +23,7 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Tomm
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
-sudo apt install --no-install-recommends qt5ct qt5-style-plugins arc-theme git -y
+sudo apt install --no-install-recommends qt5ct qt5-style-plugins arc-theme git pipewire-pulse -y
 
 # Enabling SUID Disabler and Permission Hardener
 sudo permission-hardener enable
