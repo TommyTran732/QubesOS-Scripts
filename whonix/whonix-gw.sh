@@ -25,10 +25,6 @@ sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 # Install packages
 sudo apt install --no-install-recommends qt5ct qt5-style-plugins arc-theme -y
 
-# Enabling SUID Disabler and Permission Hardener
-sudo permission-hardener enable
-sudo systemctl enable --now permission-hardener
-
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
 
