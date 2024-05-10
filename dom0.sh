@@ -30,10 +30,10 @@ echo 'QT_QPA_PLATFORMTHEME=gtk2' | sudo tee -a /etc/environment
 
 sudo mkdir -p /etc/gtk-3.0
 echo '[Settings]
-gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1' | sudo tee /etc/gtk-3.0/settings.ini
+gtk-theme-name = Arc-Dark
+gtk-application-prefer-dark-theme = true' | sudo tee /etc/gtk-3.0/settings.ini
 
 sudo mkdir -p /etc/gtk-4.0
 echo '[Settings]
-gtk-theme-name=Arc-Dark
-gtk-application-prefer-dark-theme=1' | sudo tee /etc/gtk-4.0/settings.ini
+gtk-theme-name = Arc-Dark
+gtk-application-prefer-dark-theme = true' | sudo tee /etc/gtk-4.0/settings.ini
