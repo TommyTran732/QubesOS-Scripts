@@ -135,14 +135,7 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/dive
 #echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 
 # Setup networking
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf | sudo tee /etc/NetworkManager/conf.d/00-macrandomize.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf | sudo tee /etc/NetworkManager/conf.d/01-transient-hostname.conf
-
-# Can't do nmcli reload here because NetworkManager is not running in a TemplateVM
-# sudo nmcli general reload conf
-
-sudo hostnamectl hostname 'localhost'
-sudo hostnamectl --transient hostname ''
+# We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
 
 sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
 unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
