@@ -80,6 +80,7 @@ unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/ra
 # Fix GNOME environment variable
 echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
+# We do the dnf tasks last, because dnf will break after we configure https repos and we need a reboot to fix it.
 # Remove unnecessary stuff from the Qubes template
 sudo dnf -y remove thunderbird httpd keepassxc rygel
 
@@ -121,7 +122,8 @@ sudo dnf remove -y lvm2 rng-tools thermald '*perl*'
 sudo dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install custom packages
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console
+# gnome-session is needed for theming to work
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console gnome-session
 
 # Setup hardened_malloc
 sudo dnf -y install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm'
