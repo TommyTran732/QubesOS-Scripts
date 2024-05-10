@@ -71,10 +71,6 @@ umask 077
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer | sudo tee /etc/systemd/user/update-user-flatpaks.timer
 
-# Systemd hardening
-sudo mkdir -p /etc/systemd/system/ModemManager.service.d
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/divestedcg/Brace/master/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/ModemManager.service.d/99-brace.conf
-
 # Setup networking
 # We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
 
