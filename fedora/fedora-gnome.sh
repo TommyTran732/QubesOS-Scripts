@@ -68,9 +68,22 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Tomm
 sudo dconf update
 umask 077
 
-# Setup DNF
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf
-sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
+# Flatpak update service
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer | sudo tee /etc/systemd/user/update-user-flatpaks.timer
+
+# Systemd hardening
+sudo mkdir -p /etc/systemd/system/ModemManager.service.d
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/divestedcg/Brace/master/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/ModemManager.service.d/99-brace.conf
+
+# Setup networking
+# We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
+
+sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+
+# Fix GNOME environment variable
+echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
 # Remove unnecessary stuff from the Qubes template
 sudo dnf -y remove thunderbird httpd keepassxc rygel
@@ -113,28 +126,15 @@ sudo dnf remove -y lvm2 rng-tools thermald '*perl*'
 sudo dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install custom packages
-sudo dnf install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console -y
-
-# Flatpak update service
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer | sudo tee /etc/systemd/user/update-user-flatpaks.timer
-
-# Systemd hardening
-sudo mkdir -p /etc/systemd/system/ModemManager.service.d
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/divestedcg/Brace/master/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/ModemManager.service.d/99-brace.conf
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console
 
 # Setup hardened_malloc
-#sudo dnf install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm' -y
-#sudo sed -i 's/^metalink=.*/&?protocol=https/g' /etc/yum.repos.d/divested-release.repo
-#sudo dnf config-manager --save --setopt=divested.includepkgs=divested-release,real-ucode,microcode_ctl,amd-ucode-firmware,hardened_malloc
-#sudo dnf install hardened_malloc -y
-#echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
+sudo dnf -y install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm'
+sudo sed -i 's/^metalink=.*/&?protocol=https/g' /etc/yum.repos.d/divested-release.repo
+sudo dnf config-manager --save --setopt=divested.includepkgs=divested-release,real-ucode,microcode_ctl,amd-ucode-firmware,hardened_malloc
+sudo dnf -y install hardened_malloc
+echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 
-# Setup networking
-# We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
-
-sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
-
-# Fix desktop environmemt variable
-echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
+# Setup DNF
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf
+sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
