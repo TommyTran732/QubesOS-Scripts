@@ -81,8 +81,11 @@ unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/ra
 echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
 # We do the dnf tasks last, because dnf will break after we configure https repos and we need a reboot to fix it.
+# Mark packages as manualy installed to avoid removal
+sudo dnf mark install flatpak gnome-menus qubes-menus
+
 # Remove unnecessary stuff from the Qubes template
-sudo dnf -y remove thunderbird httpd keepassxc rygel
+sudo dnf -y remove gnome-software httpd keepassxc thunderbird rygel
 
 # Remove firefox packages
 sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
