@@ -23,7 +23,7 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Tomm
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
-sudo apt install --no-install-recommends qt5ct qt5-style-plugins arc-theme git pipewire-pulse -y
+sudo apt install --no-install-recommends arc-theme pipewire-pulse -y
 
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
