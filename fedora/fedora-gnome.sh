@@ -128,9 +128,11 @@ sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console gnom
 # Setup hardened_malloc
 sudo dnf -y install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm'
 sudo dnf config-manager --save --setopt=divested.includepkgs=divested-release,real-ucode,microcode_ctl,amd-ucode-firmware,hardened_malloc
+sudo sed -i 's/^metalink=.*/&?protocol=https/g' /etc/yum.repos.d/divested-release.repo
 sudo dnf -y install hardened_malloc
 echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 
 # Setup DNF
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
+sudo sed -i 's/&protocol=https//g' /etc/yum.repos.d/divested-release.repo
