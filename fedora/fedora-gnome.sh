@@ -123,7 +123,7 @@ sudo dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install custom packages
 # gnome-session is needed for theming to work
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme gnome-console gnome-shell
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme ncurses gnome-console gnome-shell
 
 # Setup hardened_malloc
 sudo dnf -y install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm'
