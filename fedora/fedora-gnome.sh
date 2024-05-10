@@ -140,7 +140,6 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/dive
 sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
 unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 sudo systemctl daemon-reload
-sudo systemctl restart NetworkManager
 
 # Fix desktop environmemt variable
 
