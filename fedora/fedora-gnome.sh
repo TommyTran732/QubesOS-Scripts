@@ -141,4 +141,4 @@ unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/ra
 sudo systemctl daemon-reload
 
 # Fix desktop environmemt variable
-echo 'XDG_CURRENT_DESKTOP=GNOME' >> /etc/environment
+echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
