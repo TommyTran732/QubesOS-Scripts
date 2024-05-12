@@ -32,20 +32,19 @@ curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran73
 sudo dnf install -y pulseaudio-utils
 
 echo '[Unit]
-Description=Run pacmd to work around edge audio bug
+Description=Run pactl to work around edge audio bug
 After=pipewire-pulse.socket
 Requires=pipewire-pulse.socket
 
 [Service]
 Type=oneshot
-ExecStart=-/usr/bin/pacmd
+ExecStart=/usr/bin/pactl info
 
 [Install]
-WantedBy=default.target' | sudo tee /etc/systemd/user/pacmd.service
+WantedBy=default.target' | sudo tee /etc/systemd/user/pactl.service
 
 mkdir -p /etc/systemd/user-preset/
-echo 'enable pacmd.service' | sudo tee /etc/systemd/user-preset/10-pacmd.preset
+echo 'enable pactl.service' | sudo tee /etc/systemd/user-preset/10-pactl.preset
 
-# Ignore the error. It is just pacmd complaining that pulseaudio daemon is not there. But it will somehow magically trigger the pipewire-pulse socket and make audio work.
 # For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
-# /rw/home/user is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
+# We are using preset as `/rw/home/user` is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
