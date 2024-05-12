@@ -15,13 +15,11 @@
 # the License.
 
 sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
-sudo dnf install mullvad-vpn
+sudo dnf install -y mullvad-vpn
 sudo systemctl enable mullvad-daemon
 
 sudo mkdir -p /etc/qubes-bind-dirs.d
-sudo tee /etc/qubes-bind-dirs.d/50_user.conf << EOF > /dev/null
-binds+=( '/etc/mullvad-vpn' )
-EOF
+echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
 # Run these in the AppVM:
 # echo "sleep 10 # Waiting a bit so that Mullvad can establish connection
