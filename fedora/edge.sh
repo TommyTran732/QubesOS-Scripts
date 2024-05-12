@@ -14,6 +14,10 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+# Note: Qubes does something that makes the umask for root stay at 022. Need to debug. The umask commands are unnecessary for now.
+umask 022
+
+# Install Edge
 echo '[microsoft-edge]
 name=microsoft-edge
 baseurl=https://packages.microsoft.com/yumrepos/edge/
@@ -28,7 +32,6 @@ curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran73
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json | sudo tee /etc/opt/edge/policies/managed/recommended.json
 
 # Work around for Edge audio bug
-
 sudo dnf install -y pulseaudio-utils
 
 echo '[Unit]
@@ -48,3 +51,5 @@ echo 'enable pactl.service' | sudo tee /etc/systemd/user-preset/10-pactl.preset
 
 # For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
 # We are using preset as `/rw/home/user` is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
+
+umask 077
