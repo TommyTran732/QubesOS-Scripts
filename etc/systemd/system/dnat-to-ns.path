@@ -3,7 +3,7 @@ Description=Run /usr/lib/qubes/qubes-setup-dnat-to-ns when /etc/resolv.conf chan
 
 [Path]
 PathChanged=/etc/resolv.conf
-Unit=dns-to-ns.service
+Unit=dnat-to-ns.service
 
 [Install]
 WantedBy=multi-user.target
