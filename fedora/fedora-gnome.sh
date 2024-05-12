@@ -133,8 +133,9 @@ echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 # Setup networking
 # We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
 
-sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+# This breaks saving network settings with the Fedora 40 template rn, so I am commenting it out.
+#sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+#unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 
 # Fix GNOME environment variable
 echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
