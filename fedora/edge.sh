@@ -26,3 +26,24 @@ sudo dnf install -y microsoft-edge-stable
 sudo mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended/
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json | sudo tee /etc/opt/edge/policies/managed/managed.json
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json | sudo tee /etc/opt/edge/policies/managed/recommended.json
+
+# Work around for Edge audio bug
+
+sudo dnf install -y pulseaudio-utils
+
+echo '[Unit]
+Description=Run pacmd to work around edge audio bug
+After=pipewire-pulse.socket
+Requires=pipewire-pulse.socket
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pacmd
+
+[Install]
+WantedBy=default.target' | sudo tee /etc/systemd/user/pacmd.service
+
+# Run `systemctl --user enable --now pacmd.service` in your appVM. 
+# Ignore the error. It is just pacmd complaining that pulseaudio daemon is not there. But it will somehow magically trigger the pipewire-pulse socket and make audio work.
+# For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
+# /rw/home/user is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
