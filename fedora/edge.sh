@@ -38,12 +38,14 @@ Requires=pipewire-pulse.socket
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/pacmd
+ExecStart=-/usr/bin/pacmd
 
 [Install]
 WantedBy=default.target' | sudo tee /etc/systemd/user/pacmd.service
 
-# Run `systemctl --user enable --now pacmd.service` in your appVM. 
+mkdir -p /etc/systemd/user-preset/
+echo 'enable pacmd.service' | sudo tee /etc/systemd/user-preset/10-pacmd.preset
+
 # Ignore the error. It is just pacmd complaining that pulseaudio daemon is not there. But it will somehow magically trigger the pipewire-pulse socket and make audio work.
 # For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
 # /rw/home/user is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
