@@ -1,0 +1,6 @@
+[Unit]
+Description=Run /usr/lib/qubes/qubes-setup-dnat-to-ns
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/qubes/qubes-setup-dnat-to-ns

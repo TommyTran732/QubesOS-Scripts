@@ -14,12 +14,17 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+unpriv(){
+  sudo -u nobody "$@"
+}
+
 sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
 sudo dnf install -y mullvad-vpn
 
 sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
-# Run these in the AppVM:
-# echo "sleep 10 # Waiting a bit so that Mullvad can establish connection
-# /usr/lib/qubes/qubes-setup-dnat-to-ns" | sudo tee -a /rw/config/rc.local
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service | sudo tee /etc/systemd/system/dnat-to-ns.service
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path | sudo tee /etc/systemd/system/dnat-to-ns.path
+
+sudo systemctl enable dnat-to-ns.path
