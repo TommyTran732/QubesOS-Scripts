@@ -46,10 +46,9 @@ ExecStart=/usr/bin/pactl info
 [Install]
 WantedBy=default.target' | sudo tee /etc/systemd/user/pactl.service
 
-mkdir -p /etc/systemd/user-preset/
-echo 'enable pactl.service' | sudo tee /etc/systemd/user-preset/10-pactl.preset
-
-# For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
-# We are using preset as `/rw/home/user` is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
-
 umask 077
+
+# Run `systemctl --user enable --now pactl.service` in your appVM.
+# For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
+# /rw/home/user is broken: https://forum.qubes-os.org/t/how-does-rw-home-user-directory-work/15602
+# Using preset doesn't actually work either
