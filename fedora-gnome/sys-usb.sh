@@ -14,4 +14,4 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-sudo dnf install -y android-tools mediawriter gnome-disk-utility yubioath
+sudo dnf install -y android-tools mediawriter gnome-disk-utility
