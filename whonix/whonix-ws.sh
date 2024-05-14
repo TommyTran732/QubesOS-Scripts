@@ -32,6 +32,10 @@ sudo systemctl enable --now proc-hidepid.service
 # Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
 sudo systemctl enable --now hide-hardware-info.service
 
+# Flatpak update service
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer | sudo tee /etc/systemd/user/update-user-flatpaks.timer
+
 # Theming
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/environment | sudo tee /etc/environment
 
