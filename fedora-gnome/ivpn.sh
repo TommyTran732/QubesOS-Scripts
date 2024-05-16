@@ -21,6 +21,9 @@ unpriv(){
 sudo dnf config-manager --add-repo https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
 sudo dnf install -y ivpn-ui
 
+sudo mkdir -p /etc/qubes-bind-dirs.d
+echo 'binds+=( '\'''/etc/opt/ivpn/mutable''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
+
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service | sudo tee /etc/systemd/system/dnat-to-ns.service
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path | sudo tee /etc/systemd/system/dnat-to-ns.path
 
