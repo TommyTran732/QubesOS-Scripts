@@ -15,7 +15,7 @@
 # the License.
 
 # Install necessary packages
-dnf install -y qubes-core-agent-networking qubes-core-agent-network-manager NetworkManager-wifi network-manager-applet notification-daemon gnome-keyring @hardware-support chrony arc-theme
+dnf install -y @hardware-support arc-theme chrony gnome-keyring NetworkManager-wifi network-manager-applet qubes-core-agent-networking qubes-core-agent-network-manager xfce4-notifyd
 
 # Setup NTS
 sudo rm -rf /etc/chrony.conf
