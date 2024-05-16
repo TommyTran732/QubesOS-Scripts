@@ -32,11 +32,9 @@ curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran73
 # Networking
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf | tee /etc/NetworkManager/conf.d/00-macrandomize.conf
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf | tee /etc/NetworkManager/conf.d/01-transient-hostname.conf
-sudo nmcli general reload conf
 sudo hostnamectl hostname 'localhost'
 sudo hostnamectl --transient hostname ''
 
-sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
-sudo systemctl daemon-reload
-sudo systemctl restart NetworkManager
+# This breaks saving network settings with the Fedora 40 template rn, so I am commenting it out.
+#sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+#curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
