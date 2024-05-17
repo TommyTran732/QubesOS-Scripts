@@ -48,14 +48,16 @@ sudo dconf update
 umask 077
 
 # Avoid phased updates
-unpriv curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
-# Adding KickSecure's signing key
-curl --proxy http://127.0.0.1:8082/ --tlsv1.3 --proto =https --max-time 180 --output ~/derivative.asc https://www.kicksecure.com/derivative.asc
-sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
-echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
-sudo apt update
+
+sudo apt update -y
+sudo apt full-upgrade -y
+sudo apt autoremove -y
+
+# Adding KickSecure's repo
+sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
 
 # Debloat
 sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* system-config-printer* xsettingsd yelp*
@@ -63,6 +65,7 @@ sudo apt autoremove -y
 sudo apt autoclean
 
 # Distribution morphing
+sudo apt update
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
 sudo apt autoremove -y
 sudo mv /etc/apt/sources.list ~/
