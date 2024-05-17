@@ -28,3 +28,5 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Tomm
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path | sudo tee /etc/systemd/system/dnat-to-ns.path
 
 sudo systemctl enable dnat-to-ns.path
+
+# Follow these instructions on how to set up the ProxyVM: https://privsec.dev/posts/qubes/using-ivpn-on-qubes-os/#creating-the-proxyvm
