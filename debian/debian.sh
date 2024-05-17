@@ -68,10 +68,12 @@ sudo apt autoclean
 sudo apt update
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
 sudo apt autoremove -y
+sudo repository-dist --enable --repository stable-proposed-updates
+sudo extrepo disable kicksecure
 sudo mv /etc/apt/sources.list ~/
 sudo touch /etc/apt/sources.list
 
-#E nabling SUID Disabler and Permission Hardener
+#Enabling SUID Disabler and Permission Hardener
 sudo systemctl enable --now permission-hardening
 
 # Restrict /proc and access
