@@ -19,19 +19,19 @@ dnf install -y @hardware-support arc-theme chrony gnome-keyring NetworkManager-w
 
 # Setup NTS
 sudo rm -rf /etc/chrony.conf
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf | tee /etc/chrony.conf
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd | tee /etc/sysconfig/chronyd
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf | tee /etc/chrony.conf
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd | tee /etc/sysconfig/chronyd
 
 # Theming
 sudo mkdir -p /etc/gtk-3.0
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini | tee /etc/gtk-3.0/settings.ini
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini | tee /etc/gtk-3.0/settings.ini
 
 sudo mkdir -p /etc/gtk-4.0
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini | tee /etc/gtk-4.0/settings.ini
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini | tee /etc/gtk-4.0/settings.ini
 
 # Networking
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf | tee /etc/NetworkManager/conf.d/00-macrandomize.conf
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf | tee /etc/NetworkManager/conf.d/01-transient-hostname.conf
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf | tee /etc/NetworkManager/conf.d/00-macrandomize.conf
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf | tee /etc/NetworkManager/conf.d/01-transient-hostname.conf
 sudo hostnamectl hostname 'localhost'
 sudo hostnamectl --transient hostname ''
 
