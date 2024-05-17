@@ -68,6 +68,9 @@ unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Tomm
 sudo dconf update
 umask 077
 
+# Setup ZRAM
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf
+
 # Setup DNF
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*

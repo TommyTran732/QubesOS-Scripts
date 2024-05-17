@@ -27,6 +27,10 @@ echo 'umask 077' | tee -a /etc/bashrc
 systemctl disable --now systemd-timesyncd
 systemctl mask systemd-timesyncd
 
+# Harden SSH
+curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf
+chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
+
 # Security kernel settings
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf | tee /etc/modprobe.d/30_security-misc.conf
 chmod 644 /etc/modprobe.d/30_security-misc.conf
@@ -42,9 +46,8 @@ chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
 # dracut -f
 sysctl -p
 
-# Harden SSH
-curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf
-chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
+# Setup ZRAM
+unpriv curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf
 
 # Setup hardened_malloc
 dnf install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm' -y
