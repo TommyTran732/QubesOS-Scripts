@@ -24,6 +24,9 @@ sudo dnf install -y mullvad-vpn
 sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
+sudo mkdir /-p etc/systemd/system/systemd-resolved.service.d
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/systemd-resolved.service.d/override.conf | sudo tee /etc/systemd/system/systemd-resolved.service.d/override.conf
+
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service | sudo tee /etc/systemd/system/dnat-to-ns.service
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path | sudo tee /etc/systemd/system/dnat-to-ns.path
 
