@@ -31,7 +31,7 @@ sudo mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json | sudo tee /etc/opt/edge/policies/managed/managed.json
 curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json | sudo tee /etc/opt/edge/policies/recommended/recommended.json
 
-# Work around for Edge audio bug
+# Workaround for this problem: https://forum.qubes-os.org/t/upgraded-to-4-2-and-audio-no-longer-works/23130/60
 sudo dnf install -y pulseaudio-utils
 
 echo '[Unit]
