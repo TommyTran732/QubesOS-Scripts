@@ -23,7 +23,6 @@ sudo systemctl mask debug-shell.service
 sudo systemctl mask kdump.service
 
 # Setting umask to 077
-# Note: Qubes does something here that makes the umask for root stay at 022. Need to debug.
 umask 077
 sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 echo 'umask 077' | sudo tee -a /etc/bashrc

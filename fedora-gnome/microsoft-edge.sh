@@ -14,7 +14,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-# Note: Qubes does something that makes the umask for root stay at 022. Need to debug. The umask commands are unnecessary for now.
 umask 022
 
 # Install Edge
