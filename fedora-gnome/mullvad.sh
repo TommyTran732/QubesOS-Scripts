@@ -21,6 +21,8 @@ unpriv(){
 sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
 sudo dnf install -y mullvad-vpn
 
+umask 022
+
 sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 

@@ -21,6 +21,8 @@ unpriv(){
 sudo dnf config-manager --add-repo https://repo.ivpn.net/stable/fedora/generic/ivpn.repo
 sudo dnf install -y ivpn-ui
 
+umask 022
+
 sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/opt/ivpn/mutable''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
