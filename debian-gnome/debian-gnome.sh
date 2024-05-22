@@ -102,6 +102,7 @@ sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo 
 
 # Distribution morphing
 sudo apt update
+sudo apt full-upgrade -y
 sudo apt install --no-install-recommends kicksecure-qubes-cli -y
 sudo apt autoremove -y
 sudo repository-dist --enable --repository stable-proposed-updates
