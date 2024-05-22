@@ -59,15 +59,27 @@ sudo apt autoremove -y
 # Debloat
 
 # Remove unnecessary stuff from the Qubes template
-sudo apt purge gnome-software thunderbird keepassxc rygel
+sudo apt purge gnome-software thunderbird keepassxc
+
+# Remove Network + hardware tools packages
+sudo apt purge -y cups* '*nfs*' rygel '*smtp*' '*telnet*'
+
+# Remove support for some languages and spelling
+sudo apt purge -y '*speech*'
+
+# Remove codec + image + printers
+sudo apt purge -y ImageMagick* sane* simple-scan
+
+# Remove Active Directory + Sysadmin + reporting tools
+sudo apt purge -y realmd
+
+# Remove Gnome apps
+sudo apt purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-charaters gnome-clocks gnome-disk-utility gnome-font-viewer gnome-maps gnome-music gnome-remote-desktop gnome-tweaks gnome-user-share gnome-weather totem
 
 # Remove apps
 sudo apt purge -y cheese evince file-roller* firefox* libreoffice* yelp
 
-# Remove Network + hardware tools packages
-sudo apt purge -y remove '*cups' dmidecode mtr '*nfs*' '*smtp*' '*snmp*' '*telnet*' '*teamd*'
-
-sudo apt purge -y emacs emacs-gtk emacs-bin-common emacs-common cups* system-config-printer* xsettingsd
+sudo apt purge -y system-config-printer* xsettingsd
 sudo apt autoremove -y
 sudo apt autoclean
 

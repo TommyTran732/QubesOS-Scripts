@@ -90,16 +90,16 @@ echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 sudo dnf mark install flatpak gnome-menus qubes-menus
 
 # Remove unnecessary stuff from the Qubes template
-sudo dnf -y remove gnome-software httpd keepassxc thunderbird rygel
+sudo dnf -y remove gnome-software httpd keepassxc thunderbird
 
 # Remove firefox packages
 sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
 
 # Remove Network + hardware tools packages
-sudo dnf -y remove dmidecode '*cups' geolite2* mtr net-snmp-libs net-tools nfs-utils nmap-ncat nmap-ncat opensc openssh-server rsync sgpio tcpdump teamd traceroute
+sudo dnf -y remove avahi cifs* '*cups' dmidecode dnsmasq geolite2* mtr net-snmp-libs net-tools nfs-utils nmap-ncat nmap-ncat opensc openssh-server rsync rygel sgpio tcpdump teamd traceroute usb_modeswitch
 
 # Remove support for some languages and spelling
-sudo dnf -y remove ibus-typing-booster '*speech*' '*zhuyin*' '*pinyin*' '*m17n*' '*hangul*' '*anthy*' words
+sudo dnf -y remove '*anthy*' '*hangul*' ibus-typing-booster '*m17n*' '*pinyin*' '*speech*' texlive-libs words '*zhuyin*'
 
 # Remove codec + image + printers
 sudo dnf -y remove openh264 ImageMagick* sane* simple-scan
@@ -114,10 +114,10 @@ sudo dnf -y remove 'podman*' '*libvirt*' 'open-vm*' qemu-guest-agent 'hyperv*' s
 sudo dnf -y remove NetworkManager-pptp-gnome NetworkManager-ssh-gnome NetworkManager-openconnect-gnome NetworkManager-openvpn-gnome NetworkManager-vpnc-gnome ppp* ModemManager
 
 # Remove Gnome apps
-sudo dnf remove -y chrome-gnome-shell eog gnome-photos gnome-connections gnome-tour gnome-themes-extra gnome-screenshot gnome-remote-desktop gnome-font-viewer gnome-calculator gnome-calendar gnome-contacts \
-    gnome-maps gnome-weather gnome-logs gnome-boxes gnome-disk-utility gnome-clocks gnome-color-manager gnome-characters baobab totem \
+sudo dnf remove -y baobab chrome-gnome-shell eog gnome-photos gnome-connections gnome-tour gnome-themes-extra gnome-screenshot gnome-remote-desktop gnome-font-viewer gnome-calculator gnome-calendar gnome-contacts \
+    gnome-maps gnome-weather gnome-logs gnome-boxes gnome-disk-utility gnome-clocks gnome-color-manager gnome-characters \
     gnome-shell-extension-background-logo gnome-shell-extension-apps-menu gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list \
-    gnome-classic* gnome-user* gnome-text-editor loupe snapshot
+    gnome-classic* gnome-user* gnome-text-editor loupe snapshot totem
 
 # Remove apps
 sudo dnf remove -y rhythmbox yelp evince libreoffice* cheese file-roller* mediawriter
