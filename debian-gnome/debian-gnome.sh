@@ -56,13 +56,23 @@ sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt autoremove -y
 
-# Adding KickSecure's repo
-sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
-
 # Debloat
-sudo apt purge -y thunderbird emacs emacs-gtk emacs-bin-common emacs-common firefox* keepassxc cups* system-config-printer* xsettingsd yelp*
+
+# Remove unnecessary stuff from the Qubes template
+sudo apt purge gnome-software thunderbird keepassxc rygel
+
+# Remove apps
+sudo apt purge -y cheese evince file-roller* firefox* libreoffice* yelp
+
+# Remove Network + hardware tools packages
+sudo apt purge -y remove '*cups' dmidecode mtr '*nfs*' '*smtp*' '*snmp*' '*telnet*' '*teamd*'
+
+sudo apt purge -y emacs emacs-gtk emacs-bin-common emacs-common cups* system-config-printer* xsettingsd
 sudo apt autoremove -y
 sudo apt autoclean
+
+# Adding KickSecure's repo
+sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
 
 # Distribution morphing
 sudo apt update
