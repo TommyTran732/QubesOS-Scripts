@@ -96,7 +96,7 @@ sudo dnf -y remove gnome-software httpd keepassxc thunderbird rygel
 sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
 
 # Remove Network + hardware tools packages
-sudo dnf -y remove '*cups' nmap-ncat nfs-utils nmap-ncat openssh-server net-snmp-libs net-tools opensc traceroute rsync tcpdump teamd geolite2* mtr dmidecode sgpio
+sudo dnf -y remove dmidecode '*cups' geolite2* mtr net-snmp-libs net-tools nfs-utils nmap-ncat nmap-ncat opensc openssh-server rsync sgpio tcpdump teamd traceroute
 
 # Remove support for some languages and spelling
 sudo dnf -y remove ibus-typing-booster '*speech*' '*zhuyin*' '*pinyin*' '*m17n*' '*hangul*' '*anthy*' words
