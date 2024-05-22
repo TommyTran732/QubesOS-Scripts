@@ -107,9 +107,6 @@ sudo dnf -y remove openh264 ImageMagick* sane* simple-scan
 # Remove Active Directory + Sysadmin + reporting tools
 sudo dnf -y remove 'sssd*' realmd cyrus-sasl-gssapi quota* dos2unix kpartx sos samba-client gvfs-smb
 
-# Remove vm and virtual stuff
-sudo dnf -y remove 'podman*' '*libvirt*' 'open-vm*' qemu-guest-agent 'hyperv*' spice-vdagent virtualbox-guest-additions vino xorg-x11-drv-vmware xorg-x11-drv-amdgpu
-
 # Remove NetworkManager
 sudo dnf -y remove NetworkManager-pptp-gnome NetworkManager-ssh-gnome NetworkManager-openconnect-gnome NetworkManager-openvpn-gnome NetworkManager-vpnc-gnome ppp* ModemManager
 

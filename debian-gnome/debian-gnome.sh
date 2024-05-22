@@ -62,7 +62,7 @@ sudo apt autoremove -y
 sudo apt purge gnome-software thunderbird keepassxc
 
 # Remove Network + hardware tools packages
-sudo apt purge -y cups* '*nfs*' rygel '*smtp*' '*telnet*'
+sudo apt purge -y avahi* cups* '*nfs*' rygel '*smtp*' system-config-printer* '*telnet*'
 
 # Remove support for some languages and spelling
 sudo apt purge -y '*speech*'
@@ -73,15 +73,29 @@ sudo apt purge -y ImageMagick* sane* simple-scan
 # Remove Active Directory + Sysadmin + reporting tools
 sudo apt purge -y realmd
 
+# Remove unnecessary network tools
+sudo apt purge -y ifupdown mobile-broadband-provider-info modemmanager
+
 # Remove Gnome apps
-sudo apt purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-charaters gnome-clocks gnome-disk-utility gnome-font-viewer gnome-maps gnome-music gnome-remote-desktop gnome-tweaks gnome-user-share gnome-weather totem
+sudo apt purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager \
+    gnome-contacts gnome-disk-utility gnome-font-viewer gnome-logs gnome-maps gnome-music gnome-remote-desktop gnome-shell-extensions \
+    gnome-sound-recorder gnome-tweaks gnome-user-share gnome-weather totem
 
 # Remove apps
-sudo apt purge -y cheese evince file-roller* firefox* libreoffice* yelp
+sudo apt purge -y cheese evince evolution file-roller* firefox* libreoffice* seahorse shotwell synaptic* rhythmbox yelp
 
-sudo apt purge -y system-config-printer* xsettingsd
+# Remove other packages
+sudo apt purge -y cron lvm2 lynx '*vmware*' xserver-xephyr xsettingsd
+
 sudo apt autoremove -y
 sudo apt autoclean
+
+# Add console group
+sudo groupadd --system console
+sudo usermod -aG console user
+
+# Add extrepo
+sudo apt install -y extrepo
 
 # Adding KickSecure's repo
 sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
