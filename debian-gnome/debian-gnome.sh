@@ -59,7 +59,7 @@ sudo apt autoremove -y
 # Debloat
 
 # Remove unnecessary stuff from the Qubes template
-sudo apt purge gnome-software thunderbird keepassxc
+sudo apt purge -y gnome-software thunderbird keepassxc
 
 # Remove Network + hardware tools packages
 sudo apt purge -y avahi* cups* '*nfs*' rygel '*smtp*' system-config-printer* '*telnet*'
