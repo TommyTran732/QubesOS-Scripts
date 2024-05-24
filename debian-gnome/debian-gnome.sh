@@ -23,6 +23,7 @@ sudo systemctl mask debug-shell.service
 
 # Setting umask to 077
 umask 077
+#This line is broken on the Debian templates for some reason - further debugging needed.
 echo 'umask 077' | sudo tee -a /etc/bash.bashrc
 
 # Harden SSH
