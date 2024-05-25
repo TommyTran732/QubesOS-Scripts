@@ -122,7 +122,7 @@ sudo systemctl enable --now proc-hidepid.service
 sudo systemctl enable --now hide-hardware-info.service
 
 # Install packages
-sudo apt install --no-install-recommends adw-gtk3-theme loupe qubes-ctap qubes-gpg-split -y
+sudo apt install --no-install-recommends adw-gtk3-theme gnome-console loupe qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service
