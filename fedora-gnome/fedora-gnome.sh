@@ -15,7 +15,7 @@
 # the License.
 
 unpriv(){
-  sudo -u nobody "$@"
+    sudo -u nobody "$@"
 }
 
 # Compliance
