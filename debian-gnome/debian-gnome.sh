@@ -22,9 +22,15 @@ unpriv(){
 sudo systemctl mask debug-shell.service
 
 # Setting umask to 077
+# Does not actually work for some reason - need to check
 umask 077
-#This line is broken on the Debian templates for some reason - further debugging needed.
-echo 'umask 077' | sudo tee -a /etc/bash.bashrc
+sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
+sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+sudo sed -i 's/^USERGROUPS_ENAB.*/USERGROUPS_ENAB no/g' /etc/login.defs
+sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
+
+# Make home directory private
+sudo chmod 700 /home/*
 
 # Harden SSH
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf

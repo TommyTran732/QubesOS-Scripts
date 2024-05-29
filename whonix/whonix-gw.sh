@@ -18,6 +18,17 @@ unpriv(){
   sudo -u nobody "$@"
 }
 
+# Setting umask to 077
+# Does not actually work for some reason - need to check
+umask 077
+sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
+sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+sudo sed -i 's/^USERGROUPS_ENAB.*/USERGROUPS_ENAB no/g' /etc/login.defs
+sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
+
+# Make home directory private
+sudo chmod 700 /home/*
+
 # Avoid phased updates
 unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
