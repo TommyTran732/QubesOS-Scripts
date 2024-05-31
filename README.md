@@ -1,4 +1,7 @@
 # QubesOS-Scripts
+
+[![ShellCheck](https://github.com/TommyTran732/QubesOS-Scripts/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/TommyTran732/QubesOS-Scripts/actions/workflows/shellcheck.yml)
+
 My scripts for setting up QubesOS. 
 
 Running these scripts should be very straight forward. For the default Fedora template, run fedora-gnome.sh to trim it down first.
