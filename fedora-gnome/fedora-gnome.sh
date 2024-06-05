@@ -119,7 +119,7 @@ sudo dnf remove -y baobab chrome-gnome-shell eog gnome-boxes gnome-calculator gn
     gnome-themes-extra gnome-tour gnome-user* gnome-weather loupe snapshot totem
 
 # Remove apps
-sudo dnf remove -y abrt cheese evince file-roller* libreoffice* mediawriter rhythmbox yelp
+sudo dnf remove -y abrt* cheese evince file-roller* libreoffice* mediawriter rhythmbox yelp
 
 # Remove other packages
 # We deviate from the script in TommyTran732/Linux-Setup-Scripts here, as removing yajl will break qubes integration.
