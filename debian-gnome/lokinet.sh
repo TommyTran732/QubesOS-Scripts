@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 unpriv(){
   sudo -u nobody "$@"
