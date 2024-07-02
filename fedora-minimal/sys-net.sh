@@ -14,6 +14,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+set -e
+
 # Install necessary packages
 dnf install -y @hardware-support arc-theme chrony gnome-keyring NetworkManager-wifi network-manager-applet qubes-core-agent-networking qubes-core-agent-network-manager xfce4-notifyd
 
