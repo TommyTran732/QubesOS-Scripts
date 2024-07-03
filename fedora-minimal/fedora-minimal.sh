@@ -39,30 +39,23 @@ systemctl disable --now systemd-timesyncd
 systemctl mask systemd-timesyncd
 
 # Harden SSH
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf | tee /etc/modprobe.d/30_security-misc.conf
-chmod 644 /etc/modprobe.d/30_security-misc.conf
-sed -i 's/#install msr/install msr/g' /etc/modprobe.d/30_security-misc.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf | tee /etc/sysctl.d/990-security-misc.conf
-chmod 644 /etc/sysctl.d/990-security-misc.conf
-sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/990-security-misc.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf | tee /etc/sysctl.d/30_silent-kernel-printk.conf
-chmod 644 /etc/sysctl.d/30_silent-kernel-printk.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf | tee /etc/sysctl.d/30_security-misc_kexec-disable.conf
-chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/secureblue/secureblue/live/config/files/usr/etc/modprobe.d/blacklist.conf | sudo tee /etc/modprobe.d/workstation-blacklist.conf > /dev/null
+sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
+unpriv curl -s --proxy https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf | sudo tee /etc/sysctl.d/99-workstation.conf > /dev/null
+sudo chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
-sysctl -p
+sudo sysctl -p
 
 # Setup ZRAM
-unpriv curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf > /dev/null
 
 # Setup hardened_malloc
-dnf install 'https://divested.dev/rpm/fedora/divested-release-20231210-2.noarch.rpm' -y
-sed -i 's/^metalink=.*/&?protocol=https/g' /etc/yum.repos.d/divested-release.repo
-dnf config-manager --save --setopt=divested.includepkgs=divested-release,real-ucode,microcode_ctl,amd-ucode-firmware,hardened_malloc
-dnf install hardened_malloc -y
+sudo dnf copr enable secureblue/hardened_malloc -y
+sudo dnf install -y hardened_malloc
 echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
+sudo chmod 644 /etc/ld.so.preload

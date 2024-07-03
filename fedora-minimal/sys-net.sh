@@ -21,22 +21,22 @@ dnf install -y @hardware-support arc-theme chrony gnome-keyring NetworkManager-w
 
 # Setup NTS
 sudo rm -rf /etc/chrony.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf | tee /etc/chrony.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd | tee /etc/sysconfig/chronyd
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf | tee /etc/chrony.conf > /dev/null
+unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd | tee /etc/sysconfig/chronyd > /dev/null
 
 # Theming
 sudo mkdir -p /etc/gtk-3.0
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini | tee /etc/gtk-3.0/settings.ini
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini | tee /etc/gtk-3.0/settings.ini > /dev/null
 
 sudo mkdir -p /etc/gtk-4.0
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini | tee /etc/gtk-4.0/settings.ini
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini | tee /etc/gtk-4.0/settings.ini > /dev/null
 
 # Networking
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf | tee /etc/NetworkManager/conf.d/00-macrandomize.conf
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf | tee /etc/NetworkManager/conf.d/01-transient-hostname.conf
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf | tee /etc/NetworkManager/conf.d/00-macrandomize.conf > /dev/null
+unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf | tee /etc/NetworkManager/conf.d/01-transient-hostname.conf > /dev/null
 sudo hostnamectl hostname 'localhost'
 sudo hostnamectl --transient hostname ''
 
 # This breaks saving network settings with the Fedora 40 template rn, so I am commenting it out.
 #sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-#curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+#curl -s --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf > /dev/null
