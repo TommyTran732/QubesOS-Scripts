@@ -92,6 +92,9 @@ echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 # Mark packages as manualy installed to avoid removal
 sudo dnf mark install flatpak gnome-menus qubes-menus
 
+# Remove unwanted groups
+sudo dnf -y group remove 'Container Management' 'Desktop accessibility' 'Firefox Web Browser' 'Guest Desktop Agents' 'LibreOffice' 'Printing Support'
+
 # Remove unnecessary stuff from the Qubes template
 sudo dnf -y remove gnome-software httpd keepassxc thunderbird
 
