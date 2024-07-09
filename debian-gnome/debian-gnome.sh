@@ -28,7 +28,6 @@ sudo systemctl mask debug-shell.service
 umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
 sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-sudo sed -i 's/^USERGROUPS_ENAB.*/USERGROUPS_ENAB no/g' /etc/login.defs
 sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 
 # Make home directory private
