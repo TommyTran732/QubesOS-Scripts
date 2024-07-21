@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -eu
 
 unpriv(){
   sudo -u nobody "$@"

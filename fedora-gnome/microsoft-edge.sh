@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -e
+set -eu
 
 umask 022
 
