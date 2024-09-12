@@ -14,9 +14,15 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu
+set -eu -o pipefail
 
-source "../common/utils.sh"
+unpriv(){
+  sudo -u nobody "${@}"
+}
+
+dl() {
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+}
 
 # Compliance
 systemctl mask debug-shell.service
