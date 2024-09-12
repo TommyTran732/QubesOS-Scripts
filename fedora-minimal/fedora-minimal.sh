@@ -14,10 +14,14 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu
+set -eu -o pipefail
 
 unpriv(){
-  sudo -u nobody "$@"
+  sudo -u nobody "${@}"
+}
+
+dl() {
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
 # Compliance
@@ -38,23 +42,24 @@ systemctl disable --now systemd-timesyncd
 systemctl mask systemd-timesyncd
 
 # Harden SSH
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/etc/modprobe.d/blacklist.conf | sudo tee /etc/modprobe.d/workstation-blacklist.conf > /dev/null
+dl https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
 sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
-unpriv curl -s --proxy https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf | sudo tee /etc/sysctl.d/99-workstation.conf > /dev/null
-sudo chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
+dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
+# This doesn't exist (jackwagon)
+# sudo chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
 sudo sysctl -p
 
 # Setup ZRAM
-unpriv curl --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf | sudo tee /etc/systemd/zram-generator.conf > /dev/null
+dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
 
 # Setup hardened_malloc
-sudo dnf copr enable secureblue/hardened_malloc -y
+sudo https_proxy=https://127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
 sudo dnf install -y hardened_malloc
 echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 sudo chmod 644 /etc/ld.so.preload
