@@ -14,10 +14,14 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu
+set -eu -o pipefail
 
 unpriv(){
-  sudo -u nobody "$@"
+  sudo -u nobody "${@}"
+}
+
+download() {
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
 # Setting umask to 077
@@ -31,7 +35,7 @@ sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 sudo chmod 700 /home/*
 
 # Avoid phased updates
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
@@ -45,14 +49,14 @@ sudo systemctl enable --now proc-hidepid.service
 sudo systemctl enable --now hide-hardware-info.service
 
 # Flatpak update service
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service | sudo tee /etc/systemd/user/update-user-flatpaks.service > /dev/null
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer | sudo tee /etc/systemd/user/update-user-flatpaks.timer > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
 
 # Theming
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/environment | sudo tee /etc/environment > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/environment /etc/environment
 
 sudo mkdir -p /etc/gtk-3.0
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini | sudo tee /etc/gtk-3.0/settings.ini > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
 
 sudo mkdir -p /etc/gtk-4.0
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini | sudo tee /etc/gtk-4.0/settings.ini > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini

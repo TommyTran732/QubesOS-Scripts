@@ -20,7 +20,7 @@ unpriv(){
   sudo -u nobody "${@}"
 }
 
-dl() {
+download() {
   unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
@@ -38,47 +38,47 @@ sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 sudo chmod 700 /home/*
 
 # Harden SSH
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
-dl https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
+download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
 sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 sudo chmod 644 /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
 sudo sysctl -p
 
 # Disable coredump
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
 sudo chmod 644 /etc/security/limits.d/30-disable-coredump.conf
 sudo mkdir -p /etc/systemd/coredump.conf.d
 sudo chmod 755 /etc/systemd/coredump.conf.d
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf /etc/systemd/coredump.conf.d/disable.conf
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf /etc/systemd/coredump.conf.d/disable.conf
 sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
 
 # Setup dconf
 umask 022
 mkdir -p /etc/dconf/db/local.d/locks
 
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
 
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/adw-gtk3-dark /etc/dconf/db/local.d/adw-gtk3-dark
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/adw-gtk3-dark /etc/dconf/db/local.d/adw-gtk3-dark
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
 
 sudo dconf update
 umask 077
 
 # Setup ZRAM
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
 
 # Flatpak update service
-dl https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
-dl https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
 
 # Setup networking
 # We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
@@ -90,7 +90,7 @@ dl https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/syste
 # Fix GNOME environment variable
 echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
-# Moving DNF handling to the bottom as the Qubes template just breaks when repos are changed and needs a reboot to fix
+# Moving DNF handownloading to the bottom as the Qubes template just breaks when repos are changed and needs a reboot to fix
 
 # Mark packages as manualy installed to avoid removal
 sudo dnf mark install flatpak gnome-menus qubes-menus
@@ -146,6 +146,6 @@ echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 sudo chmod 644 /etc/ld.so.preload
 
 # Setup DNF
-dl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
 sudo sed -i 's/&protocol=https//g' /etc/yum.repos.d/divested-release.repo

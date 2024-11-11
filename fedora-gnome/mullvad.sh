@@ -14,10 +14,14 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu
+set -eu -o pipefail
 
 unpriv(){
-  sudo -u nobody "$@"
+  sudo -u nobody "${@}"
+}
+
+download() {
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
 sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
@@ -29,10 +33,10 @@ sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
 sudo mkdir /-p etc/systemd/system/systemd-resolved.service.d
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/systemd-resolved.service.d/override.conf | sudo tee /etc/systemd/system/systemd-resolved.service.d/override.conf > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/systemd-resolved.service.d/override.conf /etc/systemd/system/systemd-resolved.service.d/override.conf
 
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service | sudo tee /etc/systemd/system/dnat-to-ns.service > /dev/null
-unpriv curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path | sudo tee /etc/systemd/system/dnat-to-ns.path > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service /etc/systemd/system/dnat-to-ns.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path /etc/systemd/system/dnat-to-ns.path
 
 sudo systemctl enable dnat-to-ns.path
 

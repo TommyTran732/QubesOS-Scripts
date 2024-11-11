@@ -14,7 +14,15 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu
+set -eu -o pipefail
+
+unpriv(){
+  sudo -u nobody "${@}"
+}
+
+download() {
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+}
 
 umask 022
 
@@ -29,8 +37,8 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.re
 sudo dnf install -y microsoft-edge-stable
 
 sudo mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended/
-curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json | sudo tee /etc/opt/edge/policies/managed/managed.json > /dev/null
-curl -s --proxy http://127.0.0.1:8082 https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json | sudo tee /etc/opt/edge/policies/recommended/recommended.json > /dev/null
+download https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json /etc/opt/edge/policies/managed/managed.json
+download https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json /etc/opt/edge/policies/recommended/recommended.json
 
 # Workaround for this problem: https://forum.qubes-os.org/t/upgraded-to-4-2-and-audio-no-longer-works/23130/60
 sudo dnf install -y pulseaudio-utils
