@@ -17,14 +17,18 @@
 set -eu
 
 # Enabling discard and fstrim
-sudo sed -i 's/issue_discards = 0/issue_discards = 1/g' /etc/lvm/lvm.conf
+sudo sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
 sudo systemctl enable --now fstrim.timer
+
+sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5ct qt5-qtstyleplugins
+
+# Configure PCRs
+sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
+sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 --pcr 5 /' /etc/anti-evil-maid.conf
 
 # Theming
 
 # After a reboot, run qt5ct and set the theme to gtk-2
-
-sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5-qtstyleplugins
 
 echo 'QT_QPA_PLATFORMTHEME=gtk2' | sudo tee -a /etc/environment
 
