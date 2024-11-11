@@ -24,7 +24,7 @@ sudo systemctl enable --now fstrim.timer
 
 # After a reboot, run qt5ct and set the theme to gtk-2
 
-sudo qubes-dom0-update qubes-ctap-dom0 qt5-qtstyleplugins
+sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5-qtstyleplugins
 
 echo 'QT_QPA_PLATFORMTHEME=gtk2' | sudo tee -a /etc/environment
 
