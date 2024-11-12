@@ -32,7 +32,7 @@ umask 022
 sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
-sudo mkdir /-p etc/systemd/system/systemd-resolved.service.d
+sudo mkdir -p /etc/systemd/system/systemd-resolved.service.d
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/systemd-resolved.service.d/override.conf /etc/systemd/system/systemd-resolved.service.d/override.conf
 
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service /etc/systemd/system/dnat-to-ns.service
