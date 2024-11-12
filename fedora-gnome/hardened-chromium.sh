@@ -27,6 +27,8 @@ download() {
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened-chromium -y
 sudo dnf install -y hardened-chromium
 
+umask 022
+
 # Workaround for this problem: https://forum.qubes-os.org/t/upgraded-to-4-2-and-audio-no-longer-works/23130/60
 sudo dnf install -y pulseaudio-utils
 
