@@ -145,6 +145,10 @@ sudo dnf install -y hardened_malloc
 echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 sudo chmod 644 /etc/ld.so.preload
 
+# Enable hardened_malloc for Flatpak
+sudo flatpak override --system --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
+flatpak override --user --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
+
 # Setup DNF
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
