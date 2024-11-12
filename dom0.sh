@@ -26,6 +26,11 @@ sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5ct qt5-qtstyleplugins
 sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
 sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 --pcr 10 /' /etc/anti-evil-maid.conf
 
+# Configure sudo prompt for domUs
+echo "/usr/bin/echo 1" | sudo tee /etc/qubes-rpc/qubes.VMAuth
+echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
+sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
+
 # Theming
 
 # After a reboot, run qt5ct and set the theme to gtk-2
