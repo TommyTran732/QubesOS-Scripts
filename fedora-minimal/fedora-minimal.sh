@@ -64,3 +64,7 @@ sudo https_proxy=https://127.0.0.1:8082 dnf copr enable secureblue/hardened_mall
 sudo dnf install -y hardened_malloc
 echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
 sudo chmod 644 /etc/ld.so.preload
+
+# Prepare for SELinux
+sudo touch /.autorelabel
+sudo sed -i 's/SELINUX=permissive/SELINUX=enforcing/' /etc/sysconfig/selinux
