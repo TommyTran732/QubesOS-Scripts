@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2023 Thien Tran
+# Copyright (C) 2023-2024 Thien Tran
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu
+set -eu -o pipefail
 
 # Enabling discard and fstrim
 sudo sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
@@ -30,6 +30,14 @@ sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 --pcr 10 /' /etc/ant
 echo "/usr/bin/echo 1" | sudo tee /etc/qubes-rpc/qubes.VMAuth
 echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
 sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
+
+# Set qvm-features
+
+sudo qvm-features fedora-40 default-menu-items 'org.gnome.Nautilus.desktop org.gnome.Ptyxis.desktop'
+sudo qvm-features fedora-40 netvm-menu-items 'org.gnome.Ptyxis.desktop'
+
+sudo qvm-features debian-12 default-menu-items 'org.gnome.Console.desktop org.gnome.Nautilus.desktop'
+sudo qvm-features debian-12 netvm-menu-items 'org.gnome.Console.desktop'
 
 # Theming
 
