@@ -91,7 +91,8 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/environment /etc/environment
 
 # Fix GNOME environment variable
-echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
+echo '
+XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
 # Moving DNF handownloading to the bottom as the Qubes template just breaks when repos are changed and needs a reboot to fix
 
