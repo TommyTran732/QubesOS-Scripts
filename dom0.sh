@@ -41,8 +41,6 @@ sudo qvm-features debian-12 netvm-menu-items 'org.gnome.Console.desktop'
 
 # Theming
 
-# After a reboot, run qt5ct and set the theme to gtk-2
-
 echo 'QT_QPA_PLATFORMTHEME=gtk2' | sudo tee -a /etc/environment
 
 # Add extra gtk theming - this is probably not necessary, but why not
@@ -56,3 +54,5 @@ sudo mkdir -p /etc/gtk-4.0
 echo '[Settings]
 gtk-theme-name = Arc-Dark
 gtk-application-prefer-dark-theme = true' | sudo tee /etc/gtk-4.0/settings.ini
+
+# After a reboot, run qt5ct and set the theme to gtk-2
