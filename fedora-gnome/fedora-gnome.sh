@@ -87,6 +87,9 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 #sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
 #unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 
+# Disable GJS and WebkitGTK JIT
+download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/environment /etc/environment
+
 # Fix GNOME environment variable
 echo 'XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
