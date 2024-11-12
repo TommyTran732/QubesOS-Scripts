@@ -67,4 +67,3 @@ sudo chmod 644 /etc/ld.so.preload
 
 # Prepare for SELinux
 sudo touch /.autorelabel
-sudo sed -i 's/SELINUX=permissive/SELINUX=enforcing/' /etc/sysconfig/selinux
