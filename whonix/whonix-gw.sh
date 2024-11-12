@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu -o pipefail
+set -eu
 
 unpriv(){
   sudo -u nobody "${@}"
@@ -29,7 +29,7 @@ download() {
 umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
 sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
+sudo sed -i 's/umask 022/umask 077/g' /etc/bash.bashrc
 
 # Make home directory private
 sudo chmod 700 /home/*
