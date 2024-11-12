@@ -59,3 +59,5 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 
 sudo mkdir -p /etc/gtk-4.0
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
+
+# Run qt5ct and set the theme to gtk-2
