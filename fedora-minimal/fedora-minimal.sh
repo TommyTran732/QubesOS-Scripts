@@ -49,14 +49,15 @@ chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
 sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
-# This doesn't exist (jackwagon)
-# sudo chmod 644 /etc/sysctl.d/30_security-misc_kexec-disable.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
 sudo sysctl -p
 
 # Setup ZRAM
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
+
+# Install necessary packages
+sudo dnf install -y qubes-core-agent-selinux
 
 # Setup hardened_malloc
 sudo https_proxy=https://127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
