@@ -148,4 +148,3 @@ sudo chmod 644 /etc/ld.so.preload
 # Setup DNF
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
-sudo sed -i 's/&protocol=https//g' /etc/yum.repos.d/divested-release.repo
