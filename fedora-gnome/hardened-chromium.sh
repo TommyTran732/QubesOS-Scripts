@@ -26,3 +26,24 @@ download() {
 
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened-chromium -y
 sudo dnf install -y hardened-chromium
+
+# Workaround for this problem: https://forum.qubes-os.org/t/upgraded-to-4-2-and-audio-no-longer-works/23130/60
+sudo dnf install -y pulseaudio-utils
+
+echo '[Unit]
+Description=Run pactl to work around edge audio bug
+After=pipewire-pulse.socket
+Requires=pipewire-pulse.socket
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/pactl info
+
+[Install]
+WantedBy=default.target' | sudo tee /etc/systemd/user/pactl.service
+
+umask 077
+
+# Run `systemctl --user enable --now pactl.service` in your appVM.
+# For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
+# Using preset doesn't actually work :/
