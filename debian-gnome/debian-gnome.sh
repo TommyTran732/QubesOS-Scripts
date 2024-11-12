@@ -129,7 +129,7 @@ echo 'Types: deb
 URIs: https://julianfairfax.codeberg.page/package-repo/debs
 Suites: packages
 Components: main
-Signed-By: /usr/share/keyrings/julians-package-repo.gpg' | sudo tee /etc/apt/sources.list.d/julians-package-repo.list
+Signed-By: /usr/share/keyrings/julians-package-repo.gpg' | sudo tee /etc/apt/sources.list.d/julians-package-repo.sources
 
 
 # Restrict /proc and access
@@ -140,7 +140,8 @@ sudo systemctl enable --now proc-hidepid.service
 sudo systemctl enable --now hide-hardware-info.service
 
 # Install packages
-sudo apt install --no-install-recommends adw-gtk3-theme gnome-console qubes-ctap qubes-gpg-split -y
+sudo apt update
+sudo apt install --no-install-recommends adw-gtk3 gnome-console qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
