@@ -137,7 +137,7 @@ sudo dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install custom packages
 # gnome-shell is needed for theming to work
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme ncurses gnome-console gnome-shell
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme ncurses gnome-shell ptyxis
 
 # Setup hardened_malloc
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
