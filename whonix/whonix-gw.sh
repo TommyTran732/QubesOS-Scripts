@@ -25,11 +25,11 @@ download() {
 }
 
 # Setting umask to 077
-# Does not actually work for some reason - need to check
+# Whonix defaults to zsh - I need to set it for zsh later.
 umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
 sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-sudo sed -i 's/umask 022/umask 077/g' /etc/bash.bashrc
+echo 'umask 077' | sudo tee -a /etc/bash.bashrc
 
 # Make home directory private
 sudo chmod 700 /home/*

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu -o pipefail
+set -eu
 
 unpriv(){
   sudo -u nobody "${@}"

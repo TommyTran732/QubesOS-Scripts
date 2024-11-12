@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu -o pipefail
+set -eu
 
 unpriv(){
   sudo -u nobody "${@}"
@@ -29,11 +29,11 @@ download() {
 sudo systemctl mask debug-shell.service
 
 # Setting umask to 077
-# Does not actually work for some reason - need to check
+# Kicksecure defaults to zsh - I need to set it for zsh later.
 umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
 sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
+echo 'umask 077' | sudo tee -a /etc/bash.bashrc
 
 # Make home directory private
 sudo chmod 700 /home/*
@@ -47,7 +47,7 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 
 # Setup dconf
 umask 022
-mkdir -p /etc/dconf/db/local.d/locks
+sudo mkdir -p /etc/dconf/db/local.d/locks
 
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
@@ -123,8 +123,14 @@ sudo extrepo disable kicksecure
 sudo mv /etc/apt/sources.list ~/
 sudo touch /etc/apt/sources.list
 
-#Enabling SUID Disabler and Permission Hardener
-sudo systemctl enable --now permission-hardening
+# adw-gtk3 theme repo
+curl -s --proxy http://127.0.0.1:8082 https://julianfairfax.codeberg.page/package-repo/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/julians-package-repo.gpg
+echo 'Types: deb
+URIs: https://julianfairfax.codeberg.page/package-repo/debs
+Suites: packages
+Components: main
+Signed-By: /usr/share/keyrings/julians-package-repo.gpg' | sudo tee /etc/apt/sources.list.d/julians-package-repo.list
+
 
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
@@ -134,7 +140,7 @@ sudo systemctl enable --now proc-hidepid.service
 sudo systemctl enable --now hide-hardware-info.service
 
 # Install packages
-sudo apt install --no-install-recommends adw-gtk3-theme gnome-console loupe qubes-ctap qubes-gpg-split -y
+sudo apt install --no-install-recommends adw-gtk3-theme gnome-console qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
