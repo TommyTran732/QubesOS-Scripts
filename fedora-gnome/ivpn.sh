@@ -37,7 +37,9 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service /etc/systemd/system/dnat-to-ns.service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path /etc/systemd/system/dnat-to-ns.path
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns-boot.service /etc/systemd/system/dnat-to-ns-boot.service
 
 sudo systemctl enable dnat-to-ns.path
+sudo systemctl enable dnat-to-ns-boot.service
 
 # Follow these instructions on how to set up the ProxyVM: https://privsec.dev/posts/qubes/using-ivpn-on-qubes-os/#creating-the-proxyvm
