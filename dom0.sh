@@ -31,6 +31,9 @@ echo "/usr/bin/echo 1" | sudo tee /etc/qubes-rpc/qubes.VMAuth
 echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
 sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
 
+# Fix s0ix suspension
+sudo qvm-features dom0 suspend-s0ix 1
+
 # Set qvm-features
 
 sudo qvm-features fedora-40 default-menu-items 'org.gnome.Nautilus.desktop org.gnome.Ptyxis.desktop'
