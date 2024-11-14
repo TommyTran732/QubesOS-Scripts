@@ -25,7 +25,9 @@ download() {
 }
 
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened-chromium -y
-sudo dnf install -y hardened-chromium
+sudo dnf config-manager --enable fedora-cisco-openh264 rpmfusion-free rpmfusion-free-updates rpmfusion-nonfree rpmfusion-nonfree-updates
+sudo dnf install -y ffmpeg hardened-chromium
+sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 umask 022
 
