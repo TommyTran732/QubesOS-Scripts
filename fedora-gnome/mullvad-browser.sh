@@ -33,5 +33,4 @@ sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=Package
 
 # Disable hardened_malloc (for now)
 # It causes Mullvad browser to randomly crash
-
 sudo rm /etc/ld.so.preload
