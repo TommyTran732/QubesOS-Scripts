@@ -4,9 +4,7 @@
 
 My scripts for setting up QubesOS. 
 
-Running these scripts should be very straight forward. For the default Fedora template, run fedora-gnome.sh to trim it down first.
-
-After you are done running those scripts, any other script can be used in a different template based on those trimmed down templates to create their respective virtual machines.
+For each OS, run the script associated with them to trim down the templates provided by Qubes first. For example, for Fedora, run the `fedora-gnome.sh` script. After the base templates have been trimmed down, run other scripts in templates based on them to create their respective TemplateVMs.
 
 If you want to install Flatpak packages, install them inside of an AppVM as a **user Flatpak** and enable the update-user-flatpaks.service as a **user** systemd service for automatic updates.
 
