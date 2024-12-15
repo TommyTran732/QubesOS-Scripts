@@ -12,9 +12,9 @@ It is recommended that you follow the docs [here](https://www.qubes-os.org/doc/v
 
 ## Laptop Recommendations
 
-Qubes AEM currently still requires legacy boot. Officially, the last generation of Intel CPUs with VBIOS to support legacy boot is Coffee Lake. However, I have found that certain Comet Lake Thinkpads still have legacy support. Unfortunately, all of them seems to only support U series CPU. You should check the exact laptop model's firmware with the [Lenovo's BIOS simulator](https://download.lenovo.com/bsco/index.html#/).
+Qubes AEM currently still requires legacy boot. While the last generation of Intel CPUs with VBIOS to support legacy boot is Coffee Lake officially, I have found that certain Comet Lake Thinkpads still have legacy support. Unfortunately, all of them seems to only support U series CPU. You can check [Lenovo's BIOS simulator](https://download.lenovo.com/bsco/index.html#/) for models with legacy boot support.
 
-Alternatively, you should consider Coffee Lake mobile workstation Thinkpads. These should have the longest support life cycle outside of the affomentioned Comet Lake Thinkpads, and support much more powerful H series CPUs. Perrsonally, I am using a P53 with the i9-9880H CPU.
+Alternatively, you should consider Coffee Lake mobile workstation Thinkpads. These have the longest support life cycle outside of the Comet Lake Thinkpads, and they support much more powerful H series CPUs. Perrsonally, I am using a P53 with an i9-9880H.
 
 ### Thinkpad P53 IOMMU groups:
 
