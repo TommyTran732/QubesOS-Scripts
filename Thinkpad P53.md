@@ -2,7 +2,7 @@
 
 My personal setup for the Thinkpad P53
 
-### Hardware
+## Hardware
 - **CPU**: Intel® Core™ i9-9980H Processor
 - **GPU**: NVIDIA Quadro RTX 4000
 - **RAM**: 2x 16GB Samsung DDR4-2666 (M471A2K43DB1-CTD) + 2x Micron 32GB DDR4-3200 (MTA16ATF4G64HZ-3G2E2)
@@ -18,7 +18,7 @@ There are other enterprise SSDs from Micron with firmware verification, but I am
 
 Unlike the likes of WD and Samsung who make life extremely difficult unless you buy an OEM drive, Micron [provides firmware updates on their website and also includes an update utility for Linux](https://www.micron.com/products/storage/ssd/micron-ssd-firmware#accordion-e6c186b05b-item-2ebc81f38a). There is no need to look for the Dell or Lenovo version of a drive to get updates via LVFS.
 
-### IOMMU groups:
+## IOMMU groups:
 
 ```
 IOMMU Group 0:
