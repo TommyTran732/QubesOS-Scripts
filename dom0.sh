@@ -32,15 +32,17 @@ echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qube
 sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
 
 # Fix s0ix suspension
-sudo qvm-features dom0 suspend-s0ix 1
+# Run this depending on your hardware
+# sudo qvm-features dom0 suspend-s0ix 1
 
 # Set qvm-features
+# Run these after you have installed the fedora-40 and debian-12 templates
 
-sudo qvm-features fedora-40 default-menu-items 'org.gnome.Nautilus.desktop org.gnome.Ptyxis.desktop'
-sudo qvm-features fedora-40 netvm-menu-items 'org.gnome.Ptyxis.desktop'
+# sudo qvm-features fedora-40 default-menu-items 'org.gnome.Nautilus.desktop org.gnome.Ptyxis.desktop'
+# sudo qvm-features fedora-40 netvm-menu-items 'org.gnome.Ptyxis.desktop'
 
-sudo qvm-features debian-12 default-menu-items 'org.gnome.Console.desktop org.gnome.Nautilus.desktop'
-sudo qvm-features debian-12 netvm-menu-items 'org.gnome.Console.desktop'
+# sudo qvm-features debian-12 default-menu-items 'org.gnome.Console.desktop org.gnome.Nautilus.desktop'
+# sudo qvm-features debian-12 netvm-menu-items 'org.gnome.Console.desktop'
 
 # Theming
 
