@@ -12,7 +12,7 @@ My personal setup for the Thinkpad P53
 
 **Notes**: 
 
-As of this writing, the Micron 3500 are the only client SSDs advertising [firmware verification](https://www.micron.com/content/dam/micron/global/public/documents/products/product-flyer/micron-ssd-secure-foundation-flyer.pdf). I am not sure how secure the implementation is, but I guess it is better than nothing.
+As of this writing, the Micron 2500, 2650, and 3500 are the only client SSDs advertising [firmware verification](https://www.micron.com/content/dam/micron/global/public/documents/products/product-flyer/micron-ssd-secure-foundation-flyer.pdf). I am not sure how secure the implementation is, but I guess it is better than nothing.
 
 There are other enterprise SSDs from Micron with firmware verification, but I am not using them here due to heat and power constraints.
 
@@ -155,10 +155,10 @@ Drive 0 stores the host OS and less important VMs. Drive 1 and 2 run in btrfs RA
 
 Open the shell with Control + Alt + F2 to get to the tty.
 
-Do `ls /dev/disk/by-id` to check the serial numbers and find the correct drive. Anaconda, for whatever reason, has nvme0/1/2 numbering not match the final OS install and the firmware.
+Do `ls /dev/disk/by-id` to check the serial numbers and find the correct drive. Anaconda, for whatever reason, may have different drive numbering than your firmware.
 
 ```
-fdisk /dev/nvme2n1
+fdisk /dev/nvme0n1
 d [Delete all the partition]
 n
 p
@@ -171,13 +171,23 @@ p
 [Enter]
 [Enter]
 [Enter]
+[If asked to remove signature, Y]
 w
-cryptsetup luksFormat /dev/nvme2n1p2
+cryptsetup luksFormat /dev/nvme0n1p2
 YES
 cryptsetup open /dev/nvme0n1p2 cryptroot
 mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
 mount /dev/mapper/cryptroot /mnt
 btrfs subvol create /mnt/root
-umount /mnt
-cryptsetup close /dev/nvme0n1p2 cryptroot
+cryptsetup close /dev/mapper/cryptroot
 ```
+
+Use Control + Alt + F6 to get back to Anaconda.
+
+Install destination -> Choose the drive -> Advanced Custom (Blivet-GUI) -> Hit refresh at the bottom right -> Rescan Disks -> Done
+
+Format the first partition as ext4, mountpoint /boot
+Unlock the second partition
+Btrfs subvolumes -> create new -> name root, mountpoint /
+
+Finish the rest of the installation as normal.
