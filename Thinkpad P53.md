@@ -177,8 +177,6 @@ cryptsetup luksFormat /dev/nvme0n1p2
 YES
 cryptsetup open /dev/nvme0n1p2 cryptroot
 mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
-mount /dev/mapper/cryptroot /mnt
-btrfs subvol create /mnt/root
 cryptsetup close /dev/mapper/cryptroot
 ```
 
