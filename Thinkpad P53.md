@@ -189,3 +189,15 @@ Unlock the second partition <br />
 Btrfs subvolumes -> create new -> name root, mountpoint /
 
 Finish the rest of the installation as normal.
+
+## Post install
+
+### BTRFS optimizations
+
+Edit /etc/fstab and add the following options for the / mountpoint:
+
+```
+ssd,noatime,compress=zstd
+```
+
+Reboot to apply the optimizations.
