@@ -201,3 +201,11 @@ ssd,noatime,compress=zstd
 ```
 
 Reboot to apply the optimizations.
+
+### xen-pciback.hide
+
+Add this to the Linux karg:
+
+```
+xen-pciback.hide=(01:00.0)(01:00.1)(01:00.2)(01:00.3)(00:14.0)(00:1f.6)(2c:00.0)(54:00.0)
+```
