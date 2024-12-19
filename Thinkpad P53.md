@@ -186,8 +186,8 @@ Use Control + Alt + F6 to get back to Anaconda.
 
 Install destination -> Choose the drive -> Advanced Custom (Blivet-GUI) -> Hit refresh at the bottom right -> Rescan Disks -> Done
 
-Format the first partition as ext4, mountpoint /boot
-Unlock the second partition
+Format the first partition as ext4, mountpoint /boot <br />
+Unlock the second partition <br />
 Btrfs subvolumes -> create new -> name root, mountpoint /
 
 Finish the rest of the installation as normal.
