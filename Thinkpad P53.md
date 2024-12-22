@@ -214,3 +214,15 @@ Add this to the Linux karg:
 ```
 xen-pciback.hide=(01:00.0)(01:00.1)(01:00.2)(01:00.3)(00:14.0)(00:1f.6)(2c:00.0)(54:00.0)
 ```
+
+### Memory configuration
+
+Default Qubes allocates 4GB to dom0, and creates a 4GB SWAP partition. Since I have much better hardware, I opt to allocate 8GB to dom0 and use ZRAM instead.
+
+Increase dom0 memory by editing `/etc/default/grub` and changing dom0_mem=max:8192M.
+
+To use zram:
+- `qubes-dom0-update zram-generator`
+- Type the following file to `/etc/systemd/zram-generator`: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf
+
+Reboot to apply the changes.
