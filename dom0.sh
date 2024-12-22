@@ -20,14 +20,14 @@ set -eu -o pipefail
 sudo sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
 sudo systemctl enable --now fstrim.timer
 
-sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5ct qt5-qtstyleplugins
+sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5-qtstyleplugins
 
 # Configure PCRs
 sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
 sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 --pcr 10 /' /etc/anti-evil-maid.conf
 
 # Configure sudo prompt for domUs
-echo "/usr/bin/echo 1" | sudo tee /etc/qubes-rpc/qubes.VMAuth
+echo "/usr/bin/echo '1'" | sudo tee /etc/qubes-rpc/qubes.VMAuth
 echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
 sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
 
@@ -59,5 +59,3 @@ sudo mkdir -p /etc/gtk-4.0
 echo '[Settings]
 gtk-theme-name = Arc-Dark
 gtk-application-prefer-dark-theme = true' | sudo tee /etc/gtk-4.0/settings.ini
-
-# After a reboot, run qt5ct and set the theme to gtk-2
