@@ -18,6 +18,11 @@ There are other enterprise SSDs from Micron with firmware verification, but I am
 
 Unlike the likes of WD and Samsung who make life extremely difficult unless you buy an OEM drive, Micron [provides firmware updates on their website and also includes an update utility for Linux](https://www.micron.com/products/storage/ssd/micron-ssd-firmware#accordion-e6c186b05b-item-2ebc81f38a). There is no need to look for the Dell or Lenovo version of a drive to get updates via LVFS.
 
+## Firmware notes:
+- Update all firmware on Windows before installing Qubes. Lenovo doesn't upload all of the firmware updates on LVFS for some reason. They probably just forgot to.
+- TXT needs Hyperthread to be enabled in firmware settings. Just let Qubes disable Hyperthread in the OS instead.
+- To get Thunderbolt ports working, enable Thunderbolt in I/O Port Access and Thunderbolt BIOS Assist Mode in Thunderbolt settings.
+
 ## IOMMU groups:
 
 ```
