@@ -24,7 +24,7 @@ sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qt5-qtstyleplugins
 
 # Configure PCRs
 sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
-sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 --pcr 10 /' /etc/anti-evil-maid.conf
+sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 /' /etc/anti-evil-maid.conf
 
 # Configure sudo prompt for domUs
 echo "/usr/bin/echo '1'" | sudo tee /etc/qubes-rpc/qubes.VMAuth
