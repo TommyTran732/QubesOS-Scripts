@@ -29,7 +29,7 @@ sudo dnf config-manager --enable fedora-cisco-openh264 rpmfusion-free rpmfusion-
 
 # Install the package
 sudo dnf install -y ffmpeg mullvad-browser
-sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 # Disable hardened_malloc (for now)
 # It causes Mullvad browser to randomly crash
