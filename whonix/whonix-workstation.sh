@@ -39,7 +39,7 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
-sudo apt install --no-install-recommends arc-theme pipewire-pulse qt5ct qt5-style-plugins -y
+sudo apt install --no-install-recommends arc-theme pipewire-pulse qt5-style-plugins -y
 
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
@@ -60,5 +60,3 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 
 sudo mkdir -p /etc/gtk-4.0
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-
-# Run qt5ct and set the theme to gtk-2
