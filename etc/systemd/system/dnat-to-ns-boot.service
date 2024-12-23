@@ -6,3 +6,6 @@ StartLimitIntervalSec=0
 Type=oneshot
 ExecStart=sleep 10
 ExecStart=/usr/lib/qubes/qubes-setup-dnat-to-ns
+
+[Install]
+WantedBy=multi-user.target
