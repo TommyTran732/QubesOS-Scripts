@@ -162,8 +162,8 @@ Open the shell with Control + Alt + F2 to get to the tty.
 
 Do `ls /dev/disk/by-id` to check the serial numbers and find the correct drive. Anaconda, for whatever reason, may have different drive numbering than your firmware.
 
-```
-fdisk /dev/nvme0n1
+```bash
+sudo fdisk /dev/nvme0n1
 d [Delete all the partition]
 n
 p
@@ -178,11 +178,10 @@ p
 [Enter]
 [If asked to remove signature, Y]
 w
-cryptsetup luksFormat /dev/nvme0n1p2
+sudo cryptsetup luksFormat /dev/nvme0n1p2
 YES
-cryptsetup open /dev/nvme0n1p2 cryptroot
-mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
-cryptsetup close /dev/mapper/cryptroot
+sudo cryptsetup open /dev/nvme0n1p2 cryptroot
+sudo mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
 ```
 
 Use Control + Alt + F6 to get back to Anaconda.
@@ -190,7 +189,6 @@ Use Control + Alt + F6 to get back to Anaconda.
 Install destination -> Choose the drive -> Advanced Custom (Blivet-GUI) -> Hit refresh at the bottom right -> Rescan Disks -> Done
 
 Format the first partition as ext4, mountpoint `/boot` <br />
-Unlock the second partition <br />
 Btrfs subvolumes -> create new -> name root, mountpoint `/`
 
 Finish the rest of the installation as normal.
@@ -222,7 +220,53 @@ Default Qubes allocates 4GB to dom0, and creates a 4GB SWAP partition. Since I h
 Increase dom0 memory by editing `/etc/default/grub` and changing dom0_mem=max:8192M.
 
 To use zram:
-- `qubes-dom0-update zram-generator`
+- `sudo qubes-dom0-update zram-generator`
 - Type the following file to `/etc/systemd/zram-generator`: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf
 
 Reboot to apply the changes.
+
+### Redundant VM storage
+
+Make encrypted partition `/dev/nvme1n1p1` as `cryptdata1` and `/dev/nvme2n1p1` as `cryptdata2`. If the same passphrase as `/dev/nvme0n1p1` is used for encryption, all 3 drives will be unlocked with just 1 prompt during boot.
+
+To get the filesystem UUID of `cryptdata1` and `cryptdata2`, run
+
+```bash
+lsblk -o NAME,UUID
+```
+
+Add the following to `/etc/cryttab`:
+
+```
+cryptdata1 UUID=PUT_THE_CORRESPONDING_UUID_HERE
+cryptdata2 UUID=PUT_THE_CORRESPONDING_UUID_HERE
+```
+
+Update the initramfs:
+
+```bash
+sudo dracut --regenerate-all --force
+```
+
+Make the new RAID 1 BTRFS filesystem:
+
+```bash
+sudo mkfs.btrfs --csum blake2b -m raid 1 -d /dev/mapper/cryptdata1 /dev/mapper/cryptdata2
+```
+
+**Take note of the UUID**.
+
+Run:
+
+```bash
+sudo mkdir -p /var/lib/qubes2
+sudo mount /dev/disk/by-id/PUT_THE_CORRESPONDING_UUID_HERE /var/lib/qubes2
+sudo btrfs subvolume create /var/lib/qubes2/data
+sudo umount /var/lib/qubes2/
+```
+
+Add the following to /etc/fstab:
+```
+UUID=PUT_THE_CORRESPONDING_UUID_HERE /var/lib/qubes2
+```
+
