@@ -265,8 +265,7 @@ sudo btrfs subvolume create /var/lib/qubes2/data
 sudo umount /var/lib/qubes2/
 ```
 
-Add the following to /etc/fstab:
+Add the following to `/etc/fstab`:
 ```
-UUID=PUT_THE_CORRESPONDING_UUID_HERE /var/lib/qubes2
+UUID=PUT_THE_CORRESPONDING_UUID_HERE /var/lib/qubes2 		btrfs	subvol=data,x-systemd.requires=cryptsetup.target,discard,ssd,noatime,compress=zstd 0 0
 ```
-
