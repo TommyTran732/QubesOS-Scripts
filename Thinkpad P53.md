@@ -256,6 +256,8 @@ Add the following to `/etc/fstab`:
 UUID=PUT_THE_CORRESPONDING_UUID_HERE /var/lib/qubes2 		btrfs	subvol=data,x-systemd.requires=cryptsetup.target,discard,ssd,noatime,compress=zstd 0 0
 ```
 
+Finally, add the storage pool:
+
 ```bash
 sudo qvm-pool add varlibqubes2 file-reflink -o dir_path=/var/lib/qubes2
 ```
