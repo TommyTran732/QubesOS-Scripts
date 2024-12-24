@@ -164,22 +164,8 @@ Do `ls /dev/disk/by-id` to check the serial numbers and find the correct drive. 
 
 ```bash
 sudo fdisk /dev/nvme0n1
-d [Delete all the partition]
-n
-p
-[Enter]
-[Enter]
-+1G
-[If asked to remove signature, Y]
-n
-p
-[Enter]
-[Enter]
-[Enter]
-[If asked to remove signature, Y]
-w
+[Make 2 partitions. The first one with 1G and the second one with the remaining space.]
 sudo cryptsetup luksFormat /dev/nvme0n1p2
-YES
 sudo cryptsetup open /dev/nvme0n1p2 cryptroot
 sudo mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
 ```
