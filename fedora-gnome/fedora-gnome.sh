@@ -84,8 +84,9 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 # We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
 
 sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/refs/heads/main/etc/systemd/system/NetworkManager.service.d/98-qubes-fix.conf /etc/systemd/system/NetworkManager.service.d/98-qubes-fix.conf
 download https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+sudo sed -i 's@ReadOnlyPaths=/etc/NetworkManager@#ReadOnlyPaths=/etc/NetworkManager@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+sudo sed -i 's@ReadWritePaths=-/etc/NetworkManager/system-connections@#ReadWritePaths=-/etc/NetworkManager/system-connections@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 
 # Disable GJS and WebkitGTK JIT
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/environment /etc/environment
