@@ -239,7 +239,7 @@ Make the new RAID 1 BTRFS filesystem:
 ```bash
 sudo cryptsetup --allow-discards --persistent open /dev/nvme1n1p1 cryptdata1
 sudo cryptsetup --allow-discards --persistent open /dev/nvme2n1p1 cryptdata2
-sudo mkfs.btrfs --csum blake2b -m raid 1 -d /dev/mapper/cryptdata1 /dev/mapper/cryptdata2
+sudo mkfs.btrfs --csum blake2b -m raid1 -d raid1 /dev/mapper/cryptdata1 /dev/mapper/cryptdata2
 ```
 
 **Take note of the UUID**.
