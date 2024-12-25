@@ -100,7 +100,7 @@ XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 sudo dnf -y group remove 'Container Management' 'Desktop accessibility' 'Firefox Web Browser' 'Guest Desktop Agents' 'LibreOffice' 'Printing Support'
 
 # Remove unnecessary stuff from the Qubes template
-sudo dnf -y remove gnome-software gnome-system-monitor amd-ucode-firmware *gpu* httpd keepassxc thunderbird
+sudo dnf -y remove gnome-software gnome-system-monitor amd-ucode-firmware '*gpu*' httpd keepassxc thunderbird
 
 # Remove unnecessary stuff from the Fedora-41 template (will be split into whats in the qubes template and whats upstream later)
 sudo dnf -y remove c-ares hiredis
