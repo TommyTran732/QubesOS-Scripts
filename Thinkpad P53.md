@@ -166,7 +166,7 @@ Do `ls /dev/disk/by-id` to check the serial numbers and find the correct drive. 
 sudo fdisk /dev/nvme0n1
 [Make 2 partitions. The first one with 1G and the second one with the remaining space.]
 sudo cryptsetup luksFormat /dev/nvme0n1p2
-sudo cryptsetup open /dev/nvme0n1p2 cryptroot
+sudo cryptsetup open --allow-discards --persistent /dev/nvme0n1p2 cryptroot
 sudo mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
 ```
 
@@ -213,9 +213,9 @@ Reboot to apply the changes.
 
 ### Redundant VM storage
 
-Make encrypted partition `/dev/nvme1n1p1` as `cryptdata1` and `/dev/nvme2n1p1` as `cryptdata2`. If the same passphrase as `/dev/nvme0n1p1` is used for encryption, all 3 drives will be unlocked with just 1 prompt during boot.
+Make encrypted partition `/dev/nvme1n1p1` and `/dev/nvme2n1p1`. If the same passphrase as `/dev/nvme0n1p1` is used for encryption, all 3 drives will be unlocked with just 1 prompt during boot.
 
-To get the filesystem UUID of `cryptdata1` and `cryptdata2`, run
+To get the filesystem UUIDs of of the 2 CRYPTO_LUKS filesystems, run
 
 ```bash
 lsblk -o NAME,UUID
@@ -237,6 +237,8 @@ sudo dracut --regenerate-all --force
 Make the new RAID 1 BTRFS filesystem:
 
 ```bash
+sudo cryptsetup --allow-discards --persistent open /dev/nvme1n1p1 cryptdata1
+sudo cryptsetup --allow-discards --persistent open /dev/nvme2n1p1 cryptdata2
 sudo mkfs.btrfs --csum blake2b -m raid 1 -d /dev/mapper/cryptdata1 /dev/mapper/cryptdata2
 ```
 
