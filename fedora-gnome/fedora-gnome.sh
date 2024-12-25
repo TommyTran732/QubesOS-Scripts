@@ -83,9 +83,9 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 # Setup networking
 # We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
 
-# This breaks saving network settings with the Fedora 40 template rn, so I am commenting it out.
-#sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-#unpriv curl --proxy http://127.0.0.1:8082 https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf | sudo tee /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/refs/heads/main/etc/systemd/system/NetworkManager.service.d/98-qubes-fix.conf /etc/systemd/system/NetworkManager.service.d/98-qubes-fix.conf
+download https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 
 # Disable GJS and WebkitGTK JIT
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/environment /etc/environment
@@ -94,16 +94,16 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 echo '
 XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
 
-# Moving DNF handownloading to the bottom as the Qubes template just breaks when repos are changed and needs a reboot to fix
-
-# Mark packages as manualy installed to avoid removal
-sudo dnf mark install flatpak gnome-menus qubes-menus
+# Moving DNF handling to the bottom as the Qubes template just breaks when repos are changed and needs a reboot to fix
 
 # Remove unwanted groups
 sudo dnf -y group remove 'Container Management' 'Desktop accessibility' 'Firefox Web Browser' 'Guest Desktop Agents' 'LibreOffice' 'Printing Support'
 
 # Remove unnecessary stuff from the Qubes template
-sudo dnf -y remove gnome-software httpd keepassxc thunderbird
+sudo dnf -y remove gnome-software gnome-system-monitor amd-ucode-firmware *gpu* httpd keepassxc thunderbird
+
+# Remove unnecessary stuff from the Fedora-41 template (will be split into whats in the qubes template and whats upstream later)
+sudo dnf -y remove c-ares hiredis
 
 # Remove firefox packages
 sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
@@ -141,7 +141,7 @@ sudo dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install custom packages
 # gnome-shell is needed for theming to work
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme ncurses gnome-shell ptyxis
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses gnome-shell
 
 # Setup hardened_malloc
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y

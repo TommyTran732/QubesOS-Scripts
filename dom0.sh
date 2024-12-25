@@ -38,8 +38,8 @@ sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
 # Set qvm-features
 # Run these after you have installed the fedora-40 and debian-12 templates
 
-# sudo qvm-features fedora-40 default-menu-items 'org.gnome.Nautilus.desktop org.gnome.Ptyxis.desktop'
-# sudo qvm-features fedora-40 netvm-menu-items 'org.gnome.Ptyxis.desktop'
+# sudo qvm-features fedora-41 default-menu-items 'org.gnome.Nautilus.desktop org.gnome.Ptyxis.desktop'
+# sudo qvm-features fedora-41 netvm-menu-items 'org.gnome.Ptyxis.desktop'
 
 # sudo qvm-features debian-12 default-menu-items 'org.gnome.Console.desktop org.gnome.Nautilus.desktop'
 # sudo qvm-features debian-12 netvm-menu-items 'org.gnome.Console.desktop'
