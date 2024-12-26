@@ -1,5 +1,13 @@
 ## Quality of Life
 
+### LUKS Discard
+
+By default, Qubes does not use discard with a LUKS volume. To enable discard, run:
+
+```bash
+sudo cryptsetup --allow-discards --persistent refresh LUKS-UUID-HERE
+```
+
 ### S0ix sleep
 
 On certain hardware like the Thinkpad T14 Gen 1, you need to enable s0ix sleep support for suspension to work correctly. Use the following command:
