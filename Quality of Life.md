@@ -10,7 +10,7 @@ sudo cryptsetup --allow-discards --persistent refresh LUKS-UUID-HERE
 
 ### S0ix sleep
 
-On certain hardware like the Thinkpad T14 Gen 1, you need to enable s0ix sleep support for suspension to work correctly. Use the following command:
+On certain hardware like the Thinkpad T14 Gen 1, you need to enable S0ix sleep support for suspension to work correctly. Use the following command:
 
 ```bash
 sudo qvm-features dom0 suspend-s0ix 1
@@ -36,6 +36,12 @@ Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the 
 
 - F5: `sudo bash -c 'echo 1 > /proc/acpi/ibm/lcdshadow'`
 - F6: `sudo bash -c 'echo 0 > /proc/acpi/ibm/lcdshadow'`
+
+### Element Flatpak
+
+Element Flatpak sometimes get stuck at launch because of Hardened Malloc. Run this to fix it:
+
+```flatpak --user override --nofilesystem=host-os --unset-env=LD_PRELOAD im.riot.Riot```
 
 ### Video player
 
