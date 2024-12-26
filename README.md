@@ -15,10 +15,3 @@ It is recommended that you follow the docs [here](https://www.qubes-os.org/doc/v
 Qubes AEM currently still requires legacy boot. While the last generation of Intel CPUs with VBIOS to support legacy boot is Coffee Lake officially, I have found that certain Comet Lake Thinkpads still have legacy support. Unfortunately, all of them seems to only support U series CPU. You can check [Lenovo's BIOS simulator](https://download.lenovo.com/bsco/index.html#/) for models with legacy boot support.
 
 Alternatively, you should consider Coffee Lake mobile workstation Thinkpads. These have the longest support life cycle outside of the Comet Lake Thinkpads, and they support much more powerful H series CPUs. Perrsonally, I am using a P53 with an i9-9880H.
-
-### Lenovo ePrivacy
-
-Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the following shortcuts:
-
-- F5: `sudo bash -c 'echo 1 > /proc/acpi/ibm/lcdshadow'`
-- F6: `sudo bash -c 'echo 0 > /proc/acpi/ibm/lcdshadow'`
