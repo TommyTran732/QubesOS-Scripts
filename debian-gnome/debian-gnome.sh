@@ -52,7 +52,6 @@ sudo mkdir -p /etc/dconf/db/local.d/locks
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
 
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/adw-gtk3-dark /etc/dconf/db/local.d/adw-gtk3-dark
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
@@ -123,14 +122,6 @@ sudo extrepo disable kicksecure
 sudo mv /etc/apt/sources.list ~/
 sudo touch /etc/apt/sources.list
 
-# adw-gtk3 theme repo
-curl -s --proxy http://127.0.0.1:8082 https://julianfairfax.codeberg.page/package-repo/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/julians-package-repo.gpg
-echo 'Types: deb
-URIs: https://julianfairfax.codeberg.page/package-repo/debs
-Suites: packages
-Components: main
-Signed-By: /usr/share/keyrings/julians-package-repo.gpg' | sudo tee /etc/apt/sources.list.d/julians-package-repo.sources
-
 
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
@@ -141,7 +132,7 @@ sudo systemctl enable --now hide-hardware-info.service
 
 # Install packages
 sudo apt update
-sudo apt install --no-install-recommends adw-gtk3 gnome-console qubes-ctap qubes-gpg-split -y
+sudo apt install --no-install-recommends gnome-console qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
