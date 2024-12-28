@@ -44,6 +44,15 @@ Bitwarden Flatpak sometimes get stuck at launch.
 Copy `~/.local/share/flatpak/exports/share/applications/com.bitwarden.desktop.desktop` to `~/.local/share/applications/com.bitwarden.desktop.desktop`
 and add `--disable-gpu` at the end of the `Exec` line to fix it.
 
+### Matrix 
+
+For the best security with Matrix:
+- Setup a TemplateVM with Debian and the official Element repo (there is no official rpm repo at the time of this writing)
+- Add the IP address and hostname of the Matrix homeserver in /etc/hosts
+- Make an AppVM based on the template
+- Use the UI and limit the connection of the AppVM to just the Matrix homeserver
+- In `dom0`, use `qvm-firewall <appvm name> del --rule-no <rule number>` to delete rules allowing ICMP and DNS to prevent exfiltration attacks.
+
 ### Video player
 
 In my experience, VLC works best. Changing video output to X11 video output (XCB) reduces CPU usage by 10% on my Thinkpad P53. See [this link](https://forum.qubes-os.org/t/vlc-video-playback-cpu-usage-improvement/23363).
