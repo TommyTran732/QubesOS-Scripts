@@ -37,11 +37,12 @@ Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the 
 - F5: `sudo bash -c 'echo 1 > /proc/acpi/ibm/lcdshadow'`
 - F6: `sudo bash -c 'echo 0 > /proc/acpi/ibm/lcdshadow'`
 
-### Element Flatpak
+### Bitwarden Flatpak
 
-Element Flatpak sometimes get stuck at launch because of Hardened Malloc. Run this to fix it:
+Bitwarden Flatpak sometimes get stuck at launch.
 
-```flatpak --user override --nofilesystem=host-os --unset-env=LD_PRELOAD im.riot.Riot```
+Copy `~/.local/share/flatpak/exports/share/applications/com.bitwarden.desktop.desktop` to `~/.local/share/applications/com.bitwarden.desktop.desktop`
+and add `--disable-gpu` at the end of the `Exec` line to fix it.
 
 ### Video player
 
