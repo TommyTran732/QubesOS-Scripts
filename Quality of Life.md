@@ -37,21 +37,9 @@ Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the 
 - F5: `sudo bash -c 'echo 1 > /proc/acpi/ibm/lcdshadow'`
 - F6: `sudo bash -c 'echo 0 > /proc/acpi/ibm/lcdshadow'`
 
-### Bitwarden Flatpak
+### Bitwarden & Element Flatpak
 
-Bitwarden Flatpak sometimes get stuck at launch.
-
-Copy `~/.local/share/flatpak/exports/share/applications/com.bitwarden.desktop.desktop` to `~/.local/share/applications/com.bitwarden.desktop.desktop`
-and add `--disable-gpu` at the end of the `Exec` line to fix it.
-
-### Matrix 
-
-For the best security with Matrix:
-- Setup a TemplateVM with Debian and the official Element repo (there is no official rpm repo at the time of this writing)
-- Add the IP address and hostname of the Matrix homeserver in /etc/hosts
-- Make an AppVM based on the template
-- Use the UI and limit the connection of the AppVM to just the Matrix homeserver
-- In `dom0`, use `qvm-firewall <appvm name> del --rule-no <rule number>` to delete rules allowing ICMP and DNS to prevent exfiltration attacks.
+These apps require the keyring to be created first to work properly. Simply open a browser like Microsoft Edge and set an empty password for the keyring before using them.
 
 ### Video player
 
