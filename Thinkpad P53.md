@@ -21,7 +21,6 @@ Unlike the likes of WD and Samsung who make life extremely difficult unless you 
 ## Firmware notes:
 - Update all firmware on Windows before installing Qubes. Lenovo doesn't upload all of the firmware updates on LVFS for some reason. They probably just forgot to.
 - TXT needs Hyperthread to be enabled in firmware settings. Just let Qubes disable Hyperthread in the OS instead.
-- To get Thunderbolt ports working, enable Thunderbolt in I/O Port Access and Thunderbolt BIOS Assist Mode in Thunderbolt settings.
 
 ## IOMMU groups:
 
