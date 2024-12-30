@@ -132,7 +132,7 @@ sudo systemctl enable --now hide-hardware-info.service
 
 # Install packages
 sudo apt update
-sudo apt install --no-install-recommends gnome-console qubes-ctap qubes-gpg-split -y
+sudo apt install --no-install-recommends gnome-console flatpak qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
