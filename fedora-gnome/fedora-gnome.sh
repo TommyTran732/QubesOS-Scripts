@@ -29,7 +29,6 @@ sudo systemctl mask debug-shell.service
 sudo systemctl mask kdump.service
 
 # Setting umask to 077
-umask 077
 sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
 sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
 sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
@@ -39,28 +38,21 @@ sudo chmod 700 /home/*
 
 # Harden SSH
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
-sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
 download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
-sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
-sudo chmod 644 /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
 sudo sysctl -p
 
 # Disable coredump
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
-sudo chmod 644 /etc/security/limits.d/30-disable-coredump.conf
 sudo mkdir -p /etc/systemd/coredump.conf.d
-sudo chmod 755 /etc/systemd/coredump.conf.d
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf /etc/systemd/coredump.conf.d/disable.conf
-sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
 
 # Setup dconf
-umask 022
-mkdir -p /etc/dconf/db/local.d/locks
+sudo mkdir -p /etc/dconf/db/local.d/locks
 
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
@@ -71,7 +63,10 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
 
 sudo dconf update
-umask 077
+
+# Fix portals
+sudo mkdir -p /etc/xdg-desktop-portals
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portals/portals.conf /etc/xdg-desktop-portals/portals.conf
 
 # Setup ZRAM
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
@@ -142,7 +137,7 @@ sudo dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install custom packages
 # gnome-shell is needed for theming to work
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses gnome-shell
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses
 
 # Setup hardened_malloc
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
