@@ -25,3 +25,5 @@ download() {
 }
 
 sudo dnf install -y android-tools mediawriter gnome-disk-utility
+
+# In the dispvm template, delete ~/.config/autostart/nw.desktop to prevent the OnlyKey app from automatically starting.
