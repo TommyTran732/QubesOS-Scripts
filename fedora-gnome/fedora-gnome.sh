@@ -65,8 +65,8 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 sudo dconf update
 
 # Fix portals
-sudo mkdir -p /etc/xdg-desktop-portals
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portals/portals.conf /etc/xdg-desktop-portals/portals.conf
+sudo mkdir -p /etc/xdg-desktop-portal
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
 
 # Setup ZRAM
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf

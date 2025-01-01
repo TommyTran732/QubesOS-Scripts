@@ -59,6 +59,10 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 sudo dconf update
 umask 077
 
+# Fix portals
+sudo mkdir -p /etc/xdg-desktop-portal
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
+
 # Avoid phased updates
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
