@@ -24,4 +24,4 @@ download() {
   unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
-sudo dnf install -y keepassxc
+sudo dnf install -y keepassxc openssh-askpass
