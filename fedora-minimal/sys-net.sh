@@ -45,6 +45,7 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 sudo hostnamectl hostname 'localhost'
 sudo hostnamectl --transient hostname ''
 
-# This breaks saving network settings with the Fedora 40 template rn, so I am commenting it out.
-#sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
-#download https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+download https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+sudo sed -i 's@ReadOnlyPaths=/etc/NetworkManager@#ReadOnlyPaths=/etc/NetworkManager@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+sudo sed -i 's@ReadWritePaths=-/etc/NetworkManager/system-connections@#ReadWritePaths=-/etc/NetworkManager/system-connections@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
