@@ -28,7 +28,7 @@ sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/r
 sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1 rpmfusion-free.enabled=1 rpmfusion-free-updates.enabled=1 rpmfusion-nonfree.enabled=1 rpmfusion-nonfree-updates.enabled=1
 
 # Install the package
-sudo dnf install -y ffmpeg mullvad-browser
+sudo dnf install -y ffmpeg ffmpegthumbnailer mullvad-browser
 sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 # Disable hardened_malloc (for now)
