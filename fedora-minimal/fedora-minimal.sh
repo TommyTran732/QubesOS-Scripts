@@ -51,7 +51,7 @@ sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
-sudo sysctl -p
+# sudo sysctl -p
 
 # Setup ZRAM
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
