@@ -24,4 +24,10 @@ download() {
   unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
-sudo dnf install -y keepassxc openssh-askpass
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/qubes-rpc/qubes.SshAgent /etc/qubes-rpc/qubes.SshAgent
+sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
+
+# Not using openssh-askpass here, because of this bug:
+# https://github.com/QubesOS/qubes-issues/issues/9741
+
+sudo dnf install -y keepassxc
