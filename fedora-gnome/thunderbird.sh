@@ -26,4 +26,8 @@ download() {
 
 sudo dnf install -y thunderbird
 
+# Change the GPG Domain name appropriately
 echo 'QUBES_GPG_DOMAIN=vault' | sudo tee -a /etc/environment
+
+# Disable hardened_malloc (for now)
+sudo rm /etc/ld.so.preload
