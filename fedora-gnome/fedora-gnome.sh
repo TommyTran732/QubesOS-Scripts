@@ -147,6 +147,8 @@ sudo chmod 644 /etc/ld.so.preload
 
 # Enable hardened_malloc for Flatpak
 sudo flatpak override --system --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
+
+## Unforunately, user override needs to be run per-app VM
 flatpak override --user --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
 
 # Setup DNF
