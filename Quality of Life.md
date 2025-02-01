@@ -37,6 +37,16 @@ Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the 
 - F5: `sudo bash -c 'echo 1 > /proc/acpi/ibm/lcdshadow'`
 - F6: `sudo bash -c 'echo 0 > /proc/acpi/ibm/lcdshadow'`
 
+### FIDO2 policies
+The GUI configurator are missing 2 important policies needed for FIDO2 to work correctly, namely ctap.GetInfo and ctap.ClientPin.
+
+Personally, I created `/etc/qubes/policy.d/50-ctap.policy` (note that I don't touch `/etc/qubes/policy.d/50-config-u2f.policy` to avoid it being overwritten by the GUI tool):
+
+```
+ctap.GetInfo    *  microsoft-edge  sys-usb  allpw
+ctap.ClientPin  *  microsoft-edge  sys-usb  allow
+```
+
 ### Bitwarden & Element Flatpak
 
 These apps require the keyring to be created first to work properly. Simply open a browser like Microsoft Edge and set an empty password for the keyring before using them.
