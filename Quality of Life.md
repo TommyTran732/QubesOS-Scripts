@@ -38,14 +38,18 @@ Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the 
 - F6: `sudo bash -c 'echo 0 > /proc/acpi/ibm/lcdshadow'`
 
 ### FIDO2 policies
-The GUI configurator are missing 2 important policies needed for FIDO2 to work correctly, namely ctap.GetInfo and ctap.ClientPin.
+The GUI configurator are missing 2 important policies needed for FIDO2 to work correctly, namely `ctap.GetInfo` and `ctap.ClientPin`.
 
 Personally, I created `/etc/qubes/policy.d/50-ctap.policy` (note that I don't touch `/etc/qubes/policy.d/50-config-u2f.policy` to avoid it being overwritten by the GUI tool):
 
 ```
-ctap.GetInfo    *  microsoft-edge  sys-usb  allpw
+ctap.GetInfo    *  microsoft-edge  sys-usb  allow
 ctap.ClientPin  *  microsoft-edge  sys-usb  allow
 ```
+
+### Trivial data exfiltration prevention
+
+One trivial way for malicious applications to exfiltrate data from an offline VM is to open a link in a disposable VM with a payload. To prevent this, open the VM settings, go to advanced and set the default disposable template to none.
 
 ### Bitwarden & Element Flatpak
 
