@@ -47,6 +47,14 @@ ctap.GetInfo    *  microsoft-edge  sys-usb  allow
 ctap.ClientPin  *  microsoft-edge  sys-usb  allow
 ```
 
+### Split GPG
+The GUI configurator is very broken so I don't use it. Instead, I write my own policy at `/etc/qubes/policy.d/50-gpg.policy`
+```
+qubes.Gpg  *  thunderbird  vault  allow
+```
+
+Note that I just use allow here, because the vault VM on a new Fedora 41 already prompts for confirmation, so I don't wanna have to answer yet another prompt from dom0.
+
 ### Trivial data exfiltration prevention
 
 One trivial way for malicious applications to exfiltrate data from an offline VM is to open a link in a disposable VM with a payload. To prevent this, open the VM settings, go to advanced and set the default disposable template to none.
