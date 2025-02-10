@@ -47,3 +47,8 @@ sudo dnf install -y code docker-ce docker-compose-plugin github-desktop
 
 # Change the GPG Domain name appropriately
 echo 'QUBES_GPG_DOMAIN=vault' | sudo tee -a /etc/environment
+
+umask 022
+
+sudo mkdir -p /etc/qubes-bind-dirs.d
+echo 'binds+=( '\'''/var/lib/docker''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
