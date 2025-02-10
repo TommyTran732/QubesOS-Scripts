@@ -45,6 +45,8 @@ sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linu
 
 sudo dnf install -y code docker-ce docker-compose-plugin github-desktop
 
+sudo usermod -aG docker user
+
 # Change the GPG Domain name appropriately
 echo 'QUBES_GPG_DOMAIN=vault' | sudo tee -a /etc/environment
 
