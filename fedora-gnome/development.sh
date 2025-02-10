@@ -16,7 +16,7 @@
 
 # Base this on the microsoft-edge TemplateVM
 
-set -eu -o pipefail
+set -eu
 
 unpriv(){
   sudo -u nobody "${@}"

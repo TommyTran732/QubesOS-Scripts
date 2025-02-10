@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-set -eu -o pipefail
+set -eu
 
 unpriv(){
   sudo -u nobody "${@}"
