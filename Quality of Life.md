@@ -59,6 +59,10 @@ Note that I just use allow here, because the vault VM on a new Fedora 41 already
 
 One trivial way for malicious applications to exfiltrate data from an offline VM is to open a link in a disposable VM with a payload. To prevent this, open the VM settings, go to advanced and set the default disposable template to none.
 
+### Edge Dark Mode
+
+Go to edge://flags and set "Auto Dark Mode for Web Contents" to "Enable with selective inversion of non-image elements". This reduces flashbangs a lot.
+
 ### Bitwarden & Element Flatpak
 
 These apps require the keyring to be created first to work properly. Simply open a browser like Microsoft Edge and set an empty password for the keyring before using them.
