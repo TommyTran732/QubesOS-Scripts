@@ -25,7 +25,7 @@ download() {
 }
 
 # Install necessary packages
-sudo dnf install -y @hardware-support arc-theme chrony gnome-keyring fwupd-qubes-vm NetworkManager-wifi network-manager-applet qubes-core-agent-dom0-updates qubes-core-agent-networking qubes-core-agent-network-manager xfce4-notifyd
+sudo dnf install -y @hardware-support arc-theme chrony gnome-keyring fwupd-qubes-vm NetworkManager-wifi network-manager-applet qubes-core-agent-dom0-updates qubes-core-agent-networking qubes-core-agent-network-manager qubes-usb-proxy xfce4-notifyd
 
 # Setup NTS
 sudo rm -rf /etc/chrony.conf
