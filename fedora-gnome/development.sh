@@ -43,7 +43,7 @@ gpgkey=https://rpm.packages.shiftkey.dev/gpg.key' | sudo tee /etc/yum.repos.d/sh
 
 sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 
-sudo dnf install -y butane code docker-ce docker-compose-plugin git github-desktop
+sudo dnf install -y butane code docker-ce docker-buildx-plugin docker-compose-plugin git github-desktop
 
 sudo systemctl enable --now docker
 sudo usermod -aG docker user
