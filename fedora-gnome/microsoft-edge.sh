@@ -34,7 +34,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/microsoft-edge.repo
 
-sudo dnf install -y microsoft-edge-stable
+sudo dnf install -y microsoft-edge-stable qubes-video-companion
 
 sudo mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended/
 download https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json /etc/opt/edge/policies/managed/managed.json
