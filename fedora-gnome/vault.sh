@@ -30,4 +30,4 @@ sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
 # Not using openssh-askpass here, because of this bug:
 # https://github.com/QubesOS/qubes-issues/issues/9741
 
-sudo dnf install -y keepassxc pinentry-gnome3
+sudo dnf install -y keepassxc okular pinentry-gnome3
