@@ -8,6 +8,15 @@ By default, Qubes does not use discard with a LUKS volume. To enable discard, ru
 sudo cryptsetup --allow-discards --persistent refresh LUKS-UUID-HERE
 ```
 
+### Auto login
+
+The first login prompt after the encryption password is security theatre, so we can skip it entirely. Make `/etc/lightdm/lightdm.conf.d/autologin`:
+
+```
+[Seat:*]
+autologin-user=USERNAME
+```
+
 ### S0ix sleep
 
 On certain hardware like the Thinkpad T14 Gen 1, you need to enable S0ix sleep support for suspension to work correctly. Use the following command:
