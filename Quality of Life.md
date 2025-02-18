@@ -84,7 +84,7 @@ One trivial way for malicious applications to exfiltrate data from an offline VM
 
 ### Edge Dark Mode
 
-Go to edge://flags and set "Auto Dark Mode for Web Contents" to "Enable with selective inversion of non-image elements". This reduces flashbangs a lot.
+Go to `edge://flags` and set "Auto Dark Mode for Web Contents" to "Enable with selective inversion of non-image elements". This reduces flashbangs a lot.
 
 ### Bitwarden & Element Flatpak
 
