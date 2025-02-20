@@ -86,6 +86,12 @@ One trivial way for malicious applications to exfiltrate data from an offline VM
 
 Go to `edge://flags` and set "Auto Dark Mode for Web Contents" to "Enable with selective inversion of non-image elements". This reduces flashbangs a lot.
 
+### Firefox based browsers
+
+Currently Firefox based browsers [will break](https://github.com/QubesOS/qubes-issues/issues/8612#issuecomment-1764832181) when you try to open a YouTube video in fullscreen if their window is maximized. To workaround this, set `full-screen-api.ignore-widgets` in `about:config` to true. 
+
+I have no idea if this will make you more fingerprintable or not.
+
 ### Bitwarden & Element Flatpak
 
 These apps require the keyring to be created first to work properly. Simply open a browser like Microsoft Edge and set an empty password for the keyring before using them.
