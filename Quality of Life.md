@@ -70,7 +70,7 @@ Note that I just use allow here, because the vault VM on a new Fedora 41 already
 sudo qubes-d0m-update maim zenity
 ```
 
-Copy [this file](https://github.com/ben-grande/qubes-qvm-screenshot-tool/blob/master/qvm-screenshot) to `/usr/local/bin` in dom0. Maim is needed until [this issue](https://github.com/ben-grande/qubes-qvm-screenshot-tool/issues/1) is resolved.
+Copy [this file](https://github.com/ben-grande/qubes-qvm-screenshot-tool/blob/master/qvm-screenshot) to `/usr/local/bin` in dom0.
 
 ```bash
 sudo chmod +x /usr/local/bin
