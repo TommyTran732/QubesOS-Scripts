@@ -39,6 +39,11 @@ sudo qvm-features debian-12 default-menu-items 'org.gnome.Console.desktop org.gn
 sudo qvm-features debian-12 netvm-menu-items 'org.gnome.Console.desktop'
 ```
 
+### Fedora memory limit
+
+Currently Qubes has [this bug](https://github.com/QubesOS/qubes-issues/issues/9663). Supposedly it has been fix, but I still notice my Fedora VMs getting stuck at 400 MB RAM after a few updates.
+To work around this for now, I change the minimum memory for all of my Fedora Template VMs to 2000 MB.
+
 ### Lenovo ePrivacy
 
 Lenovo ePrivacy can be controlled through `/proc/acpi/ibm/lcdshadow`. I use the following shortcuts:
