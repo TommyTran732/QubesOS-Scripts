@@ -133,7 +133,7 @@ sudo dnf remove -y abrt* cheese evince file-roller* libreoffice* mediawriter rhy
 sudo dnf remove -y lvm2 rng-tools thermald '*perl*'
 
 # Disable openh264 repo
-sudo dnf config-manager --set-disabled fedora-cisco-openh264
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=0
 
 # Install custom packages
 # gnome-shell is needed for theming to work
