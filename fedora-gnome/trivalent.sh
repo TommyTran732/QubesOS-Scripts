@@ -24,7 +24,7 @@ download() {
   unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
 }
 
-sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/trivalent -y
+sudo dnf config-manager addrepo --from-repofile=https://repo.secureblue.dev/secureblue.repo
 sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1 rpmfusion-free.enabled=1 rpmfusion-free-updates.enabled=1 rpmfusion-nonfree.enabled=1 rpmfusion-nonfree-updates.enabled=1
 sudo dnf install -y ffmpeg trivalent
 sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
