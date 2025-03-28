@@ -136,8 +136,7 @@ sudo dnf remove -y lvm2 rng-tools thermald '*perl*'
 sudo dnf config-manager setopt fedora-cisco-openh264.enabled=0
 
 # Install custom packages
-# gnome-shell is needed for theming to work
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses
+sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses xdg-desktop-portal-gtk
 
 # Setup hardened_malloc
 sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
