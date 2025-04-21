@@ -57,6 +57,10 @@ WantedBy=default.target' | sudo tee /etc/systemd/user/pactl.service
 
 umask 077
 
+# Disable hardened_malloc (for now)
+# It causes Edge to crash at launch most of the time
+sudo rm /etc/ld.so.preload
+
 # Run `systemctl --user enable --now pactl.service` in your appVM.
 # For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
 # Using preset doesn't actually work :/
