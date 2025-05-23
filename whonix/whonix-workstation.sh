@@ -14,6 +14,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+# Run this as root. Whonix workstation stopped allowing the default user to use sudo.
+
 set -eu
 
 unpriv(){
@@ -27,26 +29,26 @@ download() {
 # Setting umask to 077
 # Whonix defaults to zsh - I need to set it for zsh later.
 umask 077
-sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
-sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
+sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
 echo 'umask 077' | sudo tee -a /etc/bash.bashrc
 
 # Make home directory private
-sudo chmod 700 /home/*
+chmod 700 /home/*
 
 # Avoid phased updates
 download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
-sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
+chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
-sudo apt install --no-install-recommends arc-theme pipewire-pulse qt5-style-plugins -y
+apt install --no-install-recommends arc-theme pipewire-pulse qt5-style-plugins -y
 
 # Restrict /proc and access
-sudo systemctl enable --now proc-hidepid.service
+systemctl enable --now proc-hidepid.service
 
 # Reduce kernel information leaks
 # Will break a lot of applications. The apps I use on Whonix work fine with it so I am enabling it.
-sudo systemctl enable --now hide-hardware-info.service
+systemctl enable --now hide-hardware-info.service
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
