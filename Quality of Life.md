@@ -85,7 +85,7 @@ Set the `PrntSc` button to run `qvm-screenshot` in shortcut settings.
 
 ### Trivial data exfiltration prevention
 
-One trivial way for malicious applications to exfiltrate data from an offline VM is to open a link in a disposable VM with a payload. To prevent this, open the VM settings, go to advanced and set the default disposable template to none.
+One trivial way for malicious applications to exfiltrate data from an offline VM is to open a link in a disposable VM with a payload. To prevent this, open Qubes Global Config -> URL handing -> All Qubes will ask and default to Default Disposable Template.
 
 ### Edge Dark Mode
 
