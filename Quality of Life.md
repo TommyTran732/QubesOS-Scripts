@@ -87,6 +87,12 @@ Set the `PrntSc` button to run `qvm-screenshot` in shortcut settings.
 
 One trivial way for malicious applications to exfiltrate data from an offline VM is to open a link in a disposable VM with a payload. To prevent this, open Qubes Global Config -> URL handing -> All Qubes will ask and default to Default Disposable Template.
 
+### Disposable Qubes file access
+
+Although not as important security wise, it is nice to also set similar rules for file access as well.
+
+Qubes Global Config -> File Access -> Open in Disposable Qubes -> All Qubes will ask and defailt to Default Disposable Templatte.
+
 ### Edge Dark Mode
 
 Go to `edge://flags` and set "Auto Dark Mode for Web Contents" to "Enable with selective inversion of non-image elements". This reduces flashbangs a lot.
