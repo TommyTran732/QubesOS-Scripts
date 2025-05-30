@@ -37,8 +37,8 @@ download https://repository.mullvad.net/deb/mullvad-keyring.asc /usr/share/keyri
 echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$( dpkg --print-architecture )] https://repository.mullvad.net/deb/stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mullvad.list
 
 # Install packages
-sudo apt update
-sudo apt install -y lokinet mullvad-browser resolvconf
+sudo apt-get update
+sudo apt-get install -y lokinet mullvad-browser resolvconf
 
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/lokinet-dns-fix.service /etc/systemd/system/lokinet-dns-fix.service
 sudo systemctl enable --now lokinet-dns-fix
