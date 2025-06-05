@@ -41,7 +41,7 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
-apt install --no-install-recommends arc-theme pipewire-pulse qt5-style-plugins -y
+apt-get install --no-install-recommends arc-theme pipewire-pulse qt5-style-plugins -y
 
 # Restrict /proc and access
 systemctl enable --now proc-hidepid.service

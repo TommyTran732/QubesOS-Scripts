@@ -68,59 +68,59 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 
-sudo apt update -y
-sudo apt full-upgrade -y
-sudo apt autoremove -y
+sudo apt-get update -y
+sudo apt-get full-upgrade -y
+sudo apt-get autoremove -y
 
 # Debloat
 
 # Remove unnecessary stuff from the Qubes template
-sudo apt purge -y gnome-software gnome-system-monitor thunderbird keepassxc
+sudo apt-get purge -y gnome-software gnome-system-monitor thunderbird keepassxc
 
 # Remove Network + hardware tools packages
-sudo apt purge -y avahi* cups* '*nfs*' rygel '*smtp*' system-config-printer* '*telnet*'
+sudo apt-get purge -y avahi* cups* '*nfs*' rygel '*smtp*' system-config-printer* '*telnet*'
 
 # Remove support for some languages and spelling
-sudo apt purge -y '*speech*'
+sudo apt-get purge -y '*speech*'
 
 # Remove codec + image + printers
-sudo apt purge -y ImageMagick* sane* simple-scan
+sudo apt-get purge -y ImageMagick* sane* simple-scan
 
 # Remove Active Directory + Sysadmin + reporting tools
-sudo apt purge -y realmd
+sudo apt-get purge -y realmd
 
 # Remove unnecessary network tools
-sudo apt purge -y ifupdown mobile-broadband-provider-info modemmanager
+sudo apt-get purge -y ifupdown mobile-broadband-provider-info modemmanager
 
 # Remove Gnome apps
-sudo apt purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager \
+sudo apt-get purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager \
     gnome-contacts gnome-disk-utility gnome-font-viewer gnome-logs gnome-maps gnome-music gnome-remote-desktop gnome-shell-extensions \
     gnome-sound-recorder gnome-tweaks gnome-user-share gnome-weather totem
 
 # Remove apps
-sudo apt purge -y cheese evince evolution file-roller* firefox* libreoffice* seahorse shotwell synaptic* rhythmbox yelp
+sudo apt-get purge -y cheese evince evolution file-roller* firefox* libreoffice* seahorse shotwell synaptic* rhythmbox yelp
 
 # Remove other packages
-sudo apt purge -y cron lvm2 lynx '*vmware*' xserver-xephyr xsettingsd
+sudo apt-get purge -y cron lvm2 lynx '*vmware*' xserver-xephyr xsettingsd
 
-sudo apt autoremove -y
-sudo apt autoclean
+sudo apt-get autoremove -y
+sudo apt-get autoclean
 
 # Add console group
 sudo groupadd --system console
 sudo usermod -aG console user
 
 # Add extrepo
-sudo apt install -y extrepo
+sudo apt-get install -y extrepo
 
 # Adding KickSecure's repo
 sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
 
 # Distribution morphing
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt install --no-install-recommends kicksecure-qubes-cli -y
-sudo apt autoremove -y
+sudo apt-get update
+sudo apt-get full-upgrade -y
+sudo apt-get install --no-install-recommends kicksecure-qubes-cli -y
+sudo apt-get autoremove -y
 sudo repository-dist --enable --repository stable-proposed-updates
 sudo extrepo disable kicksecure
 sudo mv /etc/apt/sources.list ~/
@@ -135,8 +135,8 @@ sudo systemctl enable --now proc-hidepid.service
 sudo systemctl enable --now hide-hardware-info.service
 
 # Install packages
-sudo apt update
-sudo apt install --no-install-recommends gnome-console flatpak qubes-ctap qubes-gpg-split -y
+sudo apt-get update
+sudo apt-get install --no-install-recommends gnome-console flatpak qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service

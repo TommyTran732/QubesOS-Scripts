@@ -26,6 +26,6 @@ download() {
 
 curl -s --proxy http://127.0.0.1:8082 -L https://github.com/trustcrypto/OnlyKey-App/releases/download/v5.5.0/OnlyKey_5.5.0_amd64.deb -O
 
-sudo apt install gnome-disk-utility qubes-video-companion ./OnlyKey_5.5.0_amd64.deb
+sudo apt-get install gnome-disk-utility qubes-video-companion ./OnlyKey_5.5.0_amd64.deb
 
 sudo systemctl disable --now hide-hardware-info.service

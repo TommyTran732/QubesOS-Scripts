@@ -39,7 +39,7 @@ download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages
-sudo apt install --no-install-recommends fwupd-qubes-vm qt5-style-plugins arc-theme -y
+sudo apt-get install --no-install-recommends fwupd-qubes-vm qt5-style-plugins arc-theme -y
 
 # Restrict /proc and access
 sudo systemctl enable --now proc-hidepid.service
