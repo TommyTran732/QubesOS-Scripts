@@ -35,7 +35,7 @@ echo 'umask 077' | sudo tee -a /etc/bash.bashrc
 sudo chmod 700 /home/*
 
 # Avoid phased updates
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 # Install packages

@@ -37,30 +37,30 @@ sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
 sudo chmod 700 /home/*
 
 # Harden SSH
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
 download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
 sudo sysctl -p
 
 # Disable coredump
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
 sudo mkdir -p /etc/systemd/coredump.conf.d
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf /etc/systemd/coredump.conf.d/disable.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf /etc/systemd/coredump.conf.d/disable.conf
 
 # Setup dconf
 sudo mkdir -p /etc/dconf/db/local.d/locks
 
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
 
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/adw-gtk3-dark /etc/dconf/db/local.d/adw-gtk3-dark
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/adw-gtk3-dark /etc/dconf/db/local.d/adw-gtk3-dark
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
 
 sudo dconf update
 
@@ -69,7 +69,7 @@ sudo mkdir -p /etc/xdg-desktop-portal
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
 
 # Setup ZRAM
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
@@ -84,7 +84,7 @@ sudo sed -i 's@ReadOnlyPaths=/etc/NetworkManager@#ReadOnlyPaths=/etc/NetworkMana
 sudo sed -i 's@ReadWritePaths=-/etc/NetworkManager/system-connections@#ReadWritePaths=-/etc/NetworkManager/system-connections@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 
 # Disable GJS and WebkitGTK JIT
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/environment /etc/environment
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/environment /etc/environment
 
 # Fix GNOME environment variable
 echo '
@@ -129,7 +129,6 @@ sudo dnf remove -y baobab chrome-gnome-shell eog gnome-boxes gnome-calculator gn
 sudo dnf remove -y abrt* cheese evince file-roller* libreoffice* mediawriter rhythmbox yelp
 
 # Remove other packages
-# We deviate from the script in TommyTran732/Linux-Setup-Scripts here, as removing yajl will break qubes integration.
 sudo dnf remove -y lvm2 rng-tools thermald '*perl*'
 
 # Disable openh264 repo
@@ -151,5 +150,5 @@ sudo flatpak override --system --filesystem=host-os:ro --env=LD_PRELOAD=/var/run
 flatpak override --user --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
 
 # Setup DNF
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*

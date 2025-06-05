@@ -39,22 +39,22 @@ echo 'umask 077' | sudo tee -a /etc/bash.bashrc
 sudo chmod 700 /home/*
 
 # Harden SSH
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Disable coredump
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
 
 # Setup dconf
 umask 022
 sudo mkdir -p /etc/dconf/db/local.d/locks
 
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
 
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/automount-disable /etc/dconf/db/local.d/automount-disable
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
 
 sudo dconf update
 umask 077
@@ -64,7 +64,7 @@ sudo mkdir -p /etc/xdg-desktop-portal
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
 
 # Avoid phased updates
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 
