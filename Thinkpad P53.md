@@ -4,7 +4,7 @@ My personal setup for the Thinkpad P53
 
 ## Hardware
 - **CPU**: Intel® Core™ i9-9980H Processor
-- **GPU**: NVIDIA Quadro RTX 4000
+- **GPU**: NVIDIA Quadro RTX 4000 Mobile
 - **RAM**: 2x 16GB Samsung DDR4-2666 (M471A2K43DB1-CTD) + 2x Micron 32GB DDR4-3200 (MTA16ATF4G64HZ-3G2E2)
 - **Drive 0**: Micron 3500 1TB (MTFDKBA1T0TGD-1BK1AABYYR)
 - **Drive 1**: Micron 3500 1TB (MTFDKBA1T0TGD-1BK1AABYYR)
