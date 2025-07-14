@@ -29,8 +29,8 @@ sudo dnf install -y @hardware-support arc-theme chrony gnome-keyring fwupd-qubes
 
 # Setup NTS
 sudo rm -rf /etc/chrony.conf
-download https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf /etc/chrony.conf
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd /etc/sysconfig/chronyd
+download https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/chrony.conf /etc/chrony.conf
+download https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/sysconfig/chronyd /etc/sysconfig/chronyd
 
 # Theming
 sudo mkdir -p /etc/gtk-3.0
@@ -40,8 +40,8 @@ sudo mkdir -p /etc/gtk-4.0
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 
 # Networking
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/00-macrandomize.conf /etc/NetworkManager/conf.d/00-macrandomize.conf
-download https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/NetworkManager/conf.d/01-transient-hostname.conf /etc/NetworkManager/conf.d/01-transient-hostname.conf
+download https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/NetworkManager/conf.d/00-macrandomize.conf /etc/NetworkManager/conf.d/00-macrandomize.conf
+download https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/NetworkManager/conf.d/01-transient-hostname.conf /etc/NetworkManager/conf.d/01-transient-hostname.conf
 sudo hostnamectl hostname 'localhost'
 sudo hostnamectl --transient hostname ''
 
