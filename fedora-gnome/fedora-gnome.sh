@@ -38,6 +38,7 @@ sudo chmod 700 /home/*
 
 # Harden SSH
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
+sudo sed -i 's/KexAlgorithms curve25519-sha256/KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256/' /etc/crypto-policies/back-ends/openssh.config
 
 # Security kernel settings
 download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
