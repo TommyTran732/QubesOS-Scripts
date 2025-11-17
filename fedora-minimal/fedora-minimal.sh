@@ -46,7 +46,9 @@ download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/et
 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
-download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
+download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue-framebuffer.conf /etc/modprobe.d/framebuffer-blacklist.conf
+sudo chmod 644 /etc/modprobe.d/framebuffer-blacklist.conf
+download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue.conf /etc/modprobe.d/workstation-blacklist.conf
 sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate

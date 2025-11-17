@@ -41,7 +41,8 @@ download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/et
 sudo sed -i 's/KexAlgorithms curve25519-sha256/KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256/' /etc/crypto-policies/back-ends/openssh.config
 
 # Security kernel settings
-download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf /etc/modprobe.d/workstation-blacklist.conf
+download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue-framebuffer.conf /etc/modprobe.d/framebuffer-blacklist.conf
+download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue.conf /etc/modprobe.d/workstation-blacklist.conf
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
