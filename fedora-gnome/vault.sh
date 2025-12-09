@@ -17,17 +17,17 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/qubes-rpc/qubes.SshAgent /etc/qubes-rpc/qubes.SshAgent
-sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
+run0 chmod +x /etc/qubes-rpc/qubes.SshAgent
 
 # Not using openssh-askpass here, because of this bug:
 # https://github.com/QubesOS/qubes-issues/issues/9741
 
-sudo dnf install -y keepassxc okular pinentry-gnome3
+run0 dnf install -y keepassxc okular pinentry-gnome3
