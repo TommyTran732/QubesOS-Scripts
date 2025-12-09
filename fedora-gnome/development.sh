@@ -19,11 +19,11 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
 echo '[code]
@@ -31,7 +31,7 @@ name=Visual Studio Code
 baseurl=https://packages.microsoft.com/yumrepos/vscode/
 enabled=1
 gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | run0 tee /etc/yum.repos.d/vscode.repo
 
 echo '[shiftkey-packages]
 name=GitHub Desktop
@@ -39,19 +39,19 @@ baseurl=https://rpm.packages.shiftkey.dev/rpm/
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
-gpgkey=https://rpm.packages.shiftkey.dev/gpg.key' | sudo tee /etc/yum.repos.d/shiftkey-packages.repo
+gpgkey=https://rpm.packages.shiftkey.dev/gpg.key' | run0 tee /etc/yum.repos.d/shiftkey-packages.repo
 
-sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+run0 dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 
-sudo dnf install -y butane code docker-ce docker-buildx-plugin docker-compose-plugin git github-desktop
+run0 dnf install -y butane code docker-ce docker-buildx-plugin docker-compose-plugin git github-desktop
 
-sudo systemctl enable --now docker
-sudo usermod -aG docker user
+run0 systemctl enable --now docker
+run0 usermod -aG docker user
 
 # Change the GPG Domain name appropriately
-echo 'QUBES_GPG_DOMAIN=vault' | sudo tee -a /etc/environment
+echo 'QUBES_GPG_DOMAIN=vault' | run0 tee -a /etc/environment
 
 umask 022
 
-sudo mkdir -p /etc/qubes-bind-dirs.d
-echo 'binds+=( '\'''/var/lib/docker''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
+run0 mkdir -p /etc/qubes-bind-dirs.d
+echo 'binds+=( '\'''/var/lib/docker''\'' )' | run0 tee /etc/qubes-bind-dirs.d/50_user.conf 
