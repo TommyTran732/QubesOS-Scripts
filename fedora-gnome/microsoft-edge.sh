@@ -17,11 +17,11 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
 umask 022
@@ -32,16 +32,16 @@ name=microsoft-edge
 baseurl=https://packages.microsoft.com/yumrepos/edge/
 enabled=1
 gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/microsoft-edge.repo
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | run0 tee /etc/yum.repos.d/microsoft-edge.repo
 
-sudo dnf install -y microsoft-edge-stable qubes-video-companion
+run0 dnf install -y microsoft-edge-stable qubes-video-companion
 
-sudo mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended/
+run0 mkdir -p /etc/opt/edge/policies/managed/ /etc/opt/edge/policies/recommended/
 download https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/managed.json /etc/opt/edge/policies/managed/managed.json
 download https://raw.githubusercontent.com/TommyTran732/Microsoft-Edge-Policies/main/Linux/recommended.json /etc/opt/edge/policies/recommended/recommended.json
 
 # Workaround for this problem: https://forum.qubes-os.org/t/upgraded-to-4-2-and-audio-no-longer-works/23130/60
-sudo dnf install -y pulseaudio-utils
+run0 dnf install -y pulseaudio-utils
 
 echo '[Unit]
 Description=Run pactl to work around edge audio bug
@@ -53,13 +53,13 @@ Type=oneshot
 ExecStart=/usr/bin/pactl info
 
 [Install]
-WantedBy=default.target' | sudo tee /etc/systemd/user/pactl.service
+WantedBy=default.target' | run0 tee /etc/systemd/user/pactl.service
 
 umask 077
 
 # Disable hardened_malloc (for now)
 # It causes Edge to crash at launch most of the time
-sudo rm /etc/ld.so.preload
+run0 rm /etc/ld.so.preload
 
 # Run `systemctl --user enable --now pactl.service` in your appVM.
 # For some uncomprehensible reason, manually enabling pipewire-pulse.service will not work for Edge audio.
