@@ -17,27 +17,27 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
-sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
-sudo dnf install -y mullvad-vpn
+run0 dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
+run0 dnf install -y mullvad-vpn
 
 umask 022
 
-sudo mkdir -p /etc/qubes-bind-dirs.d
-echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
+run0 mkdir -p /etc/qubes-bind-dirs.d
+echo 'binds+=( '\'''/etc/mullvad-vpn''\'' )' | run0 tee /etc/qubes-bind-dirs.d/50_user.conf 
 
-sudo mkdir -p /etc/systemd/system/systemd-resolved.service.d
+run0 mkdir -p /etc/systemd/system/systemd-resolved.service.d
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/systemd-resolved.service.d/override.conf /etc/systemd/system/systemd-resolved.service.d/override.conf
 
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service /etc/systemd/system/dnat-to-ns.service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path /etc/systemd/system/dnat-to-ns.path
 
-sudo systemctl enable dnat-to-ns.path
+run0 systemctl enable dnat-to-ns.path
 
 # Follow these instructions on how to set up the ProxyVM: https://privsec.dev/posts/qubes/using-mullvad-vpn-on-qubes-os/#creating-the-proxyvm
