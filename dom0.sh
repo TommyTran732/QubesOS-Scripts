@@ -17,32 +17,32 @@
 set -eu -o pipefail
 
 # Enabling discard and fstrim
-sudo sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
-sudo systemctl enable --now fstrim.timer
+run0 sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
+run0 systemctl enable --now fstrim.timer
 
-sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qubes-video-companion-dom0 qt5-qtstyleplugins
+run0 qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qubes-video-companion-dom0 qt5-qtstyleplugins
 
 # Configure PCRs
-sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
-sudo sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 /' /etc/anti-evil-maid.conf
+run0 sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
+run0 sed -i 's/="/="--pcr 0 --pcr 1 --pcr 2 --pcr 3 --pcr 4 /' /etc/anti-evil-maid.conf
 
-# Configure sudo prompt for domUs
-echo "/usr/bin/echo '1'" | sudo tee /etc/qubes-rpc/qubes.VMAuth
-echo "@anyvm dom0 ask,default_target=dom0" | sudo tee /etc/qubes-rpc/policy/qubes.VMAuth
-sudo chmod +x /etc/qubes-rpc/qubes.VMAuth
+# Configure run0 prompt for domUs
+echo "/usr/bin/echo '1'" | run0 tee /etc/qubes-rpc/qubes.VMAuth
+echo "@anyvm dom0 ask,default_target=dom0" | run0 tee /etc/qubes-rpc/policy/qubes.VMAuth
+run0 chmod +x /etc/qubes-rpc/qubes.VMAuth
 
 # Theming
 
-echo 'QT_QPA_PLATFORMTHEME=gtk2' | sudo tee -a /etc/environment
+echo 'QT_QPA_PLATFORMTHEME=gtk2' | run0 tee -a /etc/environment
 
 # Add extra gtk theming - this is probably not necessary, but why not
 
-sudo mkdir -p /etc/gtk-3.0
+run0 mkdir -p /etc/gtk-3.0
 echo '[Settings]
 gtk-theme-name = Arc-Dark
-gtk-application-prefer-dark-theme = true' | sudo tee /etc/gtk-3.0/settings.ini
+gtk-application-prefer-dark-theme = true' | run0 tee /etc/gtk-3.0/settings.ini
 
-sudo mkdir -p /etc/gtk-4.0
+run0 mkdir -p /etc/gtk-4.0
 echo '[Settings]
 gtk-theme-name = Arc-Dark
-gtk-application-prefer-dark-theme = true' | sudo tee /etc/gtk-4.0/settings.ini
+gtk-application-prefer-dark-theme = true' | run0 tee /etc/gtk-4.0/settings.ini
