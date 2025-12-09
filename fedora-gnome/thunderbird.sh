@@ -17,17 +17,17 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0  -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
-sudo dnf install -y thunderbird
+run0 dnf install -y thunderbird
 
 # Change the GPG Domain name appropriately
-echo 'QUBES_GPG_DOMAIN=vault' | sudo tee -a /etc/environment
+echo 'QUBES_GPG_DOMAIN=vault' | run0 tee -a /etc/environment
 
 # Disable hardened_malloc (for now)
-sudo rm /etc/ld.so.preload
+run0 rm /etc/ld.so.preload
