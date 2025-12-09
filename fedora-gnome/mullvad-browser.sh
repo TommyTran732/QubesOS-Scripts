@@ -17,23 +17,23 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
-sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1 rpmfusion-free.enabled=1 rpmfusion-free-updates.enabled=1 rpmfusion-nonfree.enabled=1 rpmfusion-nonfree-updates.enabled=1
+run0 dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
+run0 dnf config-manager setopt fedora-cisco-openh264.enabled=1 rpmfusion-free.enabled=1 rpmfusion-free-updates.enabled=1 rpmfusion-nonfree.enabled=1 rpmfusion-nonfree-updates.enabled=1
 
 # Install the package
-sudo dnf install -y ffmpeg ffmpegthumbnailer mullvad-browser yt-dlp
-sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+run0 dnf install -y ffmpeg ffmpegthumbnailer mullvad-browser yt-dlp
+run0 dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 # Install dependencies for other apps not listed here
-sudo dnf install -y python3-pip
+run0 dnf install -y python3-pip
 
 # Disable hardened_malloc (for now)
 # It causes Mullvad browser to randomly crash
-sudo rm /etc/ld.so.preload
+run0 rm /etc/ld.so.preload

@@ -17,37 +17,37 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
 
 # Compliance
-sudo systemctl mask debug-shell.service
+run0 systemctl mask debug-shell.service
 
 # Setting umask to 077
 # Kicksecure defaults to zsh - I need to set it for zsh later.
 umask 077
-sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
-sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-echo 'umask 077' | sudo tee -a /etc/bash.bashrc
+run0 sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
+run0 sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+echo 'umask 077' | run0 tee -a /etc/bash.bashrc
 
 # Make home directory private
-sudo chmod 700 /home/*
+run0 chmod 700 /home/*
 
 # Harden SSH
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
-sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
+run0 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Disable coredump
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
 
 # Setup dconf
 umask 022
-sudo mkdir -p /etc/dconf/db/local.d/locks
+run0 mkdir -p /etc/dconf/db/local.d/locks
 
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
@@ -56,87 +56,87 @@ download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/et
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
 
-sudo dconf update
+run0 dconf update
 umask 077
 
 # Fix portals
-sudo mkdir -p /etc/xdg-desktop-portal
+run0 mkdir -p /etc/xdg-desktop-portal
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
 
 # Avoid phased updates
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
-sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
+run0 chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 
-sudo apt-get update -y
-sudo apt-get full-upgrade -y
-sudo apt-get autoremove -y
+run0 apt-get update -y
+run0 apt-get full-upgrade -y
+run0 apt-get autoremove -y
 
 # Debloat
 
 # Remove unnecessary stuff from the Qubes template
-sudo apt-get purge -y gnome-software gnome-system-monitor thunderbird keepassxc
+run0 apt-get purge -y gnome-software gnome-system-monitor thunderbird keepassxc
 
 # Remove Network + hardware tools packages
-sudo apt-get purge -y avahi* cups* '*nfs*' rygel '*smtp*' system-config-printer* '*telnet*'
+run0 apt-get purge -y avahi* cups* '*nfs*' rygel '*smtp*' system-config-printer* '*telnet*'
 
 # Remove support for some languages and spelling
-sudo apt-get purge -y '*speech*'
+run0 apt-get purge -y '*speech*'
 
 # Remove codec + image + printers
-sudo apt-get purge -y ImageMagick* sane* simple-scan
+run0 apt-get purge -y ImageMagick* sane* simple-scan
 
 # Remove Active Directory + Sysadmin + reporting tools
-sudo apt-get purge -y realmd
+run0 apt-get purge -y realmd
 
 # Remove unnecessary network tools
-sudo apt-get purge -y ifupdown mobile-broadband-provider-info modemmanager
+run0 apt-get purge -y ifupdown mobile-broadband-provider-info modemmanager
 
 # Remove Gnome apps
-sudo apt-get purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager \
+run0 apt-get purge -y baobab chrome-gnome-shell eog gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-color-manager \
     gnome-contacts gnome-disk-utility gnome-font-viewer gnome-logs gnome-maps gnome-music gnome-remote-desktop gnome-shell-extensions \
     gnome-sound-recorder gnome-tweaks gnome-user-share gnome-weather totem
 
 # Remove apps
-sudo apt-get purge -y cheese evince evolution file-roller* firefox* libreoffice* seahorse shotwell synaptic* rhythmbox yelp
+run0 apt-get purge -y cheese evince evolution file-roller* firefox* libreoffice* seahorse shotwell synaptic* rhythmbox yelp
 
 # Remove other packages
-sudo apt-get purge -y cron lvm2 lynx '*vmware*' xserver-xephyr xsettingsd
+run0 apt-get purge -y cron lvm2 lynx '*vmware*' xserver-xephyr xsettingsd sudo su runuser
 
-sudo apt-get autoremove -y
-sudo apt-get autoclean
+run0 apt-get autoremove -y
+run0 apt-get autoclean
 
 # Add console group
-sudo groupadd --system console
-sudo usermod -aG console user
+run0 groupadd --system console
+run0 usermod -aG console user
 
 # Add extrepo
-sudo apt-get install -y extrepo
+run0 apt-get install -y extrepo
 
 # Adding KickSecure's repo
-sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
+run0 http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure
 
 # Distribution morphing
-sudo apt-get update
-sudo apt-get full-upgrade -y
-sudo apt-get install --no-install-recommends kicksecure-qubes-cli -y
-sudo apt-get autoremove -y
-sudo repository-dist --enable --repository stable-proposed-updates
-sudo extrepo disable kicksecure
-sudo mv /etc/apt/sources.list ~/
-sudo touch /etc/apt/sources.list
+run0 apt-get update
+run0 apt-get full-upgrade -y
+run0 apt-get install --no-install-recommends kicksecure-qubes-cli -y
+run0 apt-get autoremove -y
+run0 repository-dist --enable --repository stable-proposed-updates
+run0 extrepo disable kicksecure
+run0 mv /etc/apt/sources.list ~/
+run0 touch /etc/apt/sources.list
 
 
 # Restrict /proc and access
-sudo systemctl enable --now proc-hidepid.service
+run0 systemctl enable --now proc-hidepid.service
 
 # Reduce kernel information leaks
 # Will break a lot of applications. The apps I use on KickSecure work fine with it so I am enabling it.
-sudo systemctl enable --now hide-hardware-info.service
+run0 systemctl enable --now hide-hardware-info.service
 
 # Install packages
-sudo apt-get update
-sudo apt-get install --no-install-recommends gnome-console flatpak qubes-ctap qubes-gpg-split -y
+run0 apt-get update
+run0 apt-get install --no-install-recommends gnome-console flatpak qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service

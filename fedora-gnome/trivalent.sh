@@ -17,22 +17,22 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
-sudo dnf config-manager addrepo --from-repofile=https://repo.secureblue.dev/secureblue.repo
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1 rpmfusion-free.enabled=1 rpmfusion-free-updates.enabled=1 rpmfusion-nonfree.enabled=1 rpmfusion-nonfree-updates.enabled=1
-sudo dnf install -y ffmpeg trivalent
-sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+run0 dnf config-manager addrepo --from-repofile=https://repo.secureblue.dev/secureblue.repo
+run0 dnf config-manager setopt fedora-cisco-openh264.enabled=1 rpmfusion-free.enabled=1 rpmfusion-free-updates.enabled=1 rpmfusion-nonfree.enabled=1 rpmfusion-nonfree-updates.enabled=1
+run0 dnf install -y ffmpeg trivalent
+run0 dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 umask 022
 
 # Workaround for this problem: https://forum.qubes-os.org/t/upgraded-to-4-2-and-audio-no-longer-works/23130/60
-sudo dnf install -y pulseaudio-utils
+run0 dnf install -y pulseaudio-utils
 
 echo '[Unit]
 Description=Run pactl to work around edge audio bug
@@ -44,7 +44,7 @@ Type=oneshot
 ExecStart=/usr/bin/pactl info
 
 [Install]
-WantedBy=default.target' | sudo tee /etc/systemd/user/pactl.service
+WantedBy=default.target' | run0 tee /etc/systemd/user/pactl.service
 
 umask 077
 

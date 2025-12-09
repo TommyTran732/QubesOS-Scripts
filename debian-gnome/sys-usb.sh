@@ -17,15 +17,15 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
 curl -s --proxy http://127.0.0.1:8082 -L https://github.com/trustcrypto/OnlyKey-App/releases/download/v5.5.0/OnlyKey_5.5.0_amd64.deb -O
 
-sudo apt-get install gnome-disk-utility qubes-video-companion ./OnlyKey_5.5.0_amd64.deb
+run0 apt-get install gnome-disk-utility qubes-video-companion ./OnlyKey_5.5.0_amd64.deb
 
-sudo systemctl disable --now hide-hardware-info.service
+run0 systemctl disable --now hide-hardware-info.service

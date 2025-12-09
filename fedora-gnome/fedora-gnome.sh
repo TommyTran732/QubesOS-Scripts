@@ -17,28 +17,28 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
 # Compliance
-sudo systemctl mask debug-shell.service
-sudo systemctl mask kdump.service
+run0 systemctl mask debug-shell.service
+run0 systemctl mask kdump.service
 
 # Setting umask to 077
-sudo sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
-sudo sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
-sudo sed -i 's/umask 022/umask 077/g' /etc/bashrc
+run0 sed -i 's/^UMASK.*/UMASK 077/g' /etc/login.defs
+run0 sed -i 's/^HOME_MODE/#HOME_MODE/g' /etc/login.defs
+run0 sed -i 's/umask 022/umask 077/g' /etc/bashrc
 
 # Make home directory private
-sudo chmod 700 /home/*
+run0 chmod 700 /home/*
 
 # Harden SSH
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
-sudo sed -i 's/KexAlgorithms curve25519-sha256/KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256/' /etc/crypto-policies/back-ends/openssh.config
+run0 sed -i 's/KexAlgorithms curve25519-sha256/KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256/' /etc/crypto-policies/back-ends/openssh.config
 
 # Security kernel settings
 download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue-framebuffer.conf /etc/modprobe.d/framebuffer-blacklist.conf
@@ -46,15 +46,15 @@ download https://raw.githubusercontent.com/secureblue/secureblue/live/files/syst
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
-sudo sysctl -p
+run0 sysctl -p
 
 # Disable coredump
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf /etc/security/limits.d/30-disable-coredump.conf
-sudo mkdir -p /etc/systemd/coredump.conf.d
+run0 mkdir -p /etc/systemd/coredump.conf.d
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf /etc/systemd/coredump.conf.d/disable.conf
 
 # Setup dconf
-sudo mkdir -p /etc/dconf/db/local.d/locks
+run0 mkdir -p /etc/dconf/db/local.d/locks
 
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/automount-disable /etc/dconf/db/local.d/locks/automount-disable
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/locks/privacy /etc/dconf/db/local.d/locks/privacy
@@ -64,10 +64,10 @@ download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/et
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/prefer-dark /etc/dconf/db/local.d/prefer-dark
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dconf/db/local.d/privacy /etc/dconf/db/local.d/privacy
 
-sudo dconf update
+run0 dconf update
 
 # Fix portals
-sudo mkdir -p /etc/xdg-desktop-portal
+run0 mkdir -p /etc/xdg-desktop-portal
 download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
 
 # Setup ZRAM
@@ -80,77 +80,77 @@ download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc
 # Setup networking
 # We don't need the usual mac address randomization and stuff here, because this template is not used for sys-net
 
-sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+run0 mkdir -p /etc/systemd/system/NetworkManager.service.d
 download https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf /etc/systemd/system/NetworkManager.service.d/99-brace.conf
-sudo sed -i 's@ReadOnlyPaths=/etc/NetworkManager@#ReadOnlyPaths=/etc/NetworkManager@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
-sudo sed -i 's@ReadWritePaths=-/etc/NetworkManager/system-connections@#ReadWritePaths=-/etc/NetworkManager/system-connections@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+run0 sed -i 's@ReadOnlyPaths=/etc/NetworkManager@#ReadOnlyPaths=/etc/NetworkManager@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+run0 sed -i 's@ReadWritePaths=-/etc/NetworkManager/system-connections@#ReadWritePaths=-/etc/NetworkManager/system-connections@' /etc/systemd/system/NetworkManager.service.d/99-brace.conf
 
 # Disable GJS and WebkitGTK JIT
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/environment /etc/environment
 
 # Fix GNOME environment variable
 echo '
-XDG_CURRENT_DESKTOP=GNOME' | sudo tee -a /etc/environment
+XDG_CURRENT_DESKTOP=GNOME' | run0 tee -a /etc/environment
 
 # Moving DNF handling to the bottom as the Qubes template just breaks when repos are changed and needs a reboot to fix
 
 # Remove unwanted groups
-sudo dnf -y group remove 'Container Management' 'Desktop accessibility' 'Firefox Web Browser' 'Guest Desktop Agents' 'LibreOffice' 'Printing Support'
+run0 dnf -y group remove 'Container Management' 'Desktop accessibility' 'Firefox Web Browser' 'Guest Desktop Agents' 'LibreOffice' 'Printing Support'
 
 # Remove unnecessary stuff from the Qubes template
-sudo dnf -y remove gnome-software gnome-system-monitor amd-ucode-firmware '*gpu*' httpd keepassxc thunderbird
+run0 dnf -y remove gnome-software gnome-system-monitor amd-ucode-firmware '*gpu*' httpd keepassxc thunderbird
 
 # Remove unnecessary stuff from the Fedora-41 template (will be split into whats in the qubes template and whats upstream later)
-sudo dnf -y remove c-ares hiredis
+run0 dnf -y remove c-ares hiredis
 
 # Remove firefox packages
-sudo dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
+run0 dnf -y remove fedora-bookmarks fedora-chromium-config firefox mozilla-filesystem
 
 # Remove Network + hardware tools packages
-sudo dnf -y remove avahi cifs* '*cups' dmidecode dnsmasq geolite2* mtr net-snmp-libs net-tools nfs-utils nmap-ncat nmap-ncat opensc openssh-server rsync rygel sgpio tcpdump teamd traceroute usb_modeswitch
+run0 dnf -y remove avahi cifs* '*cups' dmidecode dnsmasq geolite2* mtr net-snmp-libs net-tools nfs-utils nmap-ncat nmap-ncat opensc openssh-server rsync rygel sgpio tcpdump teamd traceroute usb_modeswitch
 
 # Remove support for some languages and spelling
-sudo dnf -y remove '*anthy*' '*hangul*' ibus-typing-booster '*m17n*' '*pinyin*' '*speech*' texlive-libs words '*zhuyin*'
+run0 dnf -y remove '*anthy*' '*hangul*' ibus-typing-booster '*m17n*' '*pinyin*' '*speech*' texlive-libs words '*zhuyin*'
 
 # Remove codec + image + printers
-sudo dnf -y remove openh264 ImageMagick* sane* simple-scan
+run0 dnf -y remove openh264 ImageMagick* sane* simple-scan
 
 # Remove Active Directory + Sysadmin + reporting tools
-sudo dnf -y remove 'sssd*' realmd cyrus-sasl-gssapi quota* dos2unix kpartx sos samba-client gvfs-smb
+run0 dnf -y remove 'sssd*' realmd cyrus-sasl-gssapi quota* dos2unix kpartx sos samba-client gvfs-smb
 
 # Remove NetworkManager
-sudo dnf -y remove NetworkManager-pptp-gnome NetworkManager-ssh-gnome NetworkManager-openconnect-gnome NetworkManager-openvpn-gnome NetworkManager-vpnc-gnome ppp* ModemManager
+run0 dnf -y remove NetworkManager-pptp-gnome NetworkManager-ssh-gnome NetworkManager-openconnect-gnome NetworkManager-openvpn-gnome NetworkManager-vpnc-gnome ppp* ModemManager
 
 # Remove Gnome apps
-sudo dnf remove -y baobab chrome-gnome-shell eog gnome-boxes gnome-calculator gnome-calendar gnome-characters gnome-classic* gnome-clocks gnome-color-manager gnome-connections \
+run0 dnf remove -y baobab chrome-gnome-shell eog gnome-boxes gnome-calculator gnome-calendar gnome-characters gnome-classic* gnome-clocks gnome-color-manager gnome-connections \
     gnome-contacts gnome-disk-utility gnome-font-viewer gnome-logs gnome-maps gnome-photos gnome-remote-desktop gnome-screenshot gnome-shell-extension-apps-menu \
     gnome-shell-extension-background-logo gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu gnome-shell-extension-window-list gnome-text-editor \
     gnome-themes-extra gnome-tour gnome-user* gnome-weather loupe snapshot totem
 
 # Remove apps
-sudo dnf remove -y abrt* cheese evince file-roller* libreoffice* mediawriter rhythmbox yelp
+run0 dnf remove -y abrt* cheese evince file-roller* libreoffice* mediawriter rhythmbox yelp
 
 # Remove other packages
-sudo dnf remove -y lvm2 rng-tools thermald '*perl*'
+run0 dnf remove -y lvm2 rng-tools thermald '*perl*' su sudo plexec
 
 # Disable openh264 repo
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=0
+run0 dnf config-manager setopt fedora-cisco-openh264.enabled=0
 
 # Install custom packages
-sudo dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses xdg-desktop-portal-gtk
+run0 dnf -y install qubes-ctap qubes-gpg-split adw-gtk3-theme flatpak ncurses xdg-desktop-portal-gtk
 
 # Setup hardened_malloc
-sudo https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
-sudo dnf install -y hardened_malloc
-echo 'libhardened_malloc.so' | sudo tee /etc/ld.so.preload
-sudo chmod 644 /etc/ld.so.preload
+run0 https_proxy=127.0.0.1:8082 dnf copr enable secureblue/hardened_malloc -y
+run0 dnf install -y hardened_malloc
+echo 'libhardened_malloc.so' | run0 tee /etc/ld.so.preload
+run0 chmod 644 /etc/ld.so.preload
 
 # Enable hardened_malloc for Flatpak
-sudo flatpak override --system --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
+run0 flatpak override --system --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
 
 ## Unforunately, user override needs to be run per-app VM
 flatpak override --user --filesystem=host-os:ro --env=LD_PRELOAD=/var/run/host/usr/lib64/libhardened_malloc.so
 
 # Setup DNF
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/dnf/dnf.conf /etc/dnf/dnf.conf
-sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
+run0 sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
