@@ -17,13 +17,13 @@
 set -eu
 
 unpriv(){
-  sudo -u nobody "${@}"
+  run0 -u nobody "${@}"
 }
 
 download() {
-  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | sudo tee "${2}" > /dev/null
+  unpriv curl -s --proxy http://127.0.0.1:8082 "${1}" | run0 tee "${2}" > /dev/null
 }
 
-sudo dnf install -y android-tools mediawriter gnome-disk-utility
+run0 dnf install -y android-tools mediawriter gnome-disk-utility
 
 # In the dispvm template, delete ~/.config/autostart/nw.desktop to prevent the OnlyKey app from automatically starting.
