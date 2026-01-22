@@ -2,7 +2,7 @@
 
 [![ShellCheck](https://github.com/TommyTran732/QubesOS-Scripts/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/TommyTran732/QubesOS-Scripts/actions/workflows/shellcheck.yml)
 
-My scripts for setting up QubesOS. 
+My scripts for setting up Qubes OS. 
 
 For each OS, run the script associated with them to trim down the templates provided by Qubes first. For example, for Fedora, run the `fedora-gnome.sh` script. After the base templates have been trimmed down, run other scripts in templates based on them to create their respective TemplateVMs.
 
