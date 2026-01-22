@@ -20,7 +20,7 @@ set -eu -o pipefail
 sudo sed -i 's/issue_discards = 0/issue_discards = 1/' /etc/lvm/lvm.conf
 sudo systemctl enable --now fstrim.timer
 
-sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qubes-video-companion-dom0 qt5-qtstyleplugins
+sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qubes-dist-upgrade qubes-video-companion-dom0 qt5-qtstyleplugins
 
 # Configure PCRs
 sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
