@@ -163,7 +163,7 @@ Do `ls /dev/disk/by-id` to check the serial numbers and find the correct drive. 
 
 ```bash
 sudo fdisk /dev/nvme0n1
-[Make 2 partitions. The first one with 1G and the second one with the remaining space.]
+[Make 2 partitions. The first one with 1G (or 2G if you intend on keeping both kernel and kernel-latest) and the second one with the remaining space.]
 sudo cryptsetup luksFormat /dev/nvme0n1p2
 sudo cryptsetup open --allow-discards --persistent /dev/nvme0n1p2 cryptroot
 sudo mkfs.btrfs --csum blake2b -L qubes_dom0 /dev/mapper/cryptroot
