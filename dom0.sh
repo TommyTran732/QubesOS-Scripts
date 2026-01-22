@@ -23,7 +23,7 @@ sudo systemctl enable --now fstrim.timer
 sudo qubes-dom0-update anti-evil-maid qubes-ctap-dom0 qubes-dist-upgrade qubes-video-companion-dom0 qt5-qtstyleplugins
 
 # Remove kernel if kernel-latest is being used
-#sudo dnf remove -y kernel
+#sudo dnf remove -y kernel kernel-devel kernel-modules kernel-qubes-vm
 
 # Configure PCRs
 sudo sed -i 's/ --pcr 19//' /etc/anti-evil-maid.conf
