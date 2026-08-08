@@ -1,6 +1,6 @@
 ## Thinkpad P53
 
-My personal setup for the Thinkpad P53
+My personal setup for the Thinkpad P53. This was written for Qubes 4.2 and I no longer use this laptop, and I only keep this here for historical purposes.
 
 ## Hardware
 - **CPU**: Intel® Core™ i9-9980H Processor
