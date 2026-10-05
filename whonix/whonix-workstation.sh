@@ -51,14 +51,14 @@ systemctl enable --now proc-hidepid.service
 systemctl enable --now hide-hardware-info.service
 
 # Flatpak update service
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
 
 # Theming
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/environment /etc/environment
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/environment /etc/environment
 
 sudo mkdir -p /etc/gtk-3.0
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
 
 sudo mkdir -p /etc/gtk-4.0
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini

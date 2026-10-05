@@ -61,7 +61,7 @@ umask 077
 
 # Fix portals
 sudo mkdir -p /etc/xdg-desktop-portal
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/xdg-desktop-portal/portals.conf /etc/xdg-desktop-portal/portals.conf
 
 # Avoid phased updates
 download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/master/etc/apt/apt.conf.d/99sane-upgrades /etc/apt/apt.conf.d/99sane-upgrades
@@ -139,5 +139,5 @@ sudo apt-get update
 sudo apt-get install --no-install-recommends gnome-console flatpak qubes-ctap qubes-gpg-split -y
 
 # Flatpak update service
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/user/update-user-flatpaks.service /etc/systemd/user/update-user-flatpaks.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/user/update-user-flatpaks.timer /etc/systemd/user/update-user-flatpaks.timer
