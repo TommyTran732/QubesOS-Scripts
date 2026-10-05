@@ -52,10 +52,10 @@ sudo systemctl enable --now hide-hardware-info.service
 echo 'ConnectionPadding 1' | sudo tee /usr/local/etc/torrc.d/50_user.conf
 
 # Theming
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/environment /etc/environment
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/environment /etc/environment
 
 sudo mkdir -p /etc/gtk-3.0
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
 
 sudo mkdir -p /etc/gtk-4.0
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini

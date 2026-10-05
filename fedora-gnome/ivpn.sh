@@ -33,11 +33,11 @@ sudo mkdir -p /etc/qubes-bind-dirs.d
 echo 'binds+=( '\'''/etc/opt/ivpn/mutable''\'' )' | sudo tee /etc/qubes-bind-dirs.d/50_user.conf 
 
 sudo mkdir -p /etc/systemd/system/systemd-resolved.service.d
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/systemd-resolved.service.d/override.conf /etc/systemd/system/systemd-resolved.service.d/override.conf
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/system/systemd-resolved.service.d/override.conf /etc/systemd/system/systemd-resolved.service.d/override.conf
 
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.service /etc/systemd/system/dnat-to-ns.service
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns.path /etc/systemd/system/dnat-to-ns.path
-download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/main/etc/systemd/system/dnat-to-ns-boot.service /etc/systemd/system/dnat-to-ns-boot.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/system/dnat-to-ns.service /etc/systemd/system/dnat-to-ns.service
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/system/dnat-to-ns.path /etc/systemd/system/dnat-to-ns.path
+download https://raw.githubusercontent.com/TommyTran732/QubesOS-Scripts/master/etc/systemd/system/dnat-to-ns-boot.service /etc/systemd/system/dnat-to-ns-boot.service
 
 sudo systemctl enable dnat-to-ns.path
 sudo systemctl enable dnat-to-ns-boot.service
