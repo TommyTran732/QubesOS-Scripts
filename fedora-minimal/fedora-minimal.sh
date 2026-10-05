@@ -42,7 +42,7 @@ systemctl disable --now systemd-timesyncd
 systemctl mask systemd-timesyncd
 
 # Harden SSH
-download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/master/etc/ssh/ssh_config.d/10-custom.conf /etc/ssh/ssh_config.d/10-custom.conf
 chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 
 # Security kernel settings
@@ -50,13 +50,13 @@ download https://raw.githubusercontent.com/secureblue/secureblue/live/files/syst
 sudo chmod 644 /etc/modprobe.d/framebuffer-blacklist.conf
 download https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/lib/modprobe.d/secureblue.conf /etc/modprobe.d/workstation-blacklist.conf
 sudo chmod 644 /etc/modprobe.d/workstation-blacklist.conf
-download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/master/etc/sysctl.d/99-workstation.conf /etc/sysctl.d/99-workstation.conf
 # Dracut doesn't seem to work - need to investigate
 # dracut -f
 # sudo sysctl -p
 
 # Setup ZRAM
-download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/main/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
+download https://raw.githubusercontent.com/Metropolis-Nexus/Common-Files/master/etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf
 
 # Install necessary packages
 sudo dnf install -y qubes-core-agent-selinux
